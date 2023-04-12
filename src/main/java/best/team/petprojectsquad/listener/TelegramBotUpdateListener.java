@@ -1,0 +1,57 @@
+package best.team.petprojectsquad.listener;
+
+import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.UpdatesListener;
+import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.request.SendMessage;
+
+
+import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+
+import java.util.List;
+
+
+@Slf4j
+@Component
+@AllArgsConstructor
+public class TelegramBotUpdateListener implements UpdatesListener {
+
+    private final TelegramBot telegramBot;
+
+    @PostConstruct
+    public void init() {
+        telegramBot.setUpdatesListener(this);
+    }
+
+    @Override
+    public int process(List<Update> updates) {
+        try {
+            updates.forEach(update -> {
+
+                if(update.message().text()!=null){
+
+                    log.info("New message from User:{}, chatId: {},  with text: {}"
+                            , update.message().from().username()
+                            , update.message().from().id()
+                            , update.message().text());
+
+                    SendMessage sendMessage = new SendMessage(update.message().from().id(), "hello friend!");
+
+                    telegramBot.execute(sendMessage);
+
+                }
+
+            });
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return UpdatesListener.CONFIRMED_UPDATES_ALL;
+    }
+
+
+
+}
