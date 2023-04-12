@@ -13,7 +13,7 @@
 ## Комада разработчиков "PetProjectSquad":
 
  - [Деркачев Виктор Николаевич](https://github.com/Viktor2308)
- - []()
+ - [Петко Денис Андреевич](https://github.com/DenisPetko)
  - []()
  - []()
 
