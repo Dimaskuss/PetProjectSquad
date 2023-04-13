@@ -1,7 +1,9 @@
 package best.team.petprojectsquad.service;
 
-import com.pengrad.telegrambot.request.SendMessage;
+import com.pengrad.telegrambot.request.BaseRequest;
+
+import java.util.List;
 
 public interface TextHandlerService {
-    SendMessage getReplyMessage(Long id, String message);
+    List<BaseRequest> getReplyMessage(Long id, String message);
 }

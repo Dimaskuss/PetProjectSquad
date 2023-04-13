@@ -1,13 +1,25 @@
 package best.team.petprojectsquad.service;
 
+import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
+import com.pengrad.telegrambot.request.SendPhoto;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
-public class InfoHandlerService implements TextHandlerService{
+public class InfoHandlerService implements TextHandlerService {
 
     @Override
-    public SendMessage getReplyMessage(Long id, String message) {
-        return new SendMessage(id,"а сейчас должна появиться информация о боте по команде /info!");
+    public List<BaseRequest> getReplyMessage(Long id, String message) {
+        List<BaseRequest> requestArrayList = new ArrayList<>();
+        SendMessage sendMessage = new SendMessage(id, "а сейчас должна появиться информация о боте по команде /info!");
+        SendPhoto sendPhoto = new SendPhoto(id, new File("src/main/resources/img_1.png"));
+        requestArrayList.add(sendMessage);
+        requestArrayList.add(sendPhoto);
+
+        return requestArrayList;
     }
 }
