@@ -2,8 +2,8 @@ package best.team.petprojectsquad.entity;
 
 public enum BotState {
     START("/start"),
-    INFO("/info")
-    ;
+    INFO("/info");
+
     private final String state;
 
     BotState(String state) {
