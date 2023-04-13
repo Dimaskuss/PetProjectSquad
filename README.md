@@ -14,7 +14,7 @@
 
  - [Деркачев Виктор Николаевич](https://github.com/Viktor2308)
  - [Петко Денис Андреевич](https://github.com/DenisPetko)
- - []()
+ - [Кудлай Егор Владимирович](https://github.com/Couldliegor)
  - []()
 
  ------
