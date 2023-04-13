@@ -1,5 +1,6 @@
 package best.team.petprojectsquad.listener;
 
+import best.team.petprojectsquad.handler.MainHandler;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
@@ -21,6 +22,7 @@ import java.util.List;
 public class TelegramBotUpdateListener implements UpdatesListener {
 
     private final TelegramBot telegramBot;
+    private final MainHandler mainHandler;
 
     @PostConstruct
     public void init() {
@@ -39,7 +41,7 @@ public class TelegramBotUpdateListener implements UpdatesListener {
                             , update.message().from().id()
                             , update.message().text());
 
-                    SendMessage sendMessage = new SendMessage(update.message().from().id(), "hello friend!");
+                    SendMessage sendMessage = mainHandler.handleUpdate(update);
 
                     telegramBot.execute(sendMessage);
 
