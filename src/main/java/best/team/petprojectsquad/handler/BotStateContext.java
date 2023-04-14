@@ -17,8 +17,12 @@ public class BotStateContext {
     // 1) (ключ)BotState.INFO  (значение) infoMenuHandler ->
     // -> объект класса InfoMenuHandler, этот объект спринг создает при запуске автоматически так как класс InfoMenuHandler помечен аннотацией @Component
     // 2) 1) (ключ)BotState.START  (значение) startMenuHandler ->  все аналогично строчке выше
+    /**
+     * в этой мапе после запуска программы будут значения:<br>
+     * 1) (ключ)BotState.INFO  (значение) infoMenuHandler -> объект класса InfoMenuHandler<br>
+     * 2) (ключ)BotState.START  (значение) startMenuHandler -> объект класса StartMenuHandler
+     */
     private final Map<BotState, InputHandlerMessage> messageHandlers = new HashMap<>();
-
 
     // это конструктор этого класса BotStateContext
     //по этому при старте программы сприн его обязательно запустит (смотрим наверху на аннотацию @Component)
@@ -32,6 +36,15 @@ public class BotStateContext {
 
     // сюда нам приходит из MainHandler статус бота и сообщение
     //по статусу из мапы достаем нудный нам handler и передаем туда наше сообщение
+
+    /**
+     * Формирование ответа пользователю выбранным обработчиком. Для выбора обработчика используется приватный метод
+     * {@link BotStateContext#findMessageHandler(BotState)}
+     *
+     * @param currentState статус бота, принимает значение из enum {@link BotState}
+     * @param message      сообщение пользователя
+     * @return ответ пользователю
+     */
     public List<BaseRequest> processInputMessage(BotState currentState, Message message) {
         //в строчке ниже: обработчик входящего запроса = найти обработчик по статусу бота в мапе
         InputHandlerMessage currentMessageHandler = findMessageHandler(currentState);
@@ -43,7 +56,6 @@ public class BotStateContext {
     private InputHandlerMessage findMessageHandler(BotState currentState) {
         return messageHandlers.get(currentState);
     }
-
 
 
 }

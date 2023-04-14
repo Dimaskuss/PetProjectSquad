@@ -37,13 +37,19 @@ public class MainHandler {
                     , message.from().username()
                     , message.chat().id(), message.text());
             // передаем уже сообщение в обработку
-            baseRequestList.addAll(handleInputMessage(message)) ;
+            baseRequestList.addAll(handleInputMessage(message));
         }
 
         return baseRequestList;
     }
 
 
+    /**
+     * Обработка сообщения, полученного от пользователя
+     *
+     * @param message сообщение пользователя
+     * @return ответ пользователю
+     */
     public List<BaseRequest> handleInputMessage(Message message) {
 
         //извлекаем из сообщения текст
