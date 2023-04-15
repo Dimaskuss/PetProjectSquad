@@ -1,7 +1,7 @@
 package best.team.petprojectsquad.handler.textHandler;
 
 import best.team.petprojectsquad.entity.BotState;
-import best.team.petprojectsquad.service.InfoHandlerService;
+import best.team.petprojectsquad.service.textHandler.InfoHandlerService;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.request.BaseRequest;
 import lombok.AllArgsConstructor;
