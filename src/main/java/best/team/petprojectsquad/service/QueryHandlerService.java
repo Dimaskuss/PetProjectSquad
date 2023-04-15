@@ -4,6 +4,6 @@ import com.pengrad.telegrambot.request.BaseRequest;
 
 import java.util.List;
 
-public interface TextHandlerService {
-    List<BaseRequest> getReplyMessage(long id, String message);
+public interface QueryHandlerService {
+    List<BaseRequest> getReplyMessage(long id);
 }
