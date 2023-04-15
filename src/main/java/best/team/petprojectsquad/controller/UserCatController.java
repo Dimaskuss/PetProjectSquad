@@ -1,8 +1,9 @@
 package best.team.petprojectsquad.controller;
 
 
-import best.team.petprojectsquad.entity.User;
-import best.team.petprojectsquad.repository.UserRepository;
+import best.team.petprojectsquad.entity.UserCat;
+import best.team.petprojectsquad.repository.UserCatRepository;
+import best.team.petprojectsquad.repository.UserDogRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -18,9 +19,9 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/User")
-public class UserController {
-    private final UserRepository userRepository;
+@RequestMapping(value = "/UserCat")
+public class UserCatController {
+    private final UserCatRepository userDogRepository;
 
     @Operation(
             summary = "Getting user by it's id",
@@ -30,7 +31,7 @@ public class UserController {
                             description = "User in database with id",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = User.class)
+                                    schema = @Schema(implementation = UserCat.class)
                             )
                     ),
                     @ApiResponse(
@@ -40,8 +41,8 @@ public class UserController {
             }, tags = "User"
     )
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> getuserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
-        return ResponseEntity.ok(userRepository.getReferenceById(id));
+    public ResponseEntity<UserCat> getuserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
+        return ResponseEntity.ok(userDogRepository.getReferenceById(id));
     }
 
     @Operation(
@@ -58,8 +59,8 @@ public class UserController {
             }, tags = "User"
     )
     @PostMapping("/")
-    public ResponseEntity<Long> adduser(@Parameter (description = "An Entity 'user' in database") @RequestBody User user) {
-        return ResponseEntity.ok().body(userRepository.save(user).getId());
+    public ResponseEntity<Long> adduser(@Parameter (description = "An Entity 'user' in database") @RequestBody UserCat user) {
+        return ResponseEntity.ok().body(userDogRepository.save(user).getId());
     }
 
     @Operation(
@@ -80,12 +81,12 @@ public class UserController {
             }, tags = "User"
     )
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Long> edituser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody User user) {
-        if (userRepository.findById(id).isEmpty()) {
+    public ResponseEntity<Long> edituser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody UserCat user) {
+        if (userDogRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        userRepository.deleteById(id);
-        userRepository.save(user);
+        userDogRepository.deleteById(id);
+        userDogRepository.save(user);
         return ResponseEntity.ok().body(user.getId());
     }
 
@@ -97,7 +98,7 @@ public class UserController {
                             description = "Users has been returned successfully",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = User[].class)
+                                    array = @ArraySchema(schema = @Schema(implementation = UserCat[].class)
                                     )
                             )
                     ),
@@ -108,11 +109,11 @@ public class UserController {
             }, tags = "User"
     )
     @GetMapping("/getAll")
-    public ResponseEntity<List<User>> getAll() {
-        if (userRepository.findAll().isEmpty()) {
+    public ResponseEntity<List<UserCat>> getAll() {
+        if (userDogRepository.findAll().isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok().body(userRepository.findAll());
+        return ResponseEntity.ok().body(userDogRepository.findAll());
     }
 
 
@@ -131,10 +132,10 @@ public class UserController {
     )
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteuser(@Parameter @PathVariable long id) {
-        if (userRepository.findById(id).isEmpty()) {
+        if (userDogRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        userRepository.deleteById(id);
+        userDogRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }

@@ -5,10 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user_cat")
 @Data
 @NoArgsConstructor
-public class User {
+public class UserCat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -22,7 +22,7 @@ public class User {
     @Column(name = "bot_state")
     private String botState;
 
-    public User(long chatId) {
+    public UserCat(long chatId) {
         this.chatId = chatId;
     }
 }
