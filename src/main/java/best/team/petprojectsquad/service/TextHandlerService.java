@@ -13,6 +13,6 @@ public interface TextHandlerService {
      * @param message сообщение пользователя
      * @return ответ пользователю, сформированный ботом
      */
-    List<BaseRequest> getReplyMessage(Long id, String message);
+    List<BaseRequest> getReplyMessage(long id, String message);
 
 }

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DogShelterInfoService implements TextHandlerService {
-
+    // TODO: 16.04.2023 надо перенести в queryService, будет вызываться по кнопке + доработать клавиатуру 
     @Override
-    public List<BaseRequest> getReplyMessage(Long id, String message) {
+    public List<BaseRequest> getReplyMessage(long id, String message) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         SendMessage sendMessage = new SendMessage(id, """
                 Могу предоставить некоторую информацию о приюте:
