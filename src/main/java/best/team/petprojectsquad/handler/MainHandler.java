@@ -18,11 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 public class MainHandler {
 
-    //класс основной распределитель для входящих сообщений
-
     private final BotStateContext botStateContext;
     private final UserDataCache userDataCache;
-
 
     public List<BaseRequest> handleUpdate(Update update) {
 
