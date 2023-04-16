@@ -5,6 +5,7 @@ import com.pengrad.telegrambot.request.BaseRequest;
 import java.util.List;
 
 public interface TextHandlerService {
+
     /**
      * Формирование ботом ответа пользователю
      *
@@ -13,4 +14,5 @@ public interface TextHandlerService {
      * @return ответ пользователю, сформированный ботом
      */
     List<BaseRequest> getReplyMessage(Long id, String message);
+
 }
