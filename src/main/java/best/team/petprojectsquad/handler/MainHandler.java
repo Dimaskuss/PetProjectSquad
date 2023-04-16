@@ -44,12 +44,19 @@ public class MainHandler {
                     , update.callbackQuery().message().chat().id()
                     , update.callbackQuery().data());
             baseRequestList.addAll(handleQueryMessage(update.callbackQuery()));
+
         }
 
         return baseRequestList;
     }
 
 
+    /**
+     * Обработка сообщения, полученного от пользователя
+     *
+     * @param message сообщение пользователя
+     * @return ответ пользователю
+     */
     public List<BaseRequest> handleInputMessage(Message message) {
 
         //извлекаем из сообщения текст
