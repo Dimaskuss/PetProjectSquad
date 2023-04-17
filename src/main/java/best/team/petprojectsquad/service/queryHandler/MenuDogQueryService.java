@@ -9,7 +9,6 @@ import java.util.List;
 @Service
 public class MenuDogQueryService implements QueryHandlerService {
 
-
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
         return null;

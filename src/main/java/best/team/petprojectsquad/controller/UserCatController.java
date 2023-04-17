@@ -41,7 +41,7 @@ public class UserCatController {
             }, tags = "User"
     )
     @GetMapping(value = "/{id}")
-    public ResponseEntity<UserCat> getuserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
+    public ResponseEntity<UserCat> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
         return ResponseEntity.ok(userDogRepository.getReferenceById(id));
     }
 
@@ -59,7 +59,7 @@ public class UserCatController {
             }, tags = "User"
     )
     @PostMapping("/")
-    public ResponseEntity<Long> adduser(@Parameter (description = "An Entity 'user' in database") @RequestBody UserCat user) {
+    public ResponseEntity<Long> addUser(@Parameter (description = "An Entity 'user' in database") @RequestBody UserCat user) {
         return ResponseEntity.ok().body(userDogRepository.save(user).getId());
     }
 
@@ -81,7 +81,7 @@ public class UserCatController {
             }, tags = "User"
     )
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Long> edituser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody UserCat user) {
+    public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody UserCat user) {
         if (userDogRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -108,11 +108,8 @@ public class UserCatController {
                     )
             }, tags = "User"
     )
-    @GetMapping("/getAll")
+    @GetMapping("/")
     public ResponseEntity<List<UserCat>> getAll() {
-        if (userDogRepository.findAll().isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
         return ResponseEntity.ok().body(userDogRepository.findAll());
     }
 
@@ -131,7 +128,7 @@ public class UserCatController {
             }, tags = "User"
     )
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteuser(@Parameter @PathVariable long id) {
+    public ResponseEntity<Void> deleteUser(@Parameter @PathVariable long id) {
         if (userDogRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }

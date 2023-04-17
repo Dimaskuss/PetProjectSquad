@@ -36,7 +36,5 @@ public class MenuCatQueryService implements QueryHandlerService {
                 });
 
         return inlineKeyboard;
-}
-
-
+    }
 }

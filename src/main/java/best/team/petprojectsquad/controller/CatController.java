@@ -106,11 +106,8 @@ public class CatController {
                     )
             }, tags = "Cat"
     )
-    @GetMapping("/getAll")
+    @GetMapping("/")
     public ResponseEntity<List<Cat>> getAll() {
-        if (catRepository.findAll().isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
         return ResponseEntity.ok().body(catRepository.findAll());
     }
 

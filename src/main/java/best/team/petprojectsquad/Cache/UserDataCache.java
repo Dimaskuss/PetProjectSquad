@@ -6,10 +6,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @Service
 public class UserDataCache implements DataCache {
-
     private final Map<Long, BotState> usersBotStates = new HashMap<>();
 
     @Override
@@ -19,13 +17,6 @@ public class UserDataCache implements DataCache {
 
     @Override
     public BotState getUsersCurrentBotState(long userId) {
-        BotState botState = usersBotStates.get(userId);
-        if (botState == null) {
-            botState = BotState.START;
-        }
-
-        return botState;
+        return usersBotStates.getOrDefault(userId, BotState.valueOf("что-то пошло не-так"));
     }
-
-
 }

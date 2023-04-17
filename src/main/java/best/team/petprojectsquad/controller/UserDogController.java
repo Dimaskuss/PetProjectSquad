@@ -1,6 +1,5 @@
 package best.team.petprojectsquad.controller;
 
-
 import best.team.petprojectsquad.entity.UserDog;
 import best.team.petprojectsquad.repository.UserDogRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,7 +39,7 @@ public class UserDogController {
             }, tags = "User"
     )
     @GetMapping(value = "/{id}")
-    public ResponseEntity<UserDog> getuserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
+    public ResponseEntity<UserDog> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
         return ResponseEntity.ok(userDogRepository.getReferenceById(id));
     }
 
@@ -58,7 +57,7 @@ public class UserDogController {
             }, tags = "User"
     )
     @PostMapping("/")
-    public ResponseEntity<Long> adduser(@Parameter (description = "An Entity 'user' in database") @RequestBody UserDog user) {
+    public ResponseEntity<Long> addUser(@Parameter(description = "An Entity 'user' in database") @RequestBody UserDog user) {
         return ResponseEntity.ok().body(userDogRepository.save(user).getId());
     }
 
@@ -80,7 +79,7 @@ public class UserDogController {
             }, tags = "User"
     )
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Long> edituser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody UserDog user) {
+    public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody UserDog user) {
         if (userDogRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -107,11 +106,8 @@ public class UserDogController {
                     )
             }, tags = "User"
     )
-    @GetMapping("/getAll")
+    @GetMapping("/")
     public ResponseEntity<List<UserDog>> getAll() {
-        if (userDogRepository.findAll().isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
         return ResponseEntity.ok().body(userDogRepository.findAll());
     }
 
@@ -130,7 +126,7 @@ public class UserDogController {
             }, tags = "User"
     )
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteuser(@Parameter @PathVariable long id) {
+    public ResponseEntity<Void> deleteUser(@Parameter @PathVariable long id) {
         if (userDogRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
