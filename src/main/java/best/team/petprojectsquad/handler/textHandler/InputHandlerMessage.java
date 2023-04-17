@@ -10,7 +10,12 @@ public interface InputHandlerMessage {
 
     //интерфейс для всех обработчиков текстовых сообщений
 
-
+    /**
+     * Обработка сообщения, полученного от пользователя
+     *
+     * @param inputMessage сообщение пользователя
+     * @return ответ пользователю
+     */
     List<BaseRequest> handle(Message inputMessage);
 
     BotState getHandlerName();

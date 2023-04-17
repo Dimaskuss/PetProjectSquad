@@ -46,7 +46,7 @@ public class StartHandlerService implements TextHandlerService {
 
         InlineKeyboardButton[] row1 = new InlineKeyboardButton[]{button1,button2};
 
-        Keyboard replyKeyboard = new InlineKeyboardMarkup(row1);
+        Keyboard  replyKeyboard = new InlineKeyboardMarkup(row1);
 
         return replyKeyboard;
     }

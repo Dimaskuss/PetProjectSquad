@@ -16,8 +16,6 @@ public class StartMenuHandler implements InputHandlerMessage {
 
     private final StartHandlerService startHandlerService;
 
-    //передаем обработку входящего сообщения в слой сервиса в класс -> StartHandlerService
-    //для удобства разделил inputMessage на (лонг номер чата, стринг сам текст)
     @Override
     public List<BaseRequest> handle(Message inputMessage) {
         return startHandlerService.getReplyMessage(inputMessage.chat().id(), inputMessage.text());

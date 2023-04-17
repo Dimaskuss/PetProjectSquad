@@ -18,11 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 public class MainHandler {
 
-    //класс основной распределитель для входящих сообщений
-
     private final BotStateContext botStateContext;
     private final UserDataCache userDataCache;
-
 
     public List<BaseRequest> handleUpdate(Update update) {
 
@@ -44,12 +41,19 @@ public class MainHandler {
                     , update.callbackQuery().message().chat().id()
                     , update.callbackQuery().data());
             baseRequestList.addAll(handleQueryMessage(update.callbackQuery()));
+
         }
 
         return baseRequestList;
     }
 
 
+    /**
+     * Обработка сообщения, полученного от пользователя
+     *
+     * @param message сообщение пользователя
+     * @return ответ пользователю
+     */
     public List<BaseRequest> handleInputMessage(Message message) {
 
         //извлекаем из сообщения текст

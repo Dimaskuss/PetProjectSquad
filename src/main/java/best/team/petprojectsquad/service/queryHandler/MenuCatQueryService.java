@@ -13,12 +13,6 @@ import java.util.List;
 
 @Service
 public class MenuCatQueryService implements QueryHandlerService {
-/*
-- Узнать информацию о приюте (этап 1)
-- Как взять животное из приюта (этап 2)
-- Прислать отчет о питомце (этап 3)
-- Позвать волонтера
-*/
 
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
