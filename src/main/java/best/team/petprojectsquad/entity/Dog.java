@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class Dog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OrderColumn
     private long id;
     @Column(name = "breed")
     private String breed;

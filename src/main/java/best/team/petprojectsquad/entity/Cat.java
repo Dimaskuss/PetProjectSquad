@@ -13,6 +13,7 @@ public class Cat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OrderColumn
     private long id;
     @Column(name = "breed")
     private String breed;

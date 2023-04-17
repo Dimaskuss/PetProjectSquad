@@ -99,10 +99,6 @@ public class CatController {
                                     array = @ArraySchema(schema = @Schema(implementation = Cat[].class)
                                     )
                             )
-                    ),
-                    @ApiResponse(
-                            responseCode = "204",
-                            description = "Cat database is empty"
                     )
             }, tags = "Cat"
     )

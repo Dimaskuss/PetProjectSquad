@@ -38,6 +38,4 @@ public class TelegramBotUpdateListener implements UpdatesListener {
         }
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
-
-
 }

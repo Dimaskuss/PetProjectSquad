@@ -1,8 +1,7 @@
 package best.team.petprojectsquad.controller;
 
-
-import best.team.petprojectsquad.entity.UserCat;
-import best.team.petprojectsquad.repository.UserCatRepository;
+import best.team.petprojectsquad.entity.Shelter;
+import best.team.petprojectsquad.repository.ShelterRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -18,116 +17,116 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/UserCat")
-public class UserCatController {
-    private final UserCatRepository userDogRepository;
+@RequestMapping("/Shelter")
+public class ShelterController {
+    ShelterRepository ShelterRepository;
 
     @Operation(
-            summary = "Getting user by it's id",
+            summary = "Getting Shelter by it's number",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "User in database with id",
+                            description = "Shelter in database with it's number",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = UserCat.class)
+                                    schema = @Schema(implementation = Shelter.class)
                             )
                     ),
                     @ApiResponse(
                             responseCode = "500",
-                            description = "There is no user under that id!"
+                            description = "There is no Shelter under that number!"
                     )
-            }, tags = "User"
+            }, tags = "Shelter"
     )
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<UserCat> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
-        return ResponseEntity.ok(userDogRepository.getReferenceById(id));
+    @GetMapping(value = "/{number}")
+    public ResponseEntity<Shelter> getShelterById(@Parameter(description = "id of a Shelter in a DB", example = "1") @PathVariable String number) {
+        return ResponseEntity.ok(ShelterRepository.getReferenceById(number));
     }
 
     @Operation(
-            summary = "Adding user, returning id of added user",
+            summary = "Adding Shelter, returning number of added Shelter",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "User has been added to database successfully!"
+                            description = "Shelter has been added to database successfully!"
                     ),
                     @ApiResponse(
                             responseCode = "400",
                             description = "Some fields may be empty, try to fill them correctly using example"
                     )
-            }, tags = "User"
+            }, tags = "Shelter"
     )
     @PostMapping("/")
-    public ResponseEntity<Long> addUser(@Parameter (description = "An Entity 'user' in database") @RequestBody UserCat user) {
-        return ResponseEntity.ok().body(userDogRepository.save(user).getId());
+    public ResponseEntity<String> addShelter(@Parameter (description = "an Entity 'Shelter' in database") @RequestBody Shelter shelter) {
+        return ResponseEntity.ok().body(ShelterRepository.save(shelter).getNumber());
     }
 
     @Operation(
-            summary = "Editing user",
+            summary = "Editing Shelter",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "user has been successfully edited, id has been successfully returned"
+                            description = "Shelter has been successfully edited, number has been successfully returned"
                     ),
                     @ApiResponse(
                             responseCode = "204",
-                            description = "There is no user in database by this id"
+                            description = "There is no Shelter in database by this number"
                     ),
                     @ApiResponse(
                             responseCode = "400",
                             description = "Some fields in body may be empty, or may contain irrelevant type! Try to fill fields correctly using example"
                     )
-            }, tags = "User"
+            }, tags = "Shelter"
     )
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody UserCat user) {
-        if (userDogRepository.findById(id).isEmpty()) {
+    public ResponseEntity<String> editShelter(@Parameter(description = "id of a Shelter in a DB", example = "1") @PathVariable String id, @Parameter(description = "an Entity 'Shelter' in database") @RequestBody Shelter shelter) {
+        if (ShelterRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        userDogRepository.deleteById(id);
-        userDogRepository.save(user);
-        return ResponseEntity.ok().body(user.getId());
+        ShelterRepository.deleteById(id);
+        ShelterRepository.save(shelter);
+        return ResponseEntity.ok().body(shelter.getNumber());
     }
 
     @Operation(
-            summary = "Getting all users",
+            summary = "Getting all Shelters",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "Users has been returned successfully",
+                            description = "Shelters has been returned successfully",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = UserCat[].class)
+                                    array = @ArraySchema(schema = @Schema(implementation = Shelter[].class)
                                     )
                             )
                     )
-            }, tags = "User"
+            }, tags = "Shelter"
     )
     @GetMapping("/")
-    public ResponseEntity<List<UserCat>> getAll() {
-        return ResponseEntity.ok().body(userDogRepository.findAll());
+    public ResponseEntity<List<Shelter>> getAll() {
+        return ResponseEntity.ok().body(ShelterRepository.findAll());
     }
 
 
     @Operation(
-            summary = "Deleting user by it's id",
+            summary = "Deleting Shelter by it's number",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "User has been Successfully removed"
+                            description = "Shelter has been Successfully removed"
                     ),
                     @ApiResponse(
                             responseCode = "204",
-                            description = "There is no user in database by this id"
+                            description = "There is no Shelter in database by this id"
                     )
-            }, tags = "User"
+            }, tags = "Shelter"
     )
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteUser(@Parameter @PathVariable long id) {
-        if (userDogRepository.findById(id).isEmpty()) {
+    public ResponseEntity<Void> deleteShelter(@Parameter @PathVariable String id) {
+        if (ShelterRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        userDogRepository.deleteById(id);
+        ShelterRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }

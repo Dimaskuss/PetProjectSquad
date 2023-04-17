@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class UserDog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OrderColumn
     private long id;
 
     @Column(name = "chat_id", nullable = false, unique = true)
