@@ -17,6 +17,6 @@ public class UserDataCache implements DataCache {
 
     @Override
     public BotState getUsersCurrentBotState(long userId) {
-        return usersBotStates.getOrDefault(userId, BotState.valueOf("что-то пошло не-так"));
+        return usersBotStates.getOrDefault(userId, BotState.START);
     }
 }

@@ -14,7 +14,7 @@ public class Shelter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
-    private String number;
+    private Long number;
     @Column(name = "name")
     private String name;
     @Column(name = "address")
@@ -24,9 +24,9 @@ public class Shelter {
     @Column(name = "work_schedule")
     private String workSchedule;
     @Column(name = "shelter_type")
-    private ShelterType shelterType;
+    private String shelterType;
 
-    public Shelter(String number, String name, String address, String telephoneNumber, String workSchedule, ShelterType shelterType) {
+    public Shelter(Long number, String name, String address, String telephoneNumber, String workSchedule, ShelterType shelterType) {
         this.number = number;
         this.name = name;
         this.address = address;
@@ -36,14 +36,14 @@ public class Shelter {
             throw new IllegalArgumentException("Telephone number has been entered incorrectly");
         }
         this.workSchedule = workSchedule;
-        this.shelterType = shelterType;
+        this.shelterType = shelterType.getShelterType();
     }
 
-    public String getNumber() {
+    public Long getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(Long number) {
         this.number = number;
     }
 
@@ -79,11 +79,11 @@ public class Shelter {
         this.workSchedule = workSchedule;
     }
 
-    public ShelterType getShelterType() {
+    public String getShelterType() {
         return shelterType;
     }
 
-    public void setShelterType(ShelterType shelterType) {
+    public void setShelterType(String shelterType) {
         this.shelterType = shelterType;
     }
 
@@ -92,9 +92,7 @@ public class Shelter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Shelter shelter = (Shelter) o;
-        return Objects.equals(number, shelter.number) && Objects.equals(name, shelter.name)
-               && Objects.equals(address, shelter.address) && Objects.equals(telephoneNumber, shelter.telephoneNumber)
-               && Objects.equals(workSchedule, shelter.workSchedule) && shelterType == shelter.shelterType;
+        return Objects.equals(number, shelter.number) && Objects.equals(name, shelter.name) && Objects.equals(address, shelter.address) && Objects.equals(telephoneNumber, shelter.telephoneNumber) && Objects.equals(workSchedule, shelter.workSchedule) && Objects.equals(shelterType, shelter.shelterType);
     }
 
     @Override

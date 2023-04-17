@@ -39,12 +39,12 @@ public class ShelterController {
             }, tags = "Shelter"
     )
     @GetMapping(value = "/{number}")
-    public ResponseEntity<Shelter> getShelterById(@Parameter(description = "id of a Shelter in a DB", example = "1") @PathVariable String number) {
+    public ResponseEntity<Shelter> getShelterById(@Parameter(description = "id of a Shelter in a DB", example = "1") @PathVariable Long number) {
         return ResponseEntity.ok(ShelterRepository.getReferenceById(number));
     }
 
     @Operation(
-            summary = "Adding Shelter, returning number of added Shelter",
+            summary = "Adding Shelter, returning number of added Shelter, write value 'number' without char '+'",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -57,7 +57,7 @@ public class ShelterController {
             }, tags = "Shelter"
     )
     @PostMapping("/")
-    public ResponseEntity<String> addShelter(@Parameter (description = "an Entity 'Shelter' in database") @RequestBody Shelter shelter) {
+    public ResponseEntity<Long> addShelter(@Parameter (description = "an Entity 'Shelter' in database") @RequestBody Shelter shelter) {
         return ResponseEntity.ok().body(ShelterRepository.save(shelter).getNumber());
     }
 
@@ -79,7 +79,7 @@ public class ShelterController {
             }, tags = "Shelter"
     )
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> editShelter(@Parameter(description = "id of a Shelter in a DB", example = "1") @PathVariable String id, @Parameter(description = "an Entity 'Shelter' in database") @RequestBody Shelter shelter) {
+    public ResponseEntity<Long> editShelter(@Parameter(description = "id of a Shelter in a DB", example = "1") @PathVariable Long id, @Parameter(description = "an Entity 'Shelter' in database") @RequestBody Shelter shelter) {
         if (ShelterRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -122,7 +122,7 @@ public class ShelterController {
             }, tags = "Shelter"
     )
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteShelter(@Parameter @PathVariable String id) {
+    public ResponseEntity<Void> deleteShelter(@Parameter @PathVariable Long id) {
         if (ShelterRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
