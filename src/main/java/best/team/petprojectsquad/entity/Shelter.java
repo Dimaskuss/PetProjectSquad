@@ -1,6 +1,7 @@
 package best.team.petprojectsquad.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Table(name = "shelter")
 @Data
+@AllArgsConstructor
 public class Shelter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,28 +1,34 @@
-package best.team.petprojectsquad.TextMenuHandlerTest;
+package best.team.petprojectsquad;
 
 import best.team.petprojectsquad.entity.BotState;
+import best.team.petprojectsquad.handler.MainHandler;
 import best.team.petprojectsquad.handler.textHandler.InfoMenuHandler;
 import best.team.petprojectsquad.service.textHandler.InfoHandlerService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-public class InfoMenuHandlerTest {
-    private final InfoHandlerService infoHandlerService = new InfoHandlerService();
+class InfoMenuHandlerTest {
+
+    @Mock
+    private InfoHandlerService infoHandlerService;
 
     private final InfoMenuHandler infoMenuHandler = new InfoMenuHandler(infoHandlerService);
 
     @Test
-    public void shouldReturnInfoObject(){
+    void shouldReturnInfoObject(){
         assertEquals(infoMenuHandler.getHandlerName(), BotState.INFO);
     }
 
-    public void smth() {
-
+    @Test
+    void smth() {
+        //infoHandlerService.getReplyMessage();
     }
 }
