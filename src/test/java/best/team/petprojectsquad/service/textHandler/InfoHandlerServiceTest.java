@@ -1,4 +1,4 @@
-package best.team.petprojectsquad;
+package best.team.petprojectsquad.service.textHandler;
 
 import best.team.petprojectsquad.service.textHandler.InfoHandlerService;
 import com.pengrad.telegrambot.request.BaseRequest;
