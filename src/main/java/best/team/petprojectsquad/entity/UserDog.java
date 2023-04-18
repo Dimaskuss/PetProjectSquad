@@ -1,16 +1,19 @@
 package best.team.petprojectsquad.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user_dog")
 @Data
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+public class UserDog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OrderColumn
     private long id;
 
     @Column(name = "chat_id", nullable = false, unique = true)
@@ -22,7 +25,7 @@ public class User {
     @Column(name = "bot_state")
     private String botState;
 
-    public User(long chatId) {
+    public UserDog(long chatId) {
         this.chatId = chatId;
     }
 }

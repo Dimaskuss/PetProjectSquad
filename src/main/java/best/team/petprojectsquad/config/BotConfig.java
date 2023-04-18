@@ -12,5 +12,4 @@ public class BotConfig {
     public TelegramBot telegramBot(@Value("${bot.token}") String token) {
         return new TelegramBot(token);
     }
-
 }

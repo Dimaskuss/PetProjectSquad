@@ -4,6 +4,7 @@ import best.team.petprojectsquad.service.TextHandlerService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SendPhoto;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@NoArgsConstructor
 public class InfoHandlerService implements TextHandlerService {
 
     @Override

@@ -25,7 +25,6 @@ public class TelegramBotUpdateListener implements UpdatesListener {
     public void init() {
         telegramBot.setUpdatesListener(this);
     }
-
     public int process(List<Update> updates) {
         try {
             updates.forEach(update -> {
@@ -38,6 +37,4 @@ public class TelegramBotUpdateListener implements UpdatesListener {
         }
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
-
-
 }

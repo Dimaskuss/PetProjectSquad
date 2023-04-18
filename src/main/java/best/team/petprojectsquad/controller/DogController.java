@@ -39,7 +39,7 @@ public class DogController {
             }, tags = "Dog"
     )
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Dog> getdogById(@Parameter(description = "id of a dog in a DB", example = "1") @PathVariable long id) {
+    public ResponseEntity<Dog> getDogById(@Parameter(description = "id of a dog in a DB", example = "1") @PathVariable long id) {
         return ResponseEntity.ok(dogRepository.getReferenceById(id));
     }
 
@@ -57,7 +57,7 @@ public class DogController {
             }, tags = "Dog"
     )
     @PostMapping("/")
-    public ResponseEntity<Long> adddog(@Parameter (description = "an Entity 'dog' in database") @RequestBody Dog dog) {
+    public ResponseEntity<Long> addDog(@Parameter (description = "an Entity 'dog' in database") @RequestBody Dog dog) {
         return ResponseEntity.ok().body(dogRepository.save(dog).getId());
     }
 
@@ -79,7 +79,7 @@ public class DogController {
             }, tags = "Dog"
     )
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Long> editdog(@Parameter(description = "id of a dog in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'dog' in database") @RequestBody Dog dog) {
+    public ResponseEntity<Long> editDog(@Parameter(description = "id of a dog in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'dog' in database") @RequestBody Dog dog) {
         if (dogRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -99,18 +99,11 @@ public class DogController {
                                     array = @ArraySchema(schema = @Schema(implementation = Dog[].class)
                                     )
                             )
-                    ),
-                    @ApiResponse(
-                            responseCode = "204",
-                            description = "Dog database is empty"
                     )
             }, tags = "Dog"
     )
-    @GetMapping("/getAll")
+    @GetMapping("/")
     public ResponseEntity<List<Dog>> getAll() {
-        if (dogRepository.findAll().isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
         return ResponseEntity.ok().body(dogRepository.findAll());
     }
 
@@ -129,7 +122,7 @@ public class DogController {
             }, tags = "Dog"
     )
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deletedog(@Parameter @PathVariable long id) {
+    public ResponseEntity<Void> deleteDog(@Parameter @PathVariable long id) {
         if (dogRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }

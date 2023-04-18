@@ -1,0 +1,31 @@
+package best.team.petprojectsquad.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "user_cat")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserCat {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OrderColumn
+    private long id;
+
+    @Column(name = "chat_id", nullable = false, unique = true)
+    private long chatId;
+
+    @Column(name = "phone")
+    private int phoneNumber;
+
+    @Column(name = "bot_state")
+    private String botState;
+
+    public UserCat(long chatId) {
+        this.chatId = chatId;
+    }
+}
