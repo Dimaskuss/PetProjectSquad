@@ -1,4 +1,4 @@
-package best.team.petprojectsquad;
+package best.team.petprojectsquad.handler.textHandler;
 
 import best.team.petprojectsquad.entity.BotState;
 import best.team.petprojectsquad.handler.MainHandler;

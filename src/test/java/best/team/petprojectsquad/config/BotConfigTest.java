@@ -1,4 +1,4 @@
-package best.team.petprojectsquad;
+package best.team.petprojectsquad.config;
 
 import best.team.petprojectsquad.config.BotConfig;
 import com.pengrad.telegrambot.TelegramBot;
