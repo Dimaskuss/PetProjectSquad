@@ -75,6 +75,11 @@ public class MainHandler {
         switch (callbackQuery.data()) {
             case "/catShelterMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_SHELTER_MENU);
             case "/dogShelterMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_MENU);
+            case "/catShelterAddress" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_SHELTER_ADDRESS);
+            case "/dogShelterAddress" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_ADDRESS);
+            case "/workSchedule" -> userDataCache.setUsersCurrentBotState(chatId, BotState.WORK_SCHEDULE);
+            case "/admissionRules" -> userDataCache.setUsersCurrentBotState(chatId, BotState.ADMISSION_RULES);
+            case "/insideRules" -> userDataCache.setUsersCurrentBotState(chatId, BotState.INSIDE_RULES);
 
             default -> log.error("Нет обработки такого запроса с кнопки:" + callbackQuery.data());
         }

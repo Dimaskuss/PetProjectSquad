@@ -26,7 +26,7 @@ public class CatShelterInfoService implements TextHandlerService {
 
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
                 new InlineKeyboardButton[][]{
-                        {new InlineKeyboardButton("Где он находится").callbackData("/address")},
+                        {new InlineKeyboardButton("Где он находится").callbackData("/catShelterAddress")},
                         {new InlineKeyboardButton("Как и когда работает").callbackData("/workSchedule")},
                         {new InlineKeyboardButton("Какие правила пропуска на территорию приюта").callbackData("/admissionRules")},
                         {new InlineKeyboardButton("Правила нахождения внутри и общения с животным").callbackData("/insideRules")}
