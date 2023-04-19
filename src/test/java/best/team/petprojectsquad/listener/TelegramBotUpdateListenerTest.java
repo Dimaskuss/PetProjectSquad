@@ -38,8 +38,8 @@ public class TelegramBotUpdateListenerTest {
 
         telegramBotUpdateListener.process(Collections.singletonList(update));
 
-        ArgumentCaptor<SendMessage> argumentCaptorMessage = ArgumentCaptor.forClass(SendMessage.class);
         ArgumentCaptor<SendPhoto> argumentCaptorPhoto = ArgumentCaptor.forClass(SendPhoto.class);
+        ArgumentCaptor<SendMessage> argumentCaptorMessage = ArgumentCaptor.forClass(SendMessage.class);
         Mockito.verify(telegramBot).execute(argumentCaptorPhoto.capture());
         Mockito.verify(telegramBot).execute(argumentCaptorMessage.capture());
         SendMessage actualMessage = argumentCaptorMessage.getValue();
@@ -47,6 +47,7 @@ public class TelegramBotUpdateListenerTest {
 
         Assertions.assertThat(actualMessage.getParameters().get("chat_id")).isEqualTo(update.message().chat().id());
         Assertions.assertThat(actualMessage.getParameters().get("text")).isEqualTo("Выберите интересующий Вас приют:");
+        Assertions.assertThat(actualPhoto.getParameters().get("photo")).isEqualTo("src/main/resources/mainMenu.png");
 
     }
 }
