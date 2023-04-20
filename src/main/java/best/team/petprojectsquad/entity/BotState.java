@@ -3,16 +3,21 @@ package best.team.petprojectsquad.entity;
 public enum BotState {
     START("/start"),
     INFO("/info"),
+    CALL_VOLUNTEER("/callVolunteer"),
     CAT_SHELTER_MENU("/catShelterMenu"),
     DOG_SHELTER_MENU("/dogShelterMenu"),
-    CAT_SHELTER_ADDRESS("/catShelterAddress"),
-    DOG_SHELTER_ADDRESS("/dogShelterAddress"),
-    WORK_SCHEDULE("/workSchedule"),
-    ADMISSION_RULES("/admissionRules"),
-    INSIDE_RULES("/insideRules"),
-    ASK_VOLUNTEER("/askVolunteer"),
-    SECURITY_CONTACT("/securityContact");
-
+    CAT_INFO_MENU("/catInfoMenu"),
+    DOG_INFO_MENU("/dogInfoMenu"),
+    CAT_SHELTER_INFO("/catInfo"),
+    DOG_SHELTER_INFO("/dogInfo"),
+    CAT_SHELTER_ADDRESS("/catAddress"),
+    DOG_SHELTER_ADDRESS("/dogAddress"),
+    CAT_SHELTER_PASS("/catPass"),
+    DOG_SHELTER_PASS("/dogPass"),
+    CAT_SHELTER_SAFETY("/catSafety"),
+    DOG_SHELTER_SAFETY("/dogSafety"),
+    CAT_SHELTER_CALLBACK("/catCallback"),
+    DOG_SHELTER_CALLBACK("/dogCallback");
 
 
     private final String state;

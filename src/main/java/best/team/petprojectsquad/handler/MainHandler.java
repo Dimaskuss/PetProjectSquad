@@ -75,11 +75,19 @@ public class MainHandler {
         switch (callbackQuery.data()) {
             case "/catShelterMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_SHELTER_MENU);
             case "/dogShelterMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_MENU);
-            case "/catShelterAddress" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_SHELTER_ADDRESS);
-            case "/dogShelterAddress" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_ADDRESS);
-            case "/workSchedule" -> userDataCache.setUsersCurrentBotState(chatId, BotState.WORK_SCHEDULE);
-            case "/admissionRules" -> userDataCache.setUsersCurrentBotState(chatId, BotState.ADMISSION_RULES);
-            case "/insideRules" -> userDataCache.setUsersCurrentBotState(chatId, BotState.INSIDE_RULES);
+            case "/catInfoMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_INFO_MENU);
+            case "/dogInfoMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_INFO_MENU);
+            case "/catInfo" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_SHELTER_INFO);
+            case "/dogInfo" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_INFO);
+            case "/catAddress" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_SHELTER_ADDRESS);
+            case "/dogAddress" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_ADDRESS);
+            case "/catPass" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_SHELTER_PASS);
+            case "/dogPass" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_PASS);
+            case "/catSafety" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_SHELTER_SAFETY);
+            case "/dogSafety" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_SAFETY);
+            case "/catCallback" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_SHELTER_CALLBACK);
+            case "/dogCallback" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_CALLBACK);
+            case "/callVolunteer" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CALL_VOLUNTEER);
 
             default -> log.error("Нет обработки такого запроса с кнопки:" + callbackQuery.data());
         }
