@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Service
 public class TipsDogTrainerService implements QueryHandlerService {
+
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
@@ -18,6 +19,7 @@ public class TipsDogTrainerService implements QueryHandlerService {
                 Совет 2,
                 Совет 3;
                 """);
+        //todo: дописать советы
         requestArrayList.add(sendMessage);
 
         return requestArrayList;
