@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping(value = "/Cats")
+@AllArgsConstructor
 public class CatController {
     private final CatRepository catRepository;
-
     @Operation(
             summary = "Getting cat by it's id",
             responses = {
@@ -99,10 +99,6 @@ public class CatController {
                                     array = @ArraySchema(schema = @Schema(implementation = Cat[].class)
                                     )
                             )
-                    ),
-                    @ApiResponse(
-                            responseCode = "204",
-                            description = "Cat database is empty"
                     )
             }, tags = "Cat"
     )

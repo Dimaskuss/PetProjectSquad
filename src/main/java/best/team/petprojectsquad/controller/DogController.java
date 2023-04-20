@@ -99,10 +99,6 @@ public class DogController {
                                     array = @ArraySchema(schema = @Schema(implementation = Dog[].class)
                                     )
                             )
-                    ),
-                    @ApiResponse(
-                            responseCode = "204",
-                            description = "Dog database is empty"
                     )
             }, tags = "Dog"
     )

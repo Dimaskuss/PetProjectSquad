@@ -1,5 +1,4 @@
 package best.team.petprojectsquad.listener;
-
 import best.team.petprojectsquad.handler.MainHandler;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
@@ -11,33 +10,27 @@ import org.springframework.stereotype.Component;
 
 
 import java.util.List;
-
-
 @Slf4j
 @Component
 @AllArgsConstructor
 public class TelegramBotUpdateListener implements UpdatesListener {
-
     private final TelegramBot telegramBot;
     private final MainHandler mainHandler;
-
     @PostConstruct
     public void init() {
         telegramBot.setUpdatesListener(this);
     }
-
+    @Override
     public int process(List<Update> updates) {
         try {
             updates.forEach(update -> {
-
+                log.info("Handles update: {}", update);
                 mainHandler.handleUpdate(update).stream().forEach(message -> telegramBot.execute(message));
 
             });
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
         }
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
-
-
 }

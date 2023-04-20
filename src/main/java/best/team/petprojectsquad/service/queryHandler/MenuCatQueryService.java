@@ -22,7 +22,6 @@ public class MenuCatQueryService implements QueryHandlerService {
         sendMessage.replyMarkup(keyboard);
         requestArrayList.add(sendMessage);
         return requestArrayList;
-
     }
 
     private Keyboard getMainMenuKeyboard() {

@@ -99,10 +99,6 @@ public class UserDogController {
                                     array = @ArraySchema(schema = @Schema(implementation = UserDog[].class)
                                     )
                             )
-                    ),
-                    @ApiResponse(
-                            responseCode = "204",
-                            description = "User database is empty"
                     )
             }, tags = "User"
     )

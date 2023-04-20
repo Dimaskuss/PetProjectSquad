@@ -13,7 +13,6 @@ import java.util.List;
 @Component
 @AllArgsConstructor
 public class InfoMenuHandler implements InputHandlerMessage {
-
     private final InfoHandlerService infoHandlerService;
 
     @Override

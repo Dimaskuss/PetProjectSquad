@@ -3,7 +3,6 @@ package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.repository.UserCatRepository;
-import best.team.petprojectsquad.repository.UserDogRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -101,10 +100,6 @@ public class UserCatController {
                                     array = @ArraySchema(schema = @Schema(implementation = UserCat[].class)
                                     )
                             )
-                    ),
-                    @ApiResponse(
-                            responseCode = "204",
-                            description = "User database is empty"
                     )
             }, tags = "User"
     )

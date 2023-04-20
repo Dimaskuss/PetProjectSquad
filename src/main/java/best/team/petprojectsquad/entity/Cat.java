@@ -2,17 +2,19 @@ package best.team.petprojectsquad.entity;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "cat")
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class Cat {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OrderColumn
     private long id;
     @Column(name = "breed")
     private String breed;
@@ -22,5 +24,4 @@ public class Cat {
     private int yearOfBirthday;
     @Column(name = "description")
     private String description;
-
 }

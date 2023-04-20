@@ -1,6 +1,7 @@
 package best.team.petprojectsquad.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,9 +9,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "user_cat")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserCat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OrderColumn
     private long id;
 
     @Column(name = "chat_id", nullable = false, unique = true)
