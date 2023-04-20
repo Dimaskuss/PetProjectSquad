@@ -1,8 +1,6 @@
 package best.team.petprojectsquad.handler;
 
 import best.team.petprojectsquad.entity.BotState;
-import best.team.petprojectsquad.handler.callbackQuery.InputHandlerQuery;
-import best.team.petprojectsquad.handler.textHandler.InputHandlerMessage;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.request.BaseRequest;
 import org.springframework.stereotype.Component;
