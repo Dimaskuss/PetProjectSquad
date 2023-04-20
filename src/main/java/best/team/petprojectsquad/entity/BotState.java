@@ -9,7 +9,11 @@ public enum BotState {
     DOG_SHELTER_ADDRESS("/dogShelterAddress"),
     WORK_SCHEDULE("/workSchedule"),
     ADMISSION_RULES("/admissionRules"),
-    INSIDE_RULES("/insideRules");
+    INSIDE_RULES("/insideRules"),
+    ASK_VOLUNTEER("/askVolunteer"),
+    SECURITY_CONTACT("/securityContact");
+
+
 
     private final String state;
 
