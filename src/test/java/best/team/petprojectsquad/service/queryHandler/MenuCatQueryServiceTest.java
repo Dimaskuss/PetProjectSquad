@@ -6,27 +6,19 @@ import com.pengrad.telegrambot.model.request.Keyboard;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
 class MenuCatQueryServiceTest {
-
-    @Mock
-    MenuCatQueryService menuCatQueryService;
-    private Long id = 1005223990L;
-
+    private MenuCatQueryService menuCatQueryService = new MenuCatQueryService();
+    private static final Long ID = 1005223990L;
     @Test
     void getReplyMessage() {
         List<BaseRequest> requestArrayList = new ArrayList<>();
-        SendMessage sendMessage = new SendMessage(id, "Кошачий приют рад приветствовать Вас:");
+        SendMessage sendMessage = new SendMessage(ID, "Кошачий приют рад приветствовать Вас:");
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
                 new InlineKeyboardButton[][]{
                         {new InlineKeyboardButton("Узнать информацию о приюте").callbackData("/catShelterInfoMenu")},
@@ -37,7 +29,6 @@ class MenuCatQueryServiceTest {
         Keyboard keyboard = inlineKeyboard;
         sendMessage.replyMarkup(keyboard);
         requestArrayList.add(sendMessage);
-        when(menuCatQueryService.getReplyMessage(id)).thenReturn(requestArrayList);
-        assertEquals(menuCatQueryService.getReplyMessage(id), requestArrayList);
+        assertEquals(requestArrayList.get(0).getParameters(), menuCatQueryService.getReplyMessage(ID).get(0).getParameters());
     }
 }

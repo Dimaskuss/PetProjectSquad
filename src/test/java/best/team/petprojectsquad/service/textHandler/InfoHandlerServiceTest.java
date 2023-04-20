@@ -1,10 +1,8 @@
 package best.team.petprojectsquad.service.textHandler;
 
-import best.team.petprojectsquad.service.textHandler.InfoHandlerService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SendPhoto;
-import org.hibernate.Remove;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

@@ -17,11 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping(value = "/Cats")
+@AllArgsConstructor
 public class CatController {
     private final CatRepository catRepository;
-
     @Operation(
             summary = "Getting cat by it's id",
             responses = {

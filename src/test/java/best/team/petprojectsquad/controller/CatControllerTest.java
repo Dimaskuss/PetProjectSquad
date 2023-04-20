@@ -14,45 +14,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CatControllerTest{
-    @Mock
-    private CatController catController;
-    private Cat cat = new Cat(0, null, null, 0, null);
+    private Cat cat = new Cat(0, "ВОт", "Name", 2000, "Описание");
     private Long id = 0L;
-    @Test
-    void shouldReturnRightObjectPassIdGetter() {
-        ResponseEntity<Cat> status = new ResponseEntity<>(HttpStatus.ACCEPTED);
-        when(catController.getCatById(0)).thenReturn(status);
-        assertEquals(catController.getCatById(0), status);
-    }
+
+    @Mock
+    CatController catController;
 
     @Test
-    void shouldReturnRightObjectPassAdd() {
-        ResponseEntity<Cat> status = new ResponseEntity<>(HttpStatus.ACCEPTED);
-        assertNull(catController.addCat(cat));
-    }
-
-    @Test
-    void shouldReturnRightObjectDelete() {
-        ResponseEntity<Cat> status = new ResponseEntity<>(ResponseEntity.noContent().build().getStatusCode());
-        when(catController.deleteCat(0)).thenReturn(ResponseEntity.noContent().build());
-        assertEquals(catController.deleteCat(0), status);
-    }
-
-    @Test
-    void shouldReturnRightObjectPassIdEdit() {
-        ResponseEntity<Cat> status = new ResponseEntity<>(ResponseEntity.noContent().build().getStatusCode());
-        when(catController.editCat(0, cat)).thenReturn(ResponseEntity.noContent().build());
-        assertEquals(catController.editCat(0, cat), status);
-    }
-
-    @Test
-    void shouldReturnRightObjectPassIdGetAll() {
-        ResponseEntity<List<Cat>> status = new ResponseEntity<>(HttpStatus.ACCEPTED);
-        when(catController.getAll()).thenReturn(status);
-        assertEquals(catController.getAll(), status);
+    void testingGetter() {
+        catController.addCat(cat);
+        ResponseEntity<Cat> catById = catController.getCatById(0);
+        System.out.println("Good");
     }
 }

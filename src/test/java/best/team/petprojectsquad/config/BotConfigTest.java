@@ -1,6 +1,5 @@
 package best.team.petprojectsquad.config;
 
-import best.team.petprojectsquad.config.BotConfig;
 import com.pengrad.telegrambot.TelegramBot;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

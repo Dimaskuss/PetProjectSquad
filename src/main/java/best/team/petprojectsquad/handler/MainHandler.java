@@ -1,6 +1,5 @@
 package best.team.petprojectsquad.handler;
 
-import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.BotState;
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Message;
@@ -19,7 +18,7 @@ import java.util.List;
 public class MainHandler {
 
     private final BotStateContext botStateContext;
-    private final UserDataCache userDataCache;
+    private final best.team.petprojectsquad.cache.UserDataCache userDataCache;
 
     public List<BaseRequest> handleUpdate(Update update) {
 

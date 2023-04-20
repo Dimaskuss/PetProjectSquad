@@ -2,6 +2,7 @@ package best.team.petprojectsquad.service.queryHandler;
 import best.team.petprojectsquad.service.QueryHandlerService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
+import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
