@@ -23,9 +23,9 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "User")
+    @OneToMany(mappedBy = "user")
     private List<UserCat> catList;
 
-    @OneToMany(mappedBy = "User")
+    @OneToMany(mappedBy = "user")
     private List<UserDog> dogList;
 }

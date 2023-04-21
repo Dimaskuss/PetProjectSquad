@@ -24,7 +24,7 @@ public class UserDog {
     @JoinColumn(name = "user_dog_id", nullable = true)
     private User user;
 
-    @OneToOne(mappedBy = "UserDog")
+    @OneToOne(mappedBy = "userDog")
     private Dog dog;
 
     @Column(name = "phone")
