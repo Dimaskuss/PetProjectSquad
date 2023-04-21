@@ -1,7 +1,9 @@
 package best.team.petprojectsquad.controller;
 
+import best.team.petprojectsquad.entity.User;
 import best.team.petprojectsquad.entity.UserDog;
 import best.team.petprojectsquad.repository.UserDogRepository;
+import best.team.petprojectsquad.repository.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -14,13 +16,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/user")
 @AllArgsConstructor
-@RequestMapping(value = "/UserDog")
-@Tag(name = "UserDog", description = "a user with dog")
-public class UserDogController {
+@Tag(name = "User", description = "Any user, which haven't got any animals")
+public class UserController {
+    private final UserRepository userRepository;
     private final UserDogRepository userDogRepository;
 
     @Operation(
@@ -31,7 +35,7 @@ public class UserDogController {
                             description = "User in database with id",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = UserDog.class)
+                                    schema = @Schema(implementation = User.class)
                             )
                     ),
                     @ApiResponse(
@@ -41,8 +45,8 @@ public class UserDogController {
             }, tags = "User"
     )
     @GetMapping(value = "/{id}")
-    public ResponseEntity<UserDog> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
-        return ResponseEntity.ok(userDogRepository.getReferenceById(id));
+    public ResponseEntity<User> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
+        return ResponseEntity.ok(userRepository.getReferenceById(id));
     }
 
     @Operation(
@@ -59,8 +63,8 @@ public class UserDogController {
             }, tags = "User"
     )
     @PostMapping("/")
-    public ResponseEntity<Long> addUser(@Parameter(description = "An Entity 'user' in database") @RequestBody UserDog user) {
-        return ResponseEntity.ok().body(userDogRepository.save(user).getId());
+    public ResponseEntity<Long> addUser(@Parameter (description = "An Entity 'user' in database") @RequestBody User user) {
+        return ResponseEntity.ok().body(userRepository.save(user).getId());
     }
 
     @Operation(
@@ -81,12 +85,12 @@ public class UserDogController {
             }, tags = "User"
     )
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody UserDog user) {
-        if (userDogRepository.findById(id).isEmpty()) {
+    public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody User user) {
+        if (userRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        userDogRepository.deleteById(id);
-        userDogRepository.save(user);
+        userRepository.deleteById(id);
+        userRepository.save(user);
         return ResponseEntity.ok().body(user.getId());
     }
 
@@ -98,15 +102,15 @@ public class UserDogController {
                             description = "Users has been returned successfully",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = UserDog[].class)
+                                    array = @ArraySchema(schema = @Schema(implementation = User[].class)
                                     )
                             )
                     )
             }, tags = "User"
     )
     @GetMapping("/")
-    public ResponseEntity<List<UserDog>> getAll() {
-        return ResponseEntity.ok().body(userDogRepository.findAll());
+    public ResponseEntity<List<User>> getAll() {
+        return ResponseEntity.ok().body(userRepository.findAll());
     }
 
 
@@ -125,10 +129,10 @@ public class UserDogController {
     )
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteUser(@Parameter @PathVariable long id) {
-        if (userDogRepository.findById(id).isEmpty()) {
+        if (userRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        userDogRepository.deleteById(id);
+        userRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }
