@@ -19,10 +19,13 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CatControllerTest{
+
     @Mock
     CatRepository catRepository;
+
     @InjectMocks
     private CatController catController;
+
     private Cat cat = new Cat(0, null, null, 0, null);
     private Long id = 0L;
 
@@ -30,7 +33,9 @@ class CatControllerTest{
     void shouldReturnRightObjectPassIdGetter() {
 
         when(catRepository.getReferenceById(id)).thenReturn(cat);
+
         ResponseEntity<Cat> status = catController.getCatById(0);
+
         assertEquals(status.getBody(), cat);
     }
 

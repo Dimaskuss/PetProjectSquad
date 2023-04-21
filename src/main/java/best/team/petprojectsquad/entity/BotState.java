@@ -4,6 +4,7 @@ public enum BotState {
     START("/start"),
     INFO("/info"),
     CALL_VOLUNTEER("/callVolunteer"),
+    VALIDATE_PHONE("/validatePhone"),
     CAT_SHELTER_MENU("/catShelterMenu"),
     DOG_SHELTER_MENU("/dogShelterMenu"),
     CAT_INFO_MENU("/catInfoMenu"),
@@ -16,8 +17,8 @@ public enum BotState {
     DOG_SHELTER_PASS("/dogPass"),
     CAT_SHELTER_SAFETY("/catSafety"),
     DOG_SHELTER_SAFETY("/dogSafety"),
-    CAT_SHELTER_CALLBACK("/catCallback"),
-    DOG_SHELTER_CALLBACK("/dogCallback");
+    SHELTER_CALLBACK("/callback");
+
 
 
     private final String state;
