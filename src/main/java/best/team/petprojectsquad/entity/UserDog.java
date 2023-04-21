@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.pl.NIP;
+
+import java.util.List;
 
 @Entity
 @Table(name = "user_dog")
@@ -20,11 +23,11 @@ public class UserDog {
     @Column(name = "chat_id", nullable = false, unique = true)
     private long chatId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_dog_id", nullable = true)
-    private User user;
+    @OneToMany(mappedBy = "id")
+    private List<User> user;
 
-    @OneToOne(mappedBy = "userDog")
+    @ManyToOne
+    @JoinColumn(name = "dog_id")
     private Dog dog;
 
     @Column(name = "phone")

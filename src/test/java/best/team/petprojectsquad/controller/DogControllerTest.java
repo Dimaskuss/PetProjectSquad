@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 class DogControllerTest {
     @Mock
     private DogController DogController;
-    private Dog dog = new Dog(0, null, null, 0, null);
+    private Dog dog = new Dog(0L, null,null,0,null,null);
 
     @Test
     void shouldReturnRightObjectPassIdGetter() {

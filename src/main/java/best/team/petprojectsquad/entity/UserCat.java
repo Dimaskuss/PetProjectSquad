@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "user_cat")
 @Data
@@ -16,17 +18,15 @@ public class UserCat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
-
+    @OneToMany(mappedBy = "id")
+    private List<User> user;
     @ManyToOne
-    @JoinColumn(name = "user_cat_id", nullable = true)
-    private User user;
-    @OneToOne(mappedBy = "userCat")
+    @JoinColumn(name = "cat_id")
     private Cat cat;
     @Column(name = "chat_id", nullable = false, unique = true)
     private long chatId;
     @Column(name = "phone")
     private int phoneNumber;
-
     public UserCat(long chatId) {
         this.chatId = chatId;
     }

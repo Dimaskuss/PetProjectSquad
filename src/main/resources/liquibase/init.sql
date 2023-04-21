@@ -64,3 +64,11 @@ CREATE TABLE user_table
 DROP TABLE shelter;
 ALTER TABLE user_cat DROP COLUMN bot_state;
 ALTER TABLE user_dog DROP COLUMN bot_state;
+
+--changeset couldlie:0.6
+AlTER TABLE user_table ADD COLUMN user_cat_id BIGINT;
+AlTER TABLE user_table ADD COLUMN user_dog_id BIGINT;
+
+--changeset couldlie:0.7
+ALTER TABLE user_cat ADD COLUMN cat_id BIGINT;
+ALTER TABLE user_dog ADD COLUMN dog_id BIGINT;

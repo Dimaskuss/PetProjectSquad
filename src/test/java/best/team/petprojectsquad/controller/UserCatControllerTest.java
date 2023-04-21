@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 class UserCatControllerTest {
     @Mock
     private UserCatController userCatController;
-    private UserCat userCat = new UserCat(0,null,null,0L,0);
+    private UserCat userCat = new UserCat(0L,null,null,0L,0);
 
     @Test
     void shouldReturnRightObjectPassIdGetter() {

@@ -1,16 +1,14 @@
 package best.team.petprojectsquad.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "user_table")
 @NoArgsConstructor
 public class User {
     @Id
@@ -22,10 +20,16 @@ public class User {
 
     @Column(name = "name")
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "user_cat_id", nullable = true)
+    private UserCat catList;
 
-    @OneToMany(mappedBy = "user")
-    private List<UserCat> catList;
+    @ManyToOne
+    @JoinColumn(name = "user_dog_id", nullable = true)
+    private UserDog dogList;
 
-    @OneToMany(mappedBy = "user")
-    private List<UserDog> dogList;
+    public User(long chat_id, String name) {
+        this.chat_id = chat_id;
+        this.name = name;
+    }
 }

@@ -1,6 +1,8 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.User;
+import best.team.petprojectsquad.entity.UserDog;
+import best.team.petprojectsquad.repository.UserDogRepository;
 import best.team.petprojectsquad.repository.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -14,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,6 +25,7 @@ import java.util.List;
 @Tag(name = "User", description = "Any user, which haven't got any animals")
 public class UserController {
     private final UserRepository userRepository;
+    private final UserDogRepository userDogRepository;
 
     @Operation(
             summary = "Getting user by it's id",
