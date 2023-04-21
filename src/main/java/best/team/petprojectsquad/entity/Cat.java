@@ -24,4 +24,8 @@ public class Cat {
     private int yearOfBirthday;
     @Column(name = "description")
     private String description;
+
+    @OneToOne
+    @JoinColumn(name = "cat_id")
+    private UserCat userCat;
 }

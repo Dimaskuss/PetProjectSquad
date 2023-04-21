@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 class UserDogControllerTest {
     @Mock
     private UserDogController UserDogController;
-    private UserDog UserDog = new UserDog(0L,0L,0,"STr");
+    private UserDog UserDog = new UserDog(0L,0L,null,null,0);
 
     @Test
     void shouldReturnRightObjectPassIdGetter() {

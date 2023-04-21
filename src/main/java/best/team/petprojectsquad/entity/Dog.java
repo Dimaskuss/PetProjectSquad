@@ -23,4 +23,7 @@ public class Dog {
     private int yearOfBirthday;
     @Column(name = "description")
     private String description;
+    @OneToOne
+    @JoinColumn(name = "dog_id")
+    private UserDog userDog;
 }

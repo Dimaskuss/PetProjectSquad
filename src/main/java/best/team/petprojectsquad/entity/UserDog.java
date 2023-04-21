@@ -1,5 +1,6 @@
 package best.team.petprojectsquad.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,11 +20,15 @@ public class UserDog {
     @Column(name = "chat_id", nullable = false, unique = true)
     private long chatId;
 
+    @ManyToOne
+    @JoinColumn(name = "user_dog_id", nullable = true)
+    private User user;
+
+    @OneToOne(mappedBy = "UserDog")
+    private Dog dog;
+
     @Column(name = "phone")
     private int phoneNumber;
-
-    @Column(name = "bot_state")
-    private String botState;
 
     public UserDog(long chatId) {
         this.chatId = chatId;
