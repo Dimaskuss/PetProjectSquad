@@ -18,7 +18,7 @@ import java.util.List;
 public class MainHandler {
 
     private final BotStateContext botStateContext;
-    private final best.team.petprojectsquad.cache.UserDataCache userDataCache;
+    private final best.team.petprojectsquad.Cache.UserDataCache userDataCache;
 
     public List<BaseRequest> handleUpdate(Update update) {
 
