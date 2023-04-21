@@ -18,7 +18,7 @@ public class AddressDogQueryService implements QueryHandlerService {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         SendMessage sendMessage0 = new SendMessage(id, "Адрес: г. Первый, ул. Соседняя дом 15.");
         SendMessage sendMessage1 = new SendMessage(id, "Рабочие часы приюта для собак:\nПонедельник - Пятница: 10:00 - 17:00\nСуббота - Воскресенье: 12:00 - 16:00\nCхема проезда:");
-        SendPhoto sendPhoto = new SendPhoto(id, new File("pictures/addressDog.png"));
+        SendPhoto sendPhoto = new SendPhoto(id, new File("src/main/resources/pictures/addressDog.png"));
         requestArrayList.add(sendMessage0);
         requestArrayList.add(sendMessage1);
         requestArrayList.add(sendPhoto);

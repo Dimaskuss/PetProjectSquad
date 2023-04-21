@@ -31,8 +31,8 @@ public class InfoMenuDogQueryService implements QueryHandlerService {
                         {new InlineKeyboardButton("Информация о приюте").callbackData("/dogInfo")},
                         {new InlineKeyboardButton("Режим работы, адрес и схема проезда").callbackData("/dogAddress")},
                         {new InlineKeyboardButton("Телефон охраны для оформления пропуска").callbackData("/dogPass")},
-                        {new InlineKeyboardButton("Рекомендации о технике безопасности").callbackData("/dogSecurity")},
-                        {new InlineKeyboardButton("Заказать обратный звонок").callbackData("/dogCallback")},
+                        {new InlineKeyboardButton("Рекомендации о технике безопасности").callbackData("/dogSafety")},
+                        {new InlineKeyboardButton("Заказать обратный звонок").callbackData("/callback")},
                         {new InlineKeyboardButton("Связаться с волонтером").callbackData("/callVolunteer")}
                 });
 
