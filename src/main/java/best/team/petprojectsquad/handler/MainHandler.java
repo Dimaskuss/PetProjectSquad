@@ -2,6 +2,7 @@ package best.team.petprojectsquad.handler;
 
 import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.BotState;
+import best.team.petprojectsquad.service.textHandlerImpl.ValidatePhoneService;
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
@@ -69,9 +70,7 @@ public class MainHandler {
     }
 
     public List<BaseRequest> handleQueryMessage(CallbackQuery callbackQuery) {
-
         long chatId = callbackQuery.message().chat().id();
-
         switch (callbackQuery.data()) {
             case "/catShelterMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_SHELTER_MENU);
             case "/dogShelterMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_MENU);

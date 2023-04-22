@@ -27,6 +27,7 @@ public class ValidatePhoneService implements TextHandlerService {
             requestArrayList.add(sendMessage);
             userDataCache.setUsersCurrentBotState(id,BotState.START);
 
+
         } else {
             SendMessage sendMessage = new SendMessage(id, "Телефон написан не корректно, пришлите еще раз в формате +79315556677");
             requestArrayList.add(sendMessage);

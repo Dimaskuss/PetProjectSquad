@@ -16,7 +16,7 @@ public class User {
     @OrderColumn
     private long id;
     @Column(name = "chat_id")
-    private long chat_id;
+    private long chatId;
 
     @Column(name = "name")
     private String name;
@@ -28,8 +28,12 @@ public class User {
     @JoinColumn(name = "user_dog_id", nullable = true)
     private UserDog dogList;
 
-    public User(long chat_id, String name) {
-        this.chat_id = chat_id;
+    public User(long chatId) {
+        this.chatId = chatId;
+    }
+
+    public User(long chatId, String name) {
+        this.chatId = chatId;
         this.name = name;
     }
 }
