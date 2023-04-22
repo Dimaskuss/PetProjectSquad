@@ -1,55 +1,56 @@
 package best.team.petprojectsquad.controller;
-
+import best.team.petprojectsquad.entity.Dog;
 import best.team.petprojectsquad.entity.UserCat;
+import best.team.petprojectsquad.repository.UserCatRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
-
+import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserCatControllerTest {
+
     @Mock
+    UserCatRepository userCatRepository;
+
+    @InjectMocks
+
     private UserCatController userCatController;
-    private UserCat userCat = new UserCat(0L,null,null,0L,0);
+
+    private UserCat userCat = new UserCat(0L);
+    private Long id = 0L;
 
     @Test
     void shouldReturnRightObjectPassIdGetter() {
-        ResponseEntity<UserCat> status = new ResponseEntity<>(HttpStatus.ACCEPTED);
-        when(userCatController.getUserById(0L)).thenReturn(status);
-        assertEquals(userCatController.getUserById(0L), status);
+
+        when(userCatRepository.getReferenceById(id)).thenReturn(userCat);
+
+        ResponseEntity<UserCat> status = userCatController.getUserById(0);
+
+        assertEquals(status.getBody(), userCat);
     }
 
     @Test
-    void shouldReturnRightObjectPassIdAdd() {
-        assertNull(userCatController.addUser(userCat));
+    void shouldReturnRightObjectPassAdd() {
+
+        when(userCatRepository.save(userCat)).thenReturn(userCat);
+        ResponseEntity<Long> idNewCat = userCatController.addUser(userCat);
+        assertEquals(idNewCat.getBody(), id);
     }
 
     @Test
-    void shouldReturnRightObjectPassIdDelete() {
-        ResponseEntity<UserCat> status = new ResponseEntity<>(ResponseEntity.noContent().build().getStatusCode());
-        when(userCatController.deleteUser(0L)).thenReturn(ResponseEntity.noContent().build());
-        assertEquals(userCatController.deleteUser(0L), status);
+    void shouldReturnRightObjectDelete() {
+
+        when(userCatRepository.save(userCat)).thenReturn(userCat);
+        when(userCatRepository.findById(id)).thenReturn(Optional.of(userCat));
+        ResponseEntity<Long> idEditCat = userCatController.editUser(id, userCat);
+        assertEquals(idEditCat.getBody(), id);
     }
 
-    @Test
-    void shouldReturnRightObjectPassIdEdit() {
-        ResponseEntity<UserCat> status = new ResponseEntity<>(ResponseEntity.noContent().build().getStatusCode());
-        when(userCatController.editUser(0L, userCat)).thenReturn(ResponseEntity.noContent().build());
-        assertEquals(userCatController.editUser(0L, userCat), status);
-    }
 
-    @Test
-    void shouldReturnRightObjectPassIdGetAll() {
-        ResponseEntity<List<UserCat>> status = new ResponseEntity<>(HttpStatus.ACCEPTED);
-        when(userCatController.getAll()).thenReturn(status);
-        assertEquals(userCatController.getAll(), status);
-    }
 }
