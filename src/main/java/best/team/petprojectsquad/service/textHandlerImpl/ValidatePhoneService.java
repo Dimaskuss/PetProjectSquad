@@ -2,6 +2,8 @@ package best.team.petprojectsquad.service.textHandlerImpl;
 
 import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.BotState;
+import best.team.petprojectsquad.entity.UserFeedBack;
+import best.team.petprojectsquad.repository.UserFeedBackRepository;
 import best.team.petprojectsquad.service.TextHandlerService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
@@ -17,17 +19,20 @@ import java.util.List;
 public class ValidatePhoneService implements TextHandlerService {
 
     private final UserDataCache userDataCache;
+    private UserFeedBackRepository userFeedBackRepository;
 
     @Override
     public List<BaseRequest> getReplyMessage(long id, String message) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         if (checkPhone(message)) {
-            /// TODO: 21.04.2023 надо сохранить телефон у юзера и сделать пометку для обратной связи (например boolean)
+            boolean exist = userFeedBackRepository.existsByChatId(id);
+            if (!userFeedBackRepository.existsByChatId(id)) {
+                userFeedBackRepository.save(new UserFeedBack(message, id, true));
+            }
+            /// TODO: 21.04.2023 надо сохранить телефон у юзера и сделать пометку для обратной связи (например boolean) - done
             SendMessage sendMessage = new SendMessage(id, "Волонтер в ближайшее время Вам презвонит.");
             requestArrayList.add(sendMessage);
             userDataCache.setUsersCurrentBotState(id,BotState.START);
-
-
         } else {
             SendMessage sendMessage = new SendMessage(id, "Телефон написан не корректно, пришлите еще раз в формате +79315556677");
             requestArrayList.add(sendMessage);
