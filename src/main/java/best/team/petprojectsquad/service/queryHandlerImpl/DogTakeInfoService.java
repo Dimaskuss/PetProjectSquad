@@ -33,9 +33,9 @@ public class DogTakeInfoService implements QueryHandlerService {
                         {new InlineKeyboardButton("правила знакомства с животным до того, как забрать его из приюта")
                                 .callbackData("/rulesBeforeGettingDog")},
                         {new InlineKeyboardButton("список документов, необходимых для того, чтобы взять животное из приюта")
-                                .callbackData("/listOfDocuments")},
+                                .callbackData("/dogListOfDocuments")},
                         {new InlineKeyboardButton("список рекомендаций по транспортировке животного")
-                                .callbackData("/transportRecommendations")},
+                                .callbackData("/dogTransportRecommendations")},
                         {new InlineKeyboardButton("список рекомендаций по обустройству дома для щенка")
                                 .callbackData("/homeRecommendationsPuppy")},
                         {new InlineKeyboardButton("список рекомендаций по обустройству дома для взрослого животного")
@@ -47,9 +47,9 @@ public class DogTakeInfoService implements QueryHandlerService {
                         {new InlineKeyboardButton("рекомендации по проверенным кинологам для дальнейшего обращения к ним")
                                 .callbackData("/listVerifiedDogTrainers")},
                         {new InlineKeyboardButton("список причин, почему могут отказать и не дать забрать животное из приюта")
-                                .callbackData("/listReasonsNegative")},
+                                .callbackData("/dogListReasonsNegative")},
                         {new InlineKeyboardButton("записать контактные данные для связи")
-                                .callbackData("/sendContact")},
+                                .callbackData("/dogSendContact")},
                         {new InlineKeyboardButton("связаться с волонтером").callbackData("/callVolunteer")}
                 });
 
