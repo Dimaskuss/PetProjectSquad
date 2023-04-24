@@ -1,9 +1,13 @@
 package best.team.petprojectsquad.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.pl.NIP;
+
+import java.util.List;
 
 @Entity
 @Table(name = "user_dog")
@@ -19,11 +23,15 @@ public class UserDog {
     @Column(name = "chat_id", nullable = false, unique = true)
     private long chatId;
 
+    @OneToMany(mappedBy = "id")
+    private List<User> user;
+
+    @ManyToOne
+    @JoinColumn(name = "dog_id")
+    private Dog dog;
+
     @Column(name = "phone")
     private int phoneNumber;
-
-    @Column(name = "bot_state")
-    private String botState;
 
     public UserDog(long chatId) {
         this.chatId = chatId;

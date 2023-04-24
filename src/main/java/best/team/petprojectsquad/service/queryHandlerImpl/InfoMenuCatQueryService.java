@@ -32,8 +32,8 @@ public class InfoMenuCatQueryService implements QueryHandlerService {
                         {new InlineKeyboardButton("Информация о приюте").callbackData("/catInfo")},
                         {new InlineKeyboardButton("Режим работы, адрес и схема проезда").callbackData("/catAddress")},
                         {new InlineKeyboardButton("Телефон охраны для оформления пропуска").callbackData("/catPass")},
-                        {new InlineKeyboardButton("Рекомендации о технике безопасности").callbackData("/catSecurity")},
-                        {new InlineKeyboardButton("Заказать обратный звонок").callbackData("/catCallback")},
+                        {new InlineKeyboardButton("Рекомендации о технике безопасности").callbackData("/catSafety")},
+                        {new InlineKeyboardButton("Заказать обратный звонок").callbackData("/callback")},
                         {new InlineKeyboardButton("Связаться с волонтером").callbackData("/callVolunteer")}
                 });
 

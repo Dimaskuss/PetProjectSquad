@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "dog")
 @Data
@@ -23,4 +25,6 @@ public class Dog {
     private int yearOfBirthday;
     @Column(name = "description")
     private String description;
+    @OneToMany(mappedBy = "id")
+    private List<UserDog> userDog;
 }

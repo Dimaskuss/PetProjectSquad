@@ -4,6 +4,7 @@ public enum BotState {
     START("/start"),
     INFO("/info"),
     CALL_VOLUNTEER("/callVolunteer"),
+    VALIDATE_PHONE("/validatePhone"),
     CAT_SHELTER_MENU("/catShelterMenu"),
     DOG_SHELTER_MENU("/dogShelterMenu"),
     CAT_INFO_MENU("/catInfoMenu"),
@@ -20,7 +21,6 @@ public enum BotState {
     DOG_SHELTER_CALLBACK("/dogCallback"),
     CAT_TAKE_INFO("/catTakeInfo"),
     DOG_TAKE_INFO("/dogTakeInfo"),
-
     RULES_TAKE_CAT("/rulesBeforeGettingCat"),
     RULES_TAKE_DOG("/rulesBeforeGettingDog"),
     CAT_TAKE_DOCUMENTS("/catListOfDocuments"),
@@ -38,6 +38,7 @@ public enum BotState {
     DOG_TAKE_NEGATIVE("/dogListReasonsNegative"),
     CONTACTS_CAT("/catSendContact"),
     CONTACTS_DOG("/dogSendContact");
+
 
 
     private final String state;

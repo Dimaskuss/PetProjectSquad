@@ -1,9 +1,12 @@
 package best.team.petprojectsquad.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "user_cat")
@@ -15,16 +18,15 @@ public class UserCat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
-
+    @OneToMany(mappedBy = "id")
+    private List<User> user;
+    @ManyToOne
+    @JoinColumn(name = "cat_id")
+    private Cat cat;
     @Column(name = "chat_id", nullable = false, unique = true)
     private long chatId;
-
     @Column(name = "phone")
     private int phoneNumber;
-
-    @Column(name = "bot_state")
-    private String botState;
-
     public UserCat(long chatId) {
         this.chatId = chatId;
     }
