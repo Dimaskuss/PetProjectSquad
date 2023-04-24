@@ -19,7 +19,9 @@ public enum BotState {
     DOG_SHELTER_SAFETY("/dogSafety"),
     SHELTER_CALLBACK("/callback"),
     SUPER_USER_VOLUNTEER("/superUser"),
-    VALIDATE_VOLUNTEER("/volunteerValidate");
+    VALIDATE_VOLUNTEER("/volunteerValidate"),
+    REASONS_WHY_CANT_BRING_AN_ANIMAL("/reasonsWhy");
+
     private final String state;
 
     BotState(String state) {

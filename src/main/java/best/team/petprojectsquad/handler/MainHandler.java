@@ -85,6 +85,7 @@ public class MainHandler {
             case "/dogSafety" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_SAFETY);
             case "/callback" -> userDataCache.setUsersCurrentBotState(chatId, BotState.SHELTER_CALLBACK);
             case "/callVolunteer" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CALL_VOLUNTEER);
+            case "/reasonsWhy" -> userDataCache.setUsersCurrentBotState(chatId, BotState.REASONS_WHY_CANT_BRING_AN_ANIMAL);
 
             default -> log.error("Нет обработки такого запроса с кнопки:" + callbackQuery.data());
         }

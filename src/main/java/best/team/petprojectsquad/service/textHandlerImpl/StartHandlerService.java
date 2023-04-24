@@ -9,9 +9,6 @@ import com.pengrad.telegrambot.model.request.Keyboard;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SendPhoto;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -29,7 +26,6 @@ public class StartHandlerService implements TextHandlerService {
     public List<BaseRequest> getReplyMessage(long id, String message) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         Keyboard keyboard = getMainMenuKeyboard();
-        /// TODO: 15.04.2023 тут надо делать проверку на пользователя новый или нет, если новый то отправляем sendPhoto - done
         if (!userRepository.existsByChatId(id)) {
             User user = new User(id);
             userRepository.save(user);

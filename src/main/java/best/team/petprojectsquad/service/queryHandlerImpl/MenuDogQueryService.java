@@ -31,7 +31,8 @@ public class MenuDogQueryService implements QueryHandlerService {
                         {new InlineKeyboardButton("Узнать информацию о приюте").callbackData("/dogInfoMenu")},
                         {new InlineKeyboardButton("Как взять животное из приюта").callbackData("/dogTakeInfo")},
                         {new InlineKeyboardButton("Прислать отчет о питомце").callbackData("/dogReport")},
-                        {new InlineKeyboardButton("Связаться с волонтером").callbackData("/callVolunteer")}
+                        {new InlineKeyboardButton("Связаться с волонтером").callbackData("/callVolunteer")},
+                        {new InlineKeyboardButton("Причины, по которым вам могут отказать").callbackData("/reasonsWhy")}
                 });
 
         return inlineKeyboard;

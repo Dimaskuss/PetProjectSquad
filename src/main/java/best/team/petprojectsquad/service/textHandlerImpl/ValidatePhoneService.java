@@ -17,7 +17,6 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ValidatePhoneService implements TextHandlerService {
-
     private final UserDataCache userDataCache;
     private UserFeedBackRepository userFeedBackRepository;
 
@@ -28,7 +27,6 @@ public class ValidatePhoneService implements TextHandlerService {
             if (!userFeedBackRepository.existsByChatId(id)) {
                 userFeedBackRepository.save(new UserFeedBack(message, id, true));
             }
-            // TODO: 21.04.2023 надо сохранить телефон у юзера и сделать пометку для обратной связи (например boolean) - done
             SendMessage sendMessage = new SendMessage(id, "Волонтер в ближайшее время Вам перезвонит.");
             requestArrayList.add(sendMessage);
             userDataCache.setUsersCurrentBotState(id,BotState.START);

@@ -2,6 +2,7 @@ package best.team.petprojectsquad.entity;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "user_feedback")
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserFeedBack {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
