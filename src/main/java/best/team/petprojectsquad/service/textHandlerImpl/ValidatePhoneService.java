@@ -25,14 +25,14 @@ public class ValidatePhoneService implements TextHandlerService {
     public List<BaseRequest> getReplyMessage(long id, String message) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         if (checkPhone(message)) {
-            boolean exist = userFeedBackRepository.existsByChatId(id);
             if (!userFeedBackRepository.existsByChatId(id)) {
                 userFeedBackRepository.save(new UserFeedBack(message, id, true));
             }
-            /// TODO: 21.04.2023 надо сохранить телефон у юзера и сделать пометку для обратной связи (например boolean) - done
-            SendMessage sendMessage = new SendMessage(id, "Волонтер в ближайшее время Вам презвонит.");
+            // TODO: 21.04.2023 надо сохранить телефон у юзера и сделать пометку для обратной связи (например boolean) - done
+            SendMessage sendMessage = new SendMessage(id, "Волонтер в ближайшее время Вам перезвонит.");
             requestArrayList.add(sendMessage);
             userDataCache.setUsersCurrentBotState(id,BotState.START);
+
         } else {
             SendMessage sendMessage = new SendMessage(id, "Телефон написан не корректно, пришлите еще раз в формате +79315556677");
             requestArrayList.add(sendMessage);

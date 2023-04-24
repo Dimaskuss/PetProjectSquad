@@ -2,7 +2,6 @@ package best.team.petprojectsquad.handler;
 
 import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.BotState;
-import best.team.petprojectsquad.service.textHandlerImpl.ValidatePhoneService;
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
@@ -61,7 +60,7 @@ public class MainHandler {
         switch (message.text()) {
             case "/start" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.START);
             case "/info" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.INFO);
-
+            case "/superUser" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.SUPER_USER_VOLUNTEER);
             default -> userDataCache.getUsersCurrentBotState(message.chat().id());
         }
         BotState botState = userDataCache.getUsersCurrentBotState(message.chat().id());
