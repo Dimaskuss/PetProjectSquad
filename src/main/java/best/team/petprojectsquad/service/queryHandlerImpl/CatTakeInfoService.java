@@ -33,9 +33,9 @@ public class CatTakeInfoService implements QueryHandlerService {
                         {new InlineKeyboardButton("правила знакомства с животным до того, как забрать его из приюта")
                                 .callbackData("/rulesBeforeGettingCat")},
                         {new InlineKeyboardButton("список документов, необходимых для того, чтобы взять животное из приюта")
-                                .callbackData("/listOfDocuments")},
+                                .callbackData("/catListOfDocuments")},
                         {new InlineKeyboardButton("список рекомендаций по транспортировке животного")
-                                .callbackData("/transportRecommendations")},
+                                .callbackData("/catTransportRecommendations")},
                         {new InlineKeyboardButton("список рекомендаций по обустройству дома для котенка")
                                 .callbackData("/homeRecommendationsKitten")},
                         {new InlineKeyboardButton("список рекомендаций по обустройству дома для взрослого животного")
@@ -43,9 +43,9 @@ public class CatTakeInfoService implements QueryHandlerService {
                         {new InlineKeyboardButton("список рекомендаций по обустройству дома для для животного с " +
                                 "ограниченными возможностями").callbackData("/homeRecommendationsCatWithDisabilities")},
                         {new InlineKeyboardButton("список причин, почему могут отказать и не дать забрать животное из приюта")
-                                .callbackData("/listReasonsNegative")},
+                                .callbackData("/catListReasonsNegative")},
                         {new InlineKeyboardButton("записать контактные данные для связи")
-                                .callbackData("/sendContact")},
+                                .callbackData("/catSendContact")},
                         {new InlineKeyboardButton("связаться с волонтером").callbackData("/callVolunteer")}
                 });
 
