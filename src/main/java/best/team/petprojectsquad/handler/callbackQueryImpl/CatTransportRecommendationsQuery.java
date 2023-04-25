@@ -26,3 +26,4 @@ public class CatTransportRecommendationsQuery  implements InputHandlerQuery {
         return BotState.CAT_TRANSPORT_RECOMMENDATION;
     }
 
+}
