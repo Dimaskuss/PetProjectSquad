@@ -60,6 +60,7 @@ public class MainHandler {
         switch (message.text()) {
             case "/start" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.START);
             case "/info" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.INFO);
+            case "/superUser" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.SUPER_USER_VOLUNTEER);
 
             default -> userDataCache.getUsersCurrentBotState(message.chat().id());
         }
@@ -87,9 +88,9 @@ public class MainHandler {
             case "/dogSafety" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_SAFETY);
             case "/callback" -> userDataCache.setUsersCurrentBotState(chatId, BotState.SHELTER_CALLBACK);
             case "/callVolunteer" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CALL_VOLUNTEER);
+            case "/reasonsWhy" -> userDataCache.setUsersCurrentBotState(chatId, BotState.REASONS_WHY_CANT_BRING_AN_ANIMAL);
             case "/catTakeInfo" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_TAKE_INFO);
             case "/dogTakeInfo" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_TAKE_INFO);
-
             case "/rulesBeforeGettingCat" -> userDataCache.setUsersCurrentBotState(chatId, BotState.RULES_TAKE_CAT);
             case "/rulesBeforeGettingDog" -> userDataCache.setUsersCurrentBotState(chatId, BotState.RULES_TAKE_DOG);
             case "/catListOfDocuments" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_TAKE_DOCUMENTS);

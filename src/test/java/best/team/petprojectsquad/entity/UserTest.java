@@ -9,11 +9,11 @@ public class UserTest {
     public void testGettersAndSetters() {
         User user = new User();
         user.setId(1);
-        user.setChat_id(123456789);
+        user.setChatId(123456789);
         user.setName("John Doe");
 
         assertEquals(1, user.getId());
-        assertEquals(123456789, user.getChat_id());
+        assertEquals(123456789, user.getChatId());
         assertEquals("John Doe", user.getName());
     }
 
@@ -21,7 +21,7 @@ public class UserTest {
     public void testConstructor() {
         User user = new User(123456789, "John Doe");
 
-        assertEquals(123456789, user.getChat_id());
+        assertEquals(123456789, user.getChatId());
         assertEquals("John Doe", user.getName());
     }
 }

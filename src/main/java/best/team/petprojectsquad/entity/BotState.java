@@ -39,8 +39,11 @@ public enum BotState {
     VERIFIED_TRAINERS("/listVerifiedDogTrainers"),
     DOG_TAKE_NEGATIVE("/dogListReasonsNegative"),
     CONTACTS_CAT("/catSendContact"),
-    CONTACTS_DOG("/dogSendContact");
-
+    CONTACTS_DOG("/dogSendContact"),
+    SHELTER_CALLBACK("/callback"),
+    SUPER_USER_VOLUNTEER("/superUser"),
+    VALIDATE_VOLUNTEER("/volunteerValidate"),
+    REASONS_WHY_CANT_BRING_AN_ANIMAL("/reasonsWhy");
 
     private final String state;
 

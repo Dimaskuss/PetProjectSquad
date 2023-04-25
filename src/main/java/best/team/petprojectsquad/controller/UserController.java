@@ -25,7 +25,6 @@ import java.util.List;
 @Tag(name = "User", description = "Any user, which haven't got any animals")
 public class UserController {
     private final UserRepository userRepository;
-    private final UserDogRepository userDogRepository;
 
     @Operation(
             summary = "Getting user by it's id",

@@ -2,6 +2,8 @@ package best.team.petprojectsquad.service.textHandlerImpl;
 
 import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.BotState;
+import best.team.petprojectsquad.entity.UserFeedBack;
+import best.team.petprojectsquad.repository.UserFeedBackRepository;
 import best.team.petprojectsquad.service.TextHandlerService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
@@ -15,15 +17,17 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ValidatePhoneService implements TextHandlerService {
-
     private final UserDataCache userDataCache;
+    private UserFeedBackRepository userFeedBackRepository;
 
     @Override
     public List<BaseRequest> getReplyMessage(long id, String message) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         if (checkPhone(message)) {
-            /// TODO: 21.04.2023 надо сохранить телефон у юзера и сделать пометку для обратной связи (например boolean)
-            SendMessage sendMessage = new SendMessage(id, "Волонтер в ближайшее время Вам презвонит.");
+            if (!userFeedBackRepository.existsByChatId(id)) {
+                userFeedBackRepository.save(new UserFeedBack(message, id, true));
+            }
+            SendMessage sendMessage = new SendMessage(id, "Волонтер в ближайшее время Вам перезвонит.");
             requestArrayList.add(sendMessage);
             userDataCache.setUsersCurrentBotState(id,BotState.START);
 
