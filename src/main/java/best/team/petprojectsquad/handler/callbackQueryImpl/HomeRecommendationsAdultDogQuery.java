@@ -22,4 +22,5 @@ public class HomeRecommendationsAdultDogQuery implements InputHandlerQuery {
     public BotState getHandlerName() {
         return BotState.HOME_RECOMMENDATION_ADULT_DOG;
     }
+
 }

@@ -24,4 +24,5 @@ public class DogTransportRecommendationsQuery implements InputHandlerQuery {
     public BotState getHandlerName() {
         return BotState.DOG_TRANSPORT_RECOMMENDATION;
     }
+
 }

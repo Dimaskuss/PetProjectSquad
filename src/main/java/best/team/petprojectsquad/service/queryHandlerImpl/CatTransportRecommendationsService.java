@@ -33,9 +33,7 @@ public class CatTransportRecommendationsService implements QueryHandlerService {
 
         requestArrayList.add(sendMessage);
 
-
         return requestArrayList;
     }
-    }
-
+ }
 

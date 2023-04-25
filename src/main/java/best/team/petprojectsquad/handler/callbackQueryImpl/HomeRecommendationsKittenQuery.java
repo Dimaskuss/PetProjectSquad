@@ -22,4 +22,5 @@ private final HomeRecommendationsKittenService homeRecommendationsKittenService;
     public BotState getHandlerName() {
         return BotState.HOME_RECOMMENDATION_KITTEN;
     }
+
 }

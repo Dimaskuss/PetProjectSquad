@@ -22,4 +22,5 @@ public class HomeRecommendationsPuppyQuery implements InputHandlerQuery {
     public BotState getHandlerName() {
         return BotState.HOME_RECOMMENDATION_PUPPY;
     }
+
 }

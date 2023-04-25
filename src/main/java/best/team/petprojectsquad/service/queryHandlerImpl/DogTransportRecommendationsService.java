@@ -36,5 +36,3 @@ public class DogTransportRecommendationsService implements QueryHandlerService {
         return requestArrayList;
     }
 }
-
-
