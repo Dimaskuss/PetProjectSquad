@@ -7,6 +7,7 @@ import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -25,8 +26,9 @@ class ValidateSuperUserServiceTest {
     UserFeedBackRepository userFeedBackRepository;
     @Autowired
     private ValidateSuperUserService validateSuperUserService;
-    private final String SUPER_USER_PASSWORD = "Volunteer12345";
-    private long id = 1005223990L;
+    @Value("${super.user.password}")
+    private String superUserPassword;
+    private final long id = 1005223990L;
     @Test
     void getReplyMessageIfPasswordIsCorrect() {
         List<BaseRequest> requestArrayList = new ArrayList<>();
@@ -36,7 +38,7 @@ class ValidateSuperUserServiceTest {
             requestArrayList.add(sendMessage);
             requestArrayList.add(sendMessage1);
             requestArrayList.add(sendMessage2);
-        List<BaseRequest> replyMessage = validateSuperUserService.getReplyMessage(id, SUPER_USER_PASSWORD);
+        List<BaseRequest> replyMessage = validateSuperUserService.getReplyMessage(id, superUserPassword);
         assertEquals(replyMessage.size(), requestArrayList.size());
         assertEquals(replyMessage.get(0).getParameters(), requestArrayList.get(0).getParameters());
     }

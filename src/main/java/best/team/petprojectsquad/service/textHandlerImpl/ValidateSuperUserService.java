@@ -8,20 +8,27 @@ import best.team.petprojectsquad.repository.UserFeedBackRepository;
 import best.team.petprojectsquad.service.TextHandlerService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class ValidateSuperUserService implements TextHandlerService {
     //Поле с паролем, возможно нужно вынести в другой класс
     // TODO:есть идея создать Entity password и к ней БД, чтобы была история паролей
-    private static final String SUPER_USER_PASSWORD = "Volunteer12345";
+    @Value("${super.user.password}")
+    private String password;
+
+    public ValidateSuperUserService(UserDataCache userDataCache, SuperUserVolunteerRepository superUserVolunteerRepository, UserFeedBackRepository userFeedBackRepository) {
+        this.userDataCache = userDataCache;
+        this.superUserVolunteerRepository = superUserVolunteerRepository;
+        this.userFeedBackRepository = userFeedBackRepository;
+    }
+
     private final UserDataCache userDataCache;
-    private SuperUserVolunteerRepository superUserVolunteerRepository;
+    private final SuperUserVolunteerRepository superUserVolunteerRepository;
     private final UserFeedBackRepository userFeedBackRepository;
     @Override
     public List<BaseRequest> getReplyMessage(long id, String password) {
@@ -37,7 +44,6 @@ public class ValidateSuperUserService implements TextHandlerService {
             requestArrayList.add(sendMessage1);
             requestArrayList.add(sendMessage2);
             userDataCache.setUsersCurrentBotState(id,BotState.START);
-            //возможно тут нужна userDataCahce
         } else {
             SendMessage sendMessage = new SendMessage(id, "Пароль введен некорректно");
             requestArrayList.add(sendMessage);
@@ -48,6 +54,6 @@ public class ValidateSuperUserService implements TextHandlerService {
     }
 
     public boolean checkPassword(String message) {
-        return message.equals(SUPER_USER_PASSWORD);
+        return message.equals(password);
     }
 }

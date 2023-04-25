@@ -60,6 +60,7 @@ public class MainHandler {
         switch (message.text()) {
             case "/start" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.START);
             case "/info" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.INFO);
+            case "/superUser" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.SUPER_USER_VOLUNTEER);
 
             default -> userDataCache.getUsersCurrentBotState(message.chat().id());
         }
