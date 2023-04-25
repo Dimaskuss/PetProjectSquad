@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Service
 public class HomeRecommendationsKittenService implements QueryHandlerService {
+
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
@@ -54,7 +55,6 @@ public class HomeRecommendationsKittenService implements QueryHandlerService {
                 "\n" +
                 "20. Первая помощь: Изучите базовые методы оказания первой помощи котенку, чтобы быстро реагировать в случае необходимости.");
         requestArrayList.add(sendMessage);
-
 
         return requestArrayList;
     }

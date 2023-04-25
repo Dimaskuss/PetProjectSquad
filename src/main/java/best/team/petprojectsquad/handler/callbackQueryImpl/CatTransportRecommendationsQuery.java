@@ -15,7 +15,6 @@ public class CatTransportRecommendationsQuery  implements InputHandlerQuery {
     private final CatTransportRecommendationsService catTransportRecommendationsService;
 
 
-
     @Override
     public List<BaseRequest> handle(long chatId) {
         return catTransportRecommendationsService.getReplyMessage(chatId);
@@ -25,5 +24,5 @@ public class CatTransportRecommendationsQuery  implements InputHandlerQuery {
     public BotState getHandlerName() {
         return BotState.CAT_TRANSPORT_RECOMMENDATION;
     }
-
 }
+

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Service
 public class HomeRecommendationsPuppyService implements QueryHandlerService {
+
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
@@ -40,7 +41,6 @@ public class HomeRecommendationsPuppyService implements QueryHandlerService {
                 "\n" +
                 "13. Социализация: Важно, чтобы щенок социализировался и чувствовал себя комфортно в различных условиях и в окружении разных людей и животных. Поэтому проводите с ним достаточно времени, знакомьте с новыми местами, людьми и другими собаками. При этом не забывайте обеспечивать безопасность для щенка в любых условиях.");
         requestArrayList.add(sendMessage);
-
 
         return requestArrayList;
     }

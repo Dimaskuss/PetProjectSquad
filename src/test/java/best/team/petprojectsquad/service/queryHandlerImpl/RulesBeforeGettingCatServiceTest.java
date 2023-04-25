@@ -1,19 +1,23 @@
 package best.team.petprojectsquad.service.queryHandlerImpl;
 
-import best.team.petprojectsquad.service.QueryHandlerService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
-import org.springframework.stereotype.Service;
-
+import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class RulesBeforeGettingCatService implements QueryHandlerService {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-    @Override
-    public List<BaseRequest> getReplyMessage(long id) {
-        List<BaseRequest> requestArrayList = new ArrayList<>();
+
+class RulesBeforeGettingCatServiceTest {
+
+    private RulesBeforeGettingCatService service = new RulesBeforeGettingCatService();
+    long id = 1005223990L;
+
+    @Test
+    void getReplyMessage() {
+
+        List<BaseRequest> expectedArrayList = new ArrayList<>();
 
         SendMessage sendMessage0 = new SendMessage(id, "Перед забиранием кошки из приюта, важно убедиться, что вы готовы к ответственности за нового питомца. Также необходимо знать, как правильно знакомиться с кошкой, " +
                 "чтобы установить с ней контакт и сделать переезд в новый дом более комфортным.\nВот несколько правил знакомства с кошкой:");
@@ -22,14 +26,17 @@ public class RulesBeforeGettingCatService implements QueryHandlerService {
         SendMessage sendMessage3 = new SendMessage(id, "3. Говорите с кошкой мягким и спокойным голосом.");
         SendMessage sendMessage4 = new SendMessage(id, "4. Игрушки могут помочь в установлении контакта с кошкой.");
 
-        requestArrayList.add(sendMessage0);
-        requestArrayList.add(sendMessage1);
-        requestArrayList.add(sendMessage2);
-        requestArrayList.add(sendMessage3);
-        requestArrayList.add(sendMessage4);
+        expectedArrayList.add(sendMessage0);
+        expectedArrayList.add(sendMessage1);
+        expectedArrayList.add(sendMessage2);
+        expectedArrayList.add(sendMessage3);
+        expectedArrayList.add(sendMessage4);       
+        
+        List<BaseRequest> actualList = service.getReplyMessage(id);
 
-        return requestArrayList;
+        assertEquals(actualList.size(), expectedArrayList.size());
+        assertEquals(actualList.get(0).getClass(), expectedArrayList.get(0).getClass());
+        assertEquals(actualList.get(0).getParameters().get("chat_id"),expectedArrayList.get(0).getParameters().get("chat_id"));
+
     }
-
 }
-
