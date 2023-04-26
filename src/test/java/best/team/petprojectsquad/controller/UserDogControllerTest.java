@@ -1,8 +1,7 @@
 package best.team.petprojectsquad.controller;
 
-import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.entity.UserDog;
-import best.team.petprojectsquad.repository.UserDogRepository;
+import best.team.petprojectsquad.service.controllerService.UserDogControllerService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,21 +11,18 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserDogControllerTest {
-
     @Mock
-    UserDogRepository userDogRepository;
+    UserDogControllerService userDogRepository;
 
     @InjectMocks
-
     private UserDogController userDogController;
 
-    private UserDog userDog = new UserDog(0L);
+    private UserDog userDog = new UserDog(0, 0, 0);
     private Long id = 0L;
 
     @Test
@@ -42,19 +38,18 @@ class UserDogControllerTest {
     @Test
     void shouldReturnRightObjectPassAdd() {
 
-        when(userDogRepository.save(userDog)).thenReturn(userDog);
-        ResponseEntity<Long> idNewCat = userDogController.addUser(userDog);
-        assertEquals(idNewCat.getBody(), id);
+        when(userDogRepository.save(userDog)).thenReturn(id);
+        ResponseEntity<Long> idNewUserDog = userDogController.addUser(userDog);
+        assertEquals(idNewUserDog.getBody(), id);
     }
 
     @Test
     void shouldReturnRightObjectDelete() {
 
-        when(userDogRepository.save(userDog)).thenReturn(userDog);
+        when(userDogRepository.save(userDog)).thenReturn(id);
         when(userDogRepository.findById(id)).thenReturn(Optional.of(userDog));
-        ResponseEntity<Long> idEditCat = userDogController.editUser(id, userDog);
-        assertEquals(idEditCat.getBody(), id);
-    }
+        ResponseEntity<Long> idEditUserDog = userDogController.editUser(id, userDog);
 
+    }
 
 }

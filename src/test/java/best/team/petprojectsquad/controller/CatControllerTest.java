@@ -1,16 +1,15 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.Cat;
-import best.team.petprojectsquad.repository.CatRepository;
+import best.team.petprojectsquad.service.controllerService.CatControllerService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CatControllerTest{
+class CatControllerTest {
 
     @Mock
-    CatRepository catRepository;
+    CatControllerService catRepository;
 
     @InjectMocks
     private CatController catController;
@@ -42,7 +41,7 @@ class CatControllerTest{
     @Test
     void shouldReturnRightObjectPassAdd() {
 
-        when(catRepository.save(cat)).thenReturn(cat);
+        when(catRepository.save(cat)).thenReturn(id);
         ResponseEntity<Long> idNewCat = catController.addCat(cat);
         assertEquals(idNewCat.getBody(),id);
     }
@@ -50,11 +49,9 @@ class CatControllerTest{
     @Test
     void shouldReturnRightObjectDelete() {
 
-        when(catRepository.save(cat)).thenReturn(cat);
+        when(catRepository.save(cat)).thenReturn(id);
         when(catRepository.findById(id)).thenReturn(Optional.of(cat));
         ResponseEntity<Long> idEditCat = catController.editCat(id,cat);
         assertEquals(idEditCat.getBody(),id);
     }
-
-
 }

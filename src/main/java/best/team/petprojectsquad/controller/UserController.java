@@ -4,6 +4,8 @@ import best.team.petprojectsquad.entity.User;
 import best.team.petprojectsquad.entity.UserDog;
 import best.team.petprojectsquad.repository.UserDogRepository;
 import best.team.petprojectsquad.repository.UserRepository;
+import best.team.petprojectsquad.service.controllerService.UserCatControllerService;
+import best.team.petprojectsquad.service.controllerService.UserControllerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -24,7 +26,7 @@ import java.util.List;
 @AllArgsConstructor
 @Tag(name = "User", description = "Any user, which haven't got any animals")
 public class UserController {
-    private final UserRepository userRepository;
+    private final UserControllerService userRepository;
 
     @Operation(
             summary = "Getting user by it's id",
@@ -63,7 +65,7 @@ public class UserController {
     )
     @PostMapping("/")
     public ResponseEntity<Long> addUser(@Parameter (description = "An Entity 'user' in database") @RequestBody User user) {
-        return ResponseEntity.ok().body(userRepository.save(user).getId());
+        return ResponseEntity.ok().body(userRepository.save(user));
     }
 
     @Operation(

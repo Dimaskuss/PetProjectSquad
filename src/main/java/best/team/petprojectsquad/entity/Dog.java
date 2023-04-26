@@ -25,6 +25,14 @@ public class Dog {
     private int yearOfBirthday;
     @Column(name = "description")
     private String description;
-    @OneToMany(mappedBy = "id")
-    private List<UserDog> userDog;
+    @OneToOne(mappedBy = "dog")
+    private UserDog userDog;
+
+    public Dog(long id, String breed, String name, int yearOfBirthday, String description) {
+        this.id = id;
+        this.breed = breed;
+        this.name = name;
+        this.yearOfBirthday = yearOfBirthday;
+        this.description = description;
+    }
 }

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DogTest {
 
-    private  List<UserDog> userDog;
+    private UserDog userDog;
     @Test
     public void testGettersAndSetters() {
         Dog dog = new Dog();
@@ -28,7 +28,7 @@ public class DogTest {
 
     @Test
     public void testConstructor() {
-        Dog dog = new Dog(1, "Golden Retriever", "Buddy", 2015, "A friendly and loyal dog",  userDog );
+        Dog dog = new Dog(1, "Golden Retriever", "Buddy", 2015, "A friendly and loyal dog", userDog);
 
         assertEquals(1, dog.getId());
         assertEquals("Golden Retriever", dog.getBreed());

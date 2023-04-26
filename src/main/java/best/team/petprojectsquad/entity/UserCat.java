@@ -20,7 +20,7 @@ public class UserCat {
     private long id;
     @OneToMany(mappedBy = "id")
     private List<User> user;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "cat_id")
     private Cat cat;
     @Column(name = "chat_id", nullable = false, unique = true)
