@@ -17,14 +17,12 @@ public class User {
     private long id;
     @Column(name = "chat_id")
     private long chatId;
-
     @Column(name = "name")
     private String name;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_cat_id", nullable = true)
     private UserCat catList;
-
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_dog_id", nullable = true)
     private UserDog dogList;
 

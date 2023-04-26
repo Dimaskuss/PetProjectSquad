@@ -2,6 +2,7 @@ package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.Cat;
 import best.team.petprojectsquad.repository.CatRepository;
+import best.team.petprojectsquad.service.controllerService.CatControllerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -22,7 +23,7 @@ import java.util.List;
 @RequestMapping(value = "/Cats")
 @Tag(name = "Cat", description = "Cat entity in DB")
 public class CatController {
-    private final CatRepository catRepository;
+    private final CatControllerService catRepository;
 
     @Operation(
             summary = "Getting cat by it's id",
@@ -61,7 +62,7 @@ public class CatController {
     )
     @PostMapping("/")
     public ResponseEntity<Long> addCat(@Parameter (description = "an Entity 'cat' in database") @RequestBody Cat cat) {
-        return ResponseEntity.ok().body(catRepository.save(cat).getId());
+        return ResponseEntity.ok().body(catRepository.save(cat));
     }
 
     @Operation(

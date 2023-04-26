@@ -26,7 +26,7 @@ public class UserDog {
     @OneToMany(mappedBy = "id")
     private List<User> user;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "dog_id")
     private Dog dog;
 
@@ -35,5 +35,11 @@ public class UserDog {
 
     public UserDog(long chatId) {
         this.chatId = chatId;
+    }
+
+    public UserDog(long id, long chatId, int phoneNumber) {
+        this.id = id;
+        this.chatId = chatId;
+        this.phoneNumber = phoneNumber;
     }
 }

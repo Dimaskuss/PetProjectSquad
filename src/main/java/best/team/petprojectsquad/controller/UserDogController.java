@@ -1,7 +1,7 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.UserDog;
-import best.team.petprojectsquad.repository.UserDogRepository;
+import best.team.petprojectsquad.service.controllerService.UserDogControllerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping(value = "/UserDog")
 @Tag(name = "UserDog", description = "a user with dog")
 public class UserDogController {
-    private final UserDogRepository userDogRepository;
+    private final UserDogControllerService userDogRepository;
 
     @Operation(
             summary = "Getting user by it's id",
@@ -60,7 +60,7 @@ public class UserDogController {
     )
     @PostMapping("/")
     public ResponseEntity<Long> addUser(@Parameter(description = "An Entity 'user' in database") @RequestBody UserDog user) {
-        return ResponseEntity.ok().body(userDogRepository.save(user).getId());
+        return ResponseEntity.ok().body(userDogRepository.save(user));
     }
 
     @Operation(

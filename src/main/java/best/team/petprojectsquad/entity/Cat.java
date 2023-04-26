@@ -26,8 +26,8 @@ public class Cat {
     private int yearOfBirthday;
     @Column(name = "description")
     private String description;
-    @OneToMany(mappedBy = "id")
-    private List<UserCat> userCat;
+    @OneToOne(mappedBy = "cat")
+    private UserCat userCat;
 
     public Cat(long id, String breed, String name, int yearOfBirthday, String description) {
         this.id = id;

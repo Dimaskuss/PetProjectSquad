@@ -92,3 +92,7 @@ CREATE TABLE super_user
     chat_id   BIGINT NOT NULL UNIQUE,
     name      VARCHAR(20)
 );
+
+--changeset couldlie:0.91
+ALTER TABLE cat ADD COLUMN user_cat_id BIGINT;
+ALTER TABLE dog ADD COLUMN user_dog_id BIGINT;

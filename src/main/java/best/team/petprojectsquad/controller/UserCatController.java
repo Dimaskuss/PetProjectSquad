@@ -3,6 +3,8 @@ package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.repository.UserCatRepository;
+import best.team.petprojectsquad.service.controllerService.UserCatControllerService;
+import best.team.petprojectsquad.service.controllerService.UserDogControllerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -22,7 +24,7 @@ import java.util.List;
 @RequestMapping(value = "/UserCat")
 @Tag(name = "UserCat", description = "a user with cat")
 public class UserCatController {
-    private final UserCatRepository userDogRepository;
+    private final UserCatControllerService userCatRepository;
 
     @Operation(
             summary = "Getting user by it's id",
@@ -43,7 +45,7 @@ public class UserCatController {
     )
     @GetMapping(value = "/{id}")
     public ResponseEntity<UserCat> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
-        return ResponseEntity.ok(userDogRepository.getReferenceById(id));
+        return ResponseEntity.ok(userCatRepository.getReferenceById(id));
     }
 
     @Operation(
@@ -61,7 +63,7 @@ public class UserCatController {
     )
     @PostMapping("/")
     public ResponseEntity<Long> addUser(@Parameter (description = "An Entity 'user' in database") @RequestBody UserCat user) {
-        return ResponseEntity.ok().body(userDogRepository.save(user).getId());
+        return ResponseEntity.ok().body(userCatRepository.save(user));
     }
 
     @Operation(
@@ -83,11 +85,11 @@ public class UserCatController {
     )
     @PutMapping(value = "/{id}")
     public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody UserCat user) {
-        if (userDogRepository.findById(id).isEmpty()) {
+        if (userCatRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        userDogRepository.deleteById(id);
-        userDogRepository.save(user);
+        userCatRepository.deleteById(id);
+        userCatRepository.save(user);
         return ResponseEntity.ok().body(user.getId());
     }
 
@@ -107,7 +109,7 @@ public class UserCatController {
     )
     @GetMapping("/")
     public ResponseEntity<List<UserCat>> getAll() {
-        return ResponseEntity.ok().body(userDogRepository.findAll());
+        return ResponseEntity.ok().body(userCatRepository.findAll());
     }
 
 
@@ -126,10 +128,10 @@ public class UserCatController {
     )
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteUser(@Parameter @PathVariable long id) {
-        if (userDogRepository.findById(id).isEmpty()) {
+        if (userCatRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        userDogRepository.deleteById(id);
+        userCatRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }
