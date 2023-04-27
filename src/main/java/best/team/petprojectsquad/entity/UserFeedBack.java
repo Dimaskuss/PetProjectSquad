@@ -28,8 +28,9 @@ public class UserFeedBack {
     @Column(name = "feedback")
     private boolean feedback;
 
-    public UserFeedBack(String phoneNumber, long chatId, boolean feedback) {
+    public UserFeedBack(String phoneNumber, String name, long chatId,  boolean feedback) {
         this.phoneNumber = phoneNumber;
+        this.name = name;
         this.chatId = chatId;
         this.feedback = feedback;
     }
