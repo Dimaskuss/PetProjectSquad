@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Slf4j
@@ -27,7 +28,7 @@ public class MainHandler {
 
         Message message = update.message();
 
-        if (update.message() != null && update.message().text() != null) {
+        if (update.message() != null && (update.message().text() != null || message.photo() != null)) {
             log.info("New message from User:{}, chatId: {},  with text: {}"
                     , message.from().username()
                     , message.chat().id()
@@ -56,7 +57,6 @@ public class MainHandler {
      */
     public List<BaseRequest> handleInputMessage(Message message) {
 
-        //извлекаем из сообщения текст
         switch (message.text()) {
             case "/start" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.START);
             case "/info" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.INFO);
@@ -108,6 +108,11 @@ public class MainHandler {
             case "/dogListReasonsNegative" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_TAKE_NEGATIVE);
             case "/catSendContact" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CONTACTS_CAT);
             case "/dogSendContact" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CONTACTS_DOG);
+            case "/catReportMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_REPORT_MENU);
+            case "/dogReportMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_REPORT_MENU);
+            case "/catReport" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_REPORT);
+            case "/dogReport" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_REPORT);
+            case "/formReport" -> userDataCache.setUsersCurrentBotState(chatId, BotState.FORM_REPORT);
 
             default -> log.error("Нет обработки такого запроса с кнопки:" + callbackQuery.data());
         }

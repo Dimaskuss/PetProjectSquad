@@ -1,9 +1,8 @@
-package best.team.petprojectsquad.service.textHandlerImpl;
+package best.team.petprojectsquad.service.queryHandlerImpl;
 
 import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.BotState;
-import best.team.petprojectsquad.service.TextHandlerService;
-import com.pengrad.telegrambot.model.Message;
+import best.team.petprojectsquad.service.QueryHandlerService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import lombok.AllArgsConstructor;
@@ -14,17 +13,16 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class SuperUserService implements TextHandlerService {
+public class ReportCatService implements QueryHandlerService {
+
     private final UserDataCache userDataCache;
+
     @Override
-    public List<BaseRequest> getReplyMessage(Message message) {
+    public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
-
-        SendMessage sendMessage = new SendMessage(message.chat().id(), "Введите пароль:");
+        SendMessage sendMessage = new SendMessage(id, "Отправьте в сообщении фото с информацией о питомце:");
         requestArrayList.add(sendMessage);
-
-        userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.VALIDATE_VOLUNTEER);
-
+        userDataCache.setUsersCurrentBotState(id, BotState.CAT_REPORT_VALIDATE);
         return requestArrayList;
     }
 

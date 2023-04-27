@@ -17,7 +17,7 @@ public class SuperUserHandler implements InputHandlerMessage {
 
     @Override
     public List<BaseRequest> handle(Message inputMessage) {
-        return superUserService.getReplyMessage(inputMessage.chat().id(), inputMessage.text());
+        return superUserService.getReplyMessage(inputMessage);
     }
 
     @Override

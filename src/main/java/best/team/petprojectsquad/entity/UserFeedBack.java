@@ -12,10 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserFeedBack {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
+
     @Column(name = "phone_number")
     private String phoneNumber;
 
@@ -28,9 +30,9 @@ public class UserFeedBack {
     @Column(name = "feedback")
     private boolean feedback;
 
-    public UserFeedBack(String phoneNumber, long chatId, boolean feedback) {
+    public UserFeedBack(String phoneNumber, long chatId, String name) {
         this.phoneNumber = phoneNumber;
         this.chatId = chatId;
-        this.feedback = feedback;
+        this.name = name;
     }
 }

@@ -19,7 +19,7 @@ public class StartMenuHandler implements InputHandlerMessage {
 
     @Override
     public List<BaseRequest> handle(Message inputMessage) {
-        return startHandlerService.getReplyMessage(inputMessage.chat().id(), inputMessage.text());
+        return startHandlerService.getReplyMessage(inputMessage);
     }
 
     @Override
