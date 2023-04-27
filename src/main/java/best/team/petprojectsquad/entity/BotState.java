@@ -17,7 +17,18 @@ public enum BotState {
     DOG_SHELTER_PASS("/dogPass"),
     CAT_SHELTER_SAFETY("/catSafety"),
     DOG_SHELTER_SAFETY("/dogSafety"),
-    
+
+    CAT_REPORT_MENU("/catReportMenu"),
+    DOG_REPORT_MENU("/dogReportMenu"),
+
+    CAT_REPORT("/catReport"),
+    DOG_REPORT("/dogReport"),
+
+    FORM_REPORT("/formReport"),
+
+    CAT_REPORT_VALIDATE("/catReportValidate"),
+    DOG_REPORT_VALIDATE("/dogReportValidate"),
+
     CAT_SHELTER_CALLBACK("/catCallback"),
     DOG_SHELTER_CALLBACK("/dogCallback"),
     CAT_TAKE_INFO("/catTakeInfo"),

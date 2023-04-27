@@ -5,6 +5,7 @@ import best.team.petprojectsquad.entity.BotState;
 import best.team.petprojectsquad.entity.UserFeedBack;
 import best.team.petprojectsquad.repository.UserFeedBackRepository;
 import best.team.petprojectsquad.service.TextHandlerService;
+import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import lombok.AllArgsConstructor;
@@ -21,18 +22,18 @@ public class ValidatePhoneService implements TextHandlerService {
     private UserFeedBackRepository userFeedBackRepository;
 
     @Override
-    public List<BaseRequest> getReplyMessage(long id, String message) {
+    public List<BaseRequest> getReplyMessage(Message message) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
-        if (checkPhone(message)) {
-            if (!userFeedBackRepository.existsByChatId(id)) {
-                userFeedBackRepository.save(new UserFeedBack(message, id, true));
+        if (checkPhone(message.text())) {
+            if (!userFeedBackRepository.existsByChatId(message.chat().id())) {
+                userFeedBackRepository.save(new UserFeedBack(message.text(), message.chat().id(), message.from().username()));
             }
-            SendMessage sendMessage = new SendMessage(id, "Волонтер в ближайшее время Вам перезвонит.");
+            SendMessage sendMessage = new SendMessage(message.chat().id(), "Волонтер в ближайшее время Вам перезвонит.");
             requestArrayList.add(sendMessage);
-            userDataCache.setUsersCurrentBotState(id,BotState.START);
+            userDataCache.setUsersCurrentBotState(message.chat().id(),BotState.START);
 
         } else {
-            SendMessage sendMessage = new SendMessage(id, "Телефон написан не корректно, пришлите еще раз в формате +79315556677");
+            SendMessage sendMessage = new SendMessage(message.chat().id(), "Телефон написан не корректно, пришлите еще раз в формате +79315556677");
             requestArrayList.add(sendMessage);
 
         }
