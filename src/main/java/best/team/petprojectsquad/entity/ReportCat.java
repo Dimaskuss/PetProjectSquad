@@ -26,8 +26,8 @@ public class ReportCat {
     @Column(name = "report_date")
     private LocalDate dateReport;
 
-    @Column(name = "photo_path")
-    private String photo_path;
+    @Column(name = "photo_id")
+    private String photoId;
 
     @Column(name = "report_accepted")
     private boolean reportAccepted;
