@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SuperUserServiceTest {
     private SuperUserService superUserService = new SuperUserService(new UserDataCache());
 
-    private long id = 1005223990L;
+    private long id = 123;
     @Test
     void getReplyMessage() throws URISyntaxException, IOException {
         List<BaseRequest> requestArrayList = new ArrayList<>();

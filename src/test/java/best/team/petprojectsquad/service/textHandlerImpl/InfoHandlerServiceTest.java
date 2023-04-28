@@ -23,7 +23,7 @@ class InfoHandlerServiceTest {
 
 
     private InfoHandlerService infoHandlerService = new InfoHandlerService();
-    long id = 1005223990L;
+    long id = 123;
     String text = "/info";
 
     @Test

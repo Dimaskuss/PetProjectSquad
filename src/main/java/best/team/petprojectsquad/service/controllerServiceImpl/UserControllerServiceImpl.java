@@ -21,8 +21,7 @@ public class UserControllerServiceImpl implements UserControllerService {
 
     @Override
     public long save(User user) {
-        userRepository.save(user);
-        return user.getId();
+        return userRepository.save(user).getId();
     }
 
     @Override

@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-
 //Добавил кеширование для ускорения работы приложения во все entity
 @Entity
 @Table(name = "cat")

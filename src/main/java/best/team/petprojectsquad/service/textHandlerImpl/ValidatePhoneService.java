@@ -33,7 +33,7 @@ public class ValidatePhoneService implements TextHandlerService {
             userDataCache.setUsersCurrentBotState(message.chat().id(),BotState.START);
 
         } else {
-            SendMessage sendMessage = new SendMessage(message.chat().id(), "Телефон написан не корректно, пришлите еще раз в формате +79315556677");
+            SendMessage sendMessage = new SendMessage(message.chat().id(), "Телефон написан некорректно, пришлите еще раз в формате +79315556677");
             requestArrayList.add(sendMessage);
 
         }
