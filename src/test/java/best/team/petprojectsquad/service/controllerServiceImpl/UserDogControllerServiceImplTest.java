@@ -1,6 +1,7 @@
 package best.team.petprojectsquad.service.controllerServiceImpl;
 
 import best.team.petprojectsquad.entity.UserDog;
+import best.team.petprojectsquad.repository.UserDogRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class UserDogDogControllerServiceImplTest {
     @Mock
-    best.team.petprojectsquad.repository.UserDogRepository userDogRepository;
+    UserDogRepository userDogRepository;
     @InjectMocks
     UserDogControllerServiceImpl userDogControllerService;
     long id = 1L;
@@ -22,7 +23,7 @@ class UserDogDogControllerServiceImplTest {
 
     @Test
     void ShouldReturnRightReferenceById() {
-        assertEquals(userDogRepository.getReferenceById(id), userDogControllerService.getReferenceById(id));
+        assertEquals(userDogRepository.findById(id), userDogControllerService.findById(id));
     }
     @Test
     void deleteById() {

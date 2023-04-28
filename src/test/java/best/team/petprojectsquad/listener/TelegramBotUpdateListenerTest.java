@@ -1,12 +1,12 @@
 package best.team.petprojectsquad.listener;
 
 import best.team.petprojectsquad.handler.MainHandler;
+import best.team.petprojectsquad.service.ReminderImpl;
 import com.pengrad.telegrambot.BotUtils;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
-import com.pengrad.telegrambot.request.SendPhoto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,6 +34,8 @@ public class TelegramBotUpdateListenerTest {
     private MainHandler mainHandler;
     @InjectMocks
     private TelegramBotUpdateListener telegramBotUpdateListener;
+    @Mock
+    private ReminderImpl reminder;
 
     @Test
     public void handleStartTest() throws URISyntaxException, IOException {
@@ -59,4 +61,9 @@ public class TelegramBotUpdateListenerTest {
 //        Assertions.assertThat(actualPhoto.getParameters().get("photo")).isEqualTo("src/main/resources/mainMenu.png");
 
     }
+
+    /*@Test
+    public void mentionForUserToSendReport() {
+
+    }*/
 }

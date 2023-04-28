@@ -21,7 +21,7 @@ public class ReportDog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
     @Column(name = "report")
     private String report;
 
@@ -32,8 +32,14 @@ public class ReportDog {
     private String photoId;
 
     @Column(name = "report_accepted")
-    private boolean reportAccepted;
+    private boolean reportAccepted = false;
     @ManyToOne
     @JoinColumn(name = "user_dog")
     private UserDog userDog;
+
+    public ReportDog(String report, LocalDate dateReport, String photoId) {
+        this.report = report;
+        this.dateReport = dateReport;
+        this.photoId = photoId;
+    }
 }

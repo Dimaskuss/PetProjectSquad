@@ -30,4 +30,9 @@ public class SuperUserVolunteer {
     public SuperUserVolunteer(Long chatId) {
         this.chatId = chatId;
     }
+
+    public SuperUserVolunteer(long chatId, String name) {
+        this.chatId = chatId;
+        this.name = name;
+    }
 }
