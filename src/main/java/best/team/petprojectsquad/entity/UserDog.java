@@ -12,7 +12,6 @@ import java.util.List;
 @Table(name = "user_dog")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserDog {
