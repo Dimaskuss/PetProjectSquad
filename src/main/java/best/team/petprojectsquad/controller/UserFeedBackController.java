@@ -61,7 +61,7 @@ public class UserFeedBackController {
                     )
             }, tags = "UserFeedBack"
     )
-    @PostMapping("/")
+    @PostMapping("/add")
     public ResponseEntity<Long> addUser(@Parameter(description = "An Entity 'UserFeedBack' in database") @RequestBody UserFeedBack user) {
         return ResponseEntity.ok().body(userRepository.save(user));
     }
@@ -83,7 +83,7 @@ public class UserFeedBackController {
                     )
             }, tags = "UserFeedBack"
     )
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/edit/{id}")
     public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'UserFeedBack' in database") @RequestBody UserFeedBack user) {
         if (userRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -107,7 +107,7 @@ public class UserFeedBackController {
                     )
             }, tags = "UserFeedBack"
     )
-    @GetMapping("/")
+    @GetMapping("/getAll")
     public ResponseEntity<List<UserFeedBack>> getAll() {
         return ResponseEntity.ok().body(userRepository.findAll());
     }
@@ -126,7 +126,7 @@ public class UserFeedBackController {
                     )
             }, tags = "UserFeedBack"
     )
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Void> deleteUser(@Parameter @PathVariable long id) {
         if (userRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
