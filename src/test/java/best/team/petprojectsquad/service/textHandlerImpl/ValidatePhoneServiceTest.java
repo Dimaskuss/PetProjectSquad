@@ -24,12 +24,12 @@ class ValidatePhoneServiceTest {
     private ValidatePhoneService validatePhoneService;
 
     private String message = "89356657658";
-    private long id = 1005223990L;
+    private long id = 123;
 
     @Test
     void getReplyMessage() throws URISyntaxException, IOException {
         List<BaseRequest> requestArrayList = new ArrayList<>();
-        SendMessage sendMessage = new SendMessage(id, "Волонтер в ближайшее время Вам перезвонит.");
+        SendMessage sendMessage = new SendMessage(id, "Телефон написан некорректно, пришлите еще раз в формате +79315556677");
         requestArrayList.add(sendMessage);
 
         String json = Files.readString(Path.of(

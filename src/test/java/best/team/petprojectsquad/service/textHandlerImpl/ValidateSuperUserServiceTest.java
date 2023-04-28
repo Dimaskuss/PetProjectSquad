@@ -35,7 +35,7 @@ class ValidateSuperUserServiceTest {
     private ValidateSuperUserService validateSuperUserService;
     @Value("${super.user.password}")
     private String superUserPassword;
-    private final long id = 1005223990L;
+    private final long id = 123;
     @Test
     void getReplyMessageIfPasswordIsCorrect() throws URISyntaxException, IOException {
         List<BaseRequest> requestArrayList = new ArrayList<>();
