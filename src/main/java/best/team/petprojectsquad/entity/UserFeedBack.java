@@ -2,13 +2,13 @@ package best.team.petprojectsquad.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-@Data
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode
 @Table(name = "user_feedback")
 @NoArgsConstructor
 @Cacheable
