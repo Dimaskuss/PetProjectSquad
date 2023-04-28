@@ -46,7 +46,7 @@ class ValidatePhoneHandlerTest {
                 (TelegramBotUpdateListenerTest.class.getResource("update.json")).toURI()));
         Update update = BotUtils.fromJson(json.replace("%text%", "/validatePhone"), Update.class);
 
-        when(service.getReplyMessage(id,text)).thenReturn(expectedArrayList);
+        when(service.getReplyMessage(update.message())).thenReturn(expectedArrayList);
 
         List<BaseRequest> actualList = validatePhoneHandler.handle(update.message());
 

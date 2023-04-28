@@ -45,7 +45,7 @@ class ValidateSuperUserHandlerTest {
                 (TelegramBotUpdateListenerTest.class.getResource("update.json")).toURI()));
         Update update = BotUtils.fromJson(json.replace("%text%", "/superUser"), Update.class);
 
-        when(validateSuperUserService.getReplyMessage(id,text)).thenReturn(expectedArrayList);
+        when(validateSuperUserService.getReplyMessage(update.message())).thenReturn(expectedArrayList);
 
         List<BaseRequest> actualList = validateSuperUserHandler.handle(update.message());
 

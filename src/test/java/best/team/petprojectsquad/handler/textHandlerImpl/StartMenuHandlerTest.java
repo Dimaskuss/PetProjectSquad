@@ -45,7 +45,7 @@ class StartMenuHandlerTest {
                 (TelegramBotUpdateListenerTest.class.getResource("update.json")).toURI()));
         Update update = BotUtils.fromJson(json.replace("%text%", "/start"), Update.class);
 
-        when(service.getReplyMessage(id,text)).thenReturn(expectedArrayList);
+        when(service.getReplyMessage(update.message())).thenReturn(expectedArrayList);
 
         List<BaseRequest> actualList = startMenuHandler.handle(update.message());
 

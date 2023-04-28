@@ -19,7 +19,7 @@ public class ValidatePhoneHandler implements InputHandlerMessage {
 
     @Override
     public List<BaseRequest> handle(Message inputMessage) {
-        return validatePhoneService.getReplyMessage(inputMessage.chat().id(), inputMessage.text());
+        return validatePhoneService.getReplyMessage(inputMessage);
     }
 
     @Override
