@@ -104,7 +104,7 @@ CREATE TABLE report_cat
     user_cat    BIGINT NOT NULL UNIQUE,
     report VARCHAR(100) UNIQUE ,
     report_date DATE NOT NULL UNIQUE,
-    photo_path VARCHAR(100) UNIQUE,
+    photo_id VARCHAR(100) UNIQUE,
     report_accepted BOOLEAN UNIQUE
 );
 CREATE TABLE report_dog
@@ -113,7 +113,7 @@ CREATE TABLE report_dog
     user_dog    BIGINT NOT NULL UNIQUE,
     report VARCHAR(100) UNIQUE ,
     report_date DATE NOT NULL UNIQUE,
-    photo_path VARCHAR(100) UNIQUE,
+    photo_id VARCHAR(100) UNIQUE,
     report_accepted BOOLEAN UNIQUE
 );
 CREATE SEQUENCE report_cat_seq
@@ -126,3 +126,7 @@ CREATE SEQUENCE report_dog_seq
     MAXVALUE 50
     INCREMENT BY 1
     CACHE 20;
+
+--changeset couldlie:1.2
+ALTER TABLE user_cat ADD COLUMN trial_period INT;
+ALTER TABLE user_dog ADD COLUMN trial_period INT;
