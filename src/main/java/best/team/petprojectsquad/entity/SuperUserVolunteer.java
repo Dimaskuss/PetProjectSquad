@@ -1,16 +1,16 @@
 package best.team.petprojectsquad.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * класс волонтера
  */
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @NoArgsConstructor
 @Table(name = "super_user")
 @Cacheable

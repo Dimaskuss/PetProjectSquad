@@ -2,14 +2,15 @@ package best.team.petprojectsquad.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 //Добавил кеширование для ускорения работы приложения во все entity
 @Entity
 @Table(name = "cat")
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @NoArgsConstructor
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

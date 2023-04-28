@@ -14,29 +14,29 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class UserDogDogControllerServiceImplTest {
     @Mock
-    best.team.petprojectsquad.repository.UserDogRepository UserDogRepository;
+    best.team.petprojectsquad.repository.UserDogRepository userDogRepository;
     @InjectMocks
-    UserDogControllerServiceImpl UserDogControllerService;
-    long id = 0L;
+    UserDogControllerServiceImpl userDogControllerService;
+    long id = 1L;
     best.team.petprojectsquad.entity.UserDog UserDog = new UserDog(4161L);
 
     @Test
     void ShouldReturnRightReferenceById() {
-        assertEquals(UserDogRepository.getReferenceById(id), UserDogControllerService.getReferenceById(id));
+        assertEquals(userDogRepository.getReferenceById(id), userDogControllerService.getReferenceById(id));
     }
     @Test
     void deleteById() {
-        UserDogControllerService.deleteById(0L);
-        assertNull(UserDogRepository.getReferenceById(0L));
+        userDogControllerService.deleteById(0L);
+        assertNull(userDogRepository.getReferenceById(0L));
     }
 
     @Test
     void findAll() {
-        assertEquals(UserDogRepository.findAll(), UserDogControllerService.findAll());
+        assertEquals(userDogRepository.findAll(), userDogControllerService.findAll());
     }
 
     @Test
     void findById() {
-        assertEquals(UserDogControllerService.findById(-0L), Optional.empty());
+        assertEquals(userDogControllerService.findById(-0L), Optional.empty());
     }
 }
