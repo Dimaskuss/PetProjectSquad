@@ -16,23 +16,22 @@ import java.util.List;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserDog {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
-
     @Column(name = "chat_id", nullable = false, unique = true)
     private long chatId;
-
     @OneToMany(mappedBy = "id")
     private List<User> user;
-
     @OneToOne
     @JoinColumn(name = "dog_id")
     private Dog dog;
-
     @Column(name = "phone")
     private int phoneNumber;
+    @Column(name = "trial_period")
+    private int trialPeriod = 30;
 
     public UserDog(long chatId) {
         this.chatId = chatId;

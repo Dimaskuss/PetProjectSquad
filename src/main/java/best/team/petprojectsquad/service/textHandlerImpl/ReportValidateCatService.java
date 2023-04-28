@@ -10,10 +10,13 @@ import best.team.petprojectsquad.service.QueryHandlerService;
 import best.team.petprojectsquad.service.TextHandlerService;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.request.BaseRequest;
+import com.pengrad.telegrambot.request.GetFile;
 import com.pengrad.telegrambot.request.SendMessage;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +37,9 @@ private final UserCatRepository userCatRepository;
                 userCatRepository.save(new UserCat(message.chat().id()));
             }
             reportCat.setUserCat(userCatRepository.findByChatId(message.chat().id()));
-            //todo: reportCat.setDateReport add new LocalDate now;
+            reportCat.setDateReport(LocalDate.from(LocalDateTime.now()));
             reportCat.setReport(message.text());
-            //todo: link photo!?!??
+            reportCat.setPhotoId((message.photo()[message.photo().length-1].fileId()));
             reportCatRepository.save(reportCat);
 
             SendMessage sendMessage = new SendMessage(message.chat().id(), "Отчет направлен волонтеру на проверку.");

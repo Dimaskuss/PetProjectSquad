@@ -13,6 +13,8 @@ import com.pengrad.telegrambot.request.SendMessage;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +35,9 @@ private final UserDogRepository userDogRepository;
                 userDogRepository.save(new UserDog(message.chat().id()));
             }
             reportDog.setUserDog(userDogRepository.findByChatId(message.chat().id()));
-            //todo: reportCat.setDateReport add new LocalDate now;
+            reportDog.setDateReport(LocalDate.from(LocalDateTime.now()));
             reportDog.setReport(message.text());
-            //todo: link photo!?!??
+            reportDog.setPhotoId((message.photo()[message.photo().length-1].fileId()));
             reportDogRepository.save(reportDog);
 
             SendMessage sendMessage = new SendMessage(message.chat().id(), "Отчет направлен волонтеру на проверку.");
