@@ -16,7 +16,7 @@ public class UserControllerServiceImpl implements UserControllerService {
 
     @Override
     public User getReferenceById(long id) {
-        return userRepository.getReferenceById(id);
+        return userRepository.findById(id).get();
     }
 
     @Override
