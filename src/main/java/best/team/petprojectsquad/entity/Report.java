@@ -1,3 +1,4 @@
+/*
 package best.team.petprojectsquad.entity;
 
 import jakarta.persistence.*;
@@ -13,12 +14,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Report {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
     @Column(name = "report")
     private String report;
 
@@ -30,8 +29,7 @@ public abstract class Report {
 
     @Column(name = "report_accepted")
     private boolean reportAccepted;
-
-
 }
 
 
+*/

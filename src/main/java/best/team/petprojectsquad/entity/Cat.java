@@ -5,14 +5,17 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import java.util.List;
 
+//Добавил кеширование для ускорения работы приложения во все entity
 @Entity
 @Table(name = "cat")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Cat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
