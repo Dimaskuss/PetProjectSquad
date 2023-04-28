@@ -23,8 +23,9 @@ public class UserDog {
     private long id;
     @Column(name = "chat_id", nullable = false, unique = true)
     private long chatId;
-    @OneToMany(mappedBy = "id")
-    private List<User> user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @OneToOne
     @JoinColumn(name = "dog_id")
     private Dog dog;
