@@ -16,7 +16,7 @@ public class UserCatControllerServiceImpl implements UserCatControllerService {
 
     @Override
     public UserCat getReferenceById(long id) {
-        return userCatRepository.getReferenceById(id);
+        return userCatRepository.findById(id).get();
     }
 
     @Override

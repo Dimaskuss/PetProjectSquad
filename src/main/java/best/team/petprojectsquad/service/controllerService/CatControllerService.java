@@ -9,8 +9,6 @@ public interface CatControllerService {
     Cat getReferenceById(long id);
     long save(Cat cat);
     void deleteById(long id);
-
     List<Cat> findAll();
-
     Optional<Cat> findById(long id);
 }

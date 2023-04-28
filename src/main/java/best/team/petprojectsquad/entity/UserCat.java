@@ -12,7 +12,6 @@ import java.util.List;
 @Table(name = "user_cat")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserCat {
@@ -21,8 +20,9 @@ public class UserCat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
-    @OneToMany(mappedBy = "id")
-    private List<User> user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @OneToOne
     @JoinColumn(name = "cat_id")
     private Cat cat;
@@ -35,5 +35,13 @@ public class UserCat {
 
     public UserCat(long chatId) {
         this.chatId = chatId;
+    }
+
+    public UserCat(long id, User user, Cat cat, long chatId, int phoneNumber) {
+        this.id = id;
+        this.user = user;
+        this.cat = cat;
+        this.chatId = chatId;
+        this.phoneNumber = phoneNumber;
     }
 }
