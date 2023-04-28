@@ -16,7 +16,7 @@ public class UserDogControllerServiceImpl implements UserDogControllerService {
 
     @Override
     public UserDog getReferenceById(long id) {
-        return userDogRepository.getReferenceById(id);
+        return userDogRepository.findById(id).get();
     }
 
     @Override

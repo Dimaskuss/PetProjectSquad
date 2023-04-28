@@ -16,7 +16,7 @@ public class CatControllerServiceImpl implements CatControllerService {
 
     @Override
     public Cat getReferenceById(long id) {
-        return catRepository.getReferenceById(id);
+        return catRepository.findById(id).get();
     }
 
     @Override
