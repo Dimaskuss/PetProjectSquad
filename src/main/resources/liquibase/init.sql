@@ -130,3 +130,11 @@ CREATE SEQUENCE report_dog_seq
 --changeset couldlie:1.2
 ALTER TABLE user_cat ADD COLUMN trial_period INT;
 ALTER TABLE user_dog ADD COLUMN trial_period INT;
+
+--changeset couldlie:1.3
+ALTER TABLE user_cat ADD COLUMN user_id BIGINT;
+ALTER TABLE user_dog ADD COLUMN user_id BIGINT;
+
+--changeset couldlie:1.4
+ALTER TABLE user_cat ADD COLUMN user_cat_id BIGINT;
+ALTER TABLE user_dog ADD COLUMN user_dog_id BIGINT;
