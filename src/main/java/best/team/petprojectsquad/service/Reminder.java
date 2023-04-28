@@ -1,7 +1,10 @@
 package best.team.petprojectsquad.service;
 
-import com.pengrad.telegrambot.request.SendMessage;
+
+import java.util.List;
 
 public interface Reminder {
-    void sendReminderForUser(SendMessage sendMessage);
+
+    List<Long> idUserToSendReminder();
+
 }

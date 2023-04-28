@@ -16,6 +16,7 @@ import java.util.List;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserCat {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
@@ -29,6 +30,9 @@ public class UserCat {
     private long chatId;
     @Column(name = "phone")
     private int phoneNumber;
+    @Column(name = "trial_period")
+    private int trialPeriod = 30;
+
     public UserCat(long chatId) {
         this.chatId = chatId;
     }
