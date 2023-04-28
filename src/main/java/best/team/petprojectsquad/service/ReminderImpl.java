@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class ReminderImpl implements Reminder{
+public class ReminderImpl implements Reminder {
 
     private final UserCatRepository userCatRepository;
     private final ReportCatRepository reportCatRepository;
@@ -36,24 +36,22 @@ public class ReminderImpl implements Reminder{
     }
 
     private List<Long> catIdUserFail() {
-        return  userCatRepository.findAll().stream().
-                filter(userCat -> userCat.getTrialPeriod()>0).
-                map(UserCat::getId).filter(userId -> getPeriodCat(userId)>1).toList();
+        return userCatRepository.findAll().stream().
+                filter(userCat -> userCat.getTrialPeriod() > 0).
+                map(UserCat::getId).filter(userId -> getPeriodCat(userId) > 1).toList();
     }
 
     private int getPeriodCat(long id) {
         List<ReportCat> reportCat = reportCatRepository.findAllByUserCatId(id).stream().
                 sorted(Comparator.comparing(ReportCat::getDateReport)).toList();
-        Period period = Period.between(
-                LocalDate.from(LocalDate.now()),
-                reportCat.get(reportCat.size() - 1).getDateReport());
+        Period period = Period.between(LocalDate.from(LocalDate.now()), reportCat.get(reportCat.size() - 1).getDateReport());
         return Math.abs(period.getDays());
     }
 
     private List<Long> dogIdUserFail() {
-        return  userDogRepository.findAll().stream().
-                filter(userDog -> userDog.getTrialPeriod()>0).
-                map(UserDog::getId).filter(userId -> getPeriodDog(userId)>1).toList();
+        return userDogRepository.findAll().stream().
+                filter(userDog -> userDog.getTrialPeriod() > 0).
+                map(UserDog::getId).filter(userId -> getPeriodDog(userId) > 1).toList();
     }
 
     private int getPeriodDog(long id) {

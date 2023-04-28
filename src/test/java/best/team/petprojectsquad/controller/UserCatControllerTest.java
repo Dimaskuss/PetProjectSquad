@@ -22,7 +22,7 @@ class UserCatControllerTest {
     @InjectMocks
     private UserCatController userCatController;
 
-    private UserCat userCat = new UserCat(0, null, null, 0, 0);
+    private UserCat userCat = new UserCat();
     private Long id = 0L;
 
     @Test

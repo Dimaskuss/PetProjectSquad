@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import java.util.List;
+
 
 @Data
 @Entity
@@ -22,12 +24,12 @@ public class User {
     private long chatId;
     @Column(name = "name")
     private String name;
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "user_cat_id", nullable = true)
-    private UserCat catList;
-    @OneToOne
+    private List<UserCat> catList;
+    @OneToMany
     @JoinColumn(name = "user_dog_id", nullable = true)
-    private UserDog dogList;
+    private List<UserDog> dogList;
 
     public User(long chatId) {
         this.chatId = chatId;
