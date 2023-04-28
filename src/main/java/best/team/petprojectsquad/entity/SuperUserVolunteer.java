@@ -1,5 +1,6 @@
 package best.team.petprojectsquad.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -17,6 +18,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class SuperUserVolunteer {
     @Id
+    @JsonIgnore
     @OrderColumn
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

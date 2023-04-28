@@ -1,5 +1,6 @@
 package best.team.petprojectsquad.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ReportCat {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
@@ -30,6 +32,7 @@ public class ReportCat {
 
     @Column(name = "report_accepted")
     private boolean reportAccepted = false;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_cat")
     private UserCat userCat;
