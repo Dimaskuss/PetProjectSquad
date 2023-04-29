@@ -1,5 +1,6 @@
 package best.team.petprojectsquad.service.queryHandlerImpl;
 
+import best.team.petprojectsquad.service.queryHandlerImpl.DogInfoMenuService.SafetyDogQueryService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;

@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 
 @Cacheable
 public interface UserRepository extends JpaRepository<User, Long> {
+
     boolean existsByChatId(Long along);
 }

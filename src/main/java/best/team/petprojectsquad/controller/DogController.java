@@ -1,7 +1,7 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.Dog;
-import best.team.petprojectsquad.service.controllerService.DogControllerService;
+import best.team.petprojectsquad.service.RepositoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -21,7 +21,8 @@ import java.util.List;
 @RequestMapping(value = "/Dogs")
 @Tag(name = "Dog", description = "Dog entity in DB")
 public class DogController {
-    private final DogControllerService dogRepository;
+
+    private final RepositoryService<Dog> repository;
 
     @Operation(
             summary = "Getting dog by it's id",
@@ -42,7 +43,7 @@ public class DogController {
     )
     @GetMapping(value = "/{id}")
     public ResponseEntity<Dog> getDogById(@Parameter(description = "id of a dog in a DB", example = "1") @PathVariable long id) {
-        return ResponseEntity.ok(dogRepository.getReferenceById(id));
+        return ResponseEntity.ok(repository.get(id).get());
     }
 
     @Operation(
@@ -60,7 +61,7 @@ public class DogController {
     )
     @PostMapping("/")
     public ResponseEntity<Long> addDog(@Parameter (description = "an Entity 'dog' in database") @RequestBody Dog dog) {
-        return ResponseEntity.ok().body(dogRepository.save(dog));
+        return ResponseEntity.ok().body(repository.save(dog));
     }
 
     @Operation(
@@ -82,11 +83,11 @@ public class DogController {
     )
     @PutMapping(value = "/{id}")
     public ResponseEntity<Long> editDog(@Parameter(description = "id of a dog in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'dog' in database") @RequestBody Dog dog) {
-        if (dogRepository.findById(id).isEmpty()) {
+        if (repository.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        dogRepository.deleteById(id);
-        dogRepository.save(dog);
+        repository.delete(id);
+        repository.save(dog);
         return ResponseEntity.ok().body(dog.getId());
     }
 
@@ -106,7 +107,7 @@ public class DogController {
     )
     @GetMapping("/")
     public ResponseEntity<List<Dog>> getAll() {
-        return ResponseEntity.ok().body(dogRepository.findAll());
+        return ResponseEntity.ok().body(repository.findAll());
     }
 
 
@@ -125,10 +126,10 @@ public class DogController {
     )
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteDog(@Parameter @PathVariable long id) {
-        if (dogRepository.findById(id).isEmpty()) {
+        if (repository.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        dogRepository.deleteById(id);
+        repository.get(id);
         return ResponseEntity.ok().build();
     }
 }

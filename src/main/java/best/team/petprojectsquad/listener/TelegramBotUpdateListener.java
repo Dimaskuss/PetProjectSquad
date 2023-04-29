@@ -41,7 +41,6 @@ public class TelegramBotUpdateListener implements UpdatesListener {
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
 
-
     @Scheduled(cron = "0 0 20 * * *")
     public void mentionForUserToSendReport() {
         List<Long> ids = reminder.idUserToSendReminder();

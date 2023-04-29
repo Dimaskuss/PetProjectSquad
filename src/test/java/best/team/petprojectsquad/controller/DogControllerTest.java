@@ -1,7 +1,7 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.Dog;
-import best.team.petprojectsquad.service.controllerService.DogControllerService;
+import best.team.petprojectsquad.service.RepositoryService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class DogControllerTest {
     @Mock
-    DogControllerService dogRepository;
+    RepositoryService<Dog> dogRepository;
 
     @InjectMocks
     private DogController DogController;
@@ -28,7 +28,7 @@ class DogControllerTest {
     @Test
     void shouldReturnRightObjectPassIdGetter() {
 
-        when(dogRepository.getReferenceById(id)).thenReturn(dog);
+        when(dogRepository.get(id).get()).thenReturn(dog);
 
         ResponseEntity<Dog> status = DogController.getDogById(0);
 
@@ -47,7 +47,7 @@ class DogControllerTest {
     void shouldReturnRightObjectDelete() {
 
         when(dogRepository.save(dog)).thenReturn(id);
-        when(dogRepository.findById(id)).thenReturn(Optional.of(dog));
+        when(dogRepository.get(id)).thenReturn(Optional.of(dog));
         ResponseEntity<Long> idEditDog = DogController.editDog(id, dog);
 
     }

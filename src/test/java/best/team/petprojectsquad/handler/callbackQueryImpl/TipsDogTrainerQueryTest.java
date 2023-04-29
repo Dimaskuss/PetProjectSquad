@@ -1,7 +1,8 @@
 package best.team.petprojectsquad.handler.callbackQueryImpl;
 
 import best.team.petprojectsquad.entity.BotState;
-import best.team.petprojectsquad.service.queryHandlerImpl.TipsDogTrainerService;
+import best.team.petprojectsquad.handler.callbackQueryImpl.DogTakeMenu.TipsDogTrainerQuery;
+import best.team.petprojectsquad.service.queryHandlerImpl.DogTakeMenuService.TipsDogTrainerService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;

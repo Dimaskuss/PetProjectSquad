@@ -1,20 +1,25 @@
 package best.team.petprojectsquad.service.controllerService;
 
-import best.team.petprojectsquad.entity.UserDog;
+import best.team.petprojectsquad.entity.*;
+import best.team.petprojectsquad.service.RepositoryService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+@Service
+@AllArgsConstructor
+public class UserDogControllerService {
 
-public interface UserDogControllerService {
-    UserDog getReferenceById(long id);
+    private final RepositoryService<User> userService;
+    private final RepositoryService<Dog> dogService;
+    private final RepositoryService<UserDog> userDogService;
 
-    boolean checkIfEntitiesExist(long id, long dogId);
+    public boolean checkIfEntitiesExist(long id, long dogId) {
+        return userService.get(id).isPresent() && dogService.get(dogId).isPresent();
+    }
 
-    long save(UserDog userDog, long id, long dogId);
-
-    void deleteById(long id);
-
-    List<UserDog> findAll();
-
-    Optional<UserDog> findById(long id);
+    public long save(UserDog userDog, long id, long dogId) {
+        userDog.setUser(userService.get(id).get());
+        userDog.setDog(dogService.get(dogId).get());
+        return userDogService.save(userDog);
+    }
 }

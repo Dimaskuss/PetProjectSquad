@@ -2,6 +2,7 @@ package best.team.petprojectsquad.controller;
 
 
 import best.team.petprojectsquad.entity.UserCat;
+import best.team.petprojectsquad.service.RepositoryService;
 import best.team.petprojectsquad.service.controllerService.UserCatControllerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -22,7 +23,9 @@ import java.util.List;
 @RequestMapping(value = "/UserCat")
 @Tag(name = "UserCat", description = "a user with cat")
 public class UserCatController {
-    private final UserCatControllerService userCatRepository;
+
+    private final UserCatControllerService controllerService;
+    private final RepositoryService<UserCat> repository;
 
     @Operation(
             summary = "Getting user by it's id",
@@ -42,8 +45,10 @@ public class UserCatController {
             }, tags = "User"
     )
     @GetMapping(value = "/{id}")
-    public ResponseEntity<UserCat> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
-        return ResponseEntity.ok(userCatRepository.getReferenceById(id));
+    public ResponseEntity<UserCat> getUserById(
+            @Parameter(description = "id of a user in a DB", example = "1")
+            @PathVariable long id) {
+        return ResponseEntity.ok(repository.get(id).get());
     }
 
     @Operation(
@@ -64,9 +69,15 @@ public class UserCatController {
             }, tags = "User"
     )
     @PostMapping("/id{id}/catId{catId}")
-    public ResponseEntity<Long> addUser(@Parameter(description = "id of a user in a user.DB", example = "1") @PathVariable long id, @Parameter(description = "id of a cat in a cat.DB", example = "1") @PathVariable long catId, @Parameter(description = "An Entity 'user' in database") @RequestBody UserCat user) {
-        if (userCatRepository.checkIfEntitiesExist(id, catId)) {
-            return ResponseEntity.ok().body(userCatRepository.save(user, id, catId));
+    public ResponseEntity<Long> addUserCat(
+            @Parameter(description = "id of a user in a user.DB", example = "1")
+            @PathVariable long id,
+            @Parameter(description = "id of a cat in a cat.DB", example = "1")
+            @PathVariable long catId,
+            @Parameter(description = "An Entity 'user' in database")
+            @RequestBody UserCat userCat) {
+        if (controllerService.checkIfEntitiesExist(id, catId)) {
+            return ResponseEntity.ok().body(controllerService.save(id, catId, userCat));
         }
         return ResponseEntity.badRequest().build();
     }
@@ -89,12 +100,17 @@ public class UserCatController {
             }, tags = "User"
     )
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a user.DB", example = "1") @PathVariable long id, @Parameter(description = "id of a cat in a cat.DB", example = "1") @PathVariable long catId, @Parameter(description = "an Entity 'user' in database") @RequestBody UserCat user) {
-        if (userCatRepository.findById(id).isEmpty()) {
+    public ResponseEntity<Long> editUser(
+            @Parameter(description = "id of a user in a user.DB", example = "1")
+            @PathVariable long id, @Parameter(description = "id of a cat in a cat.DB", example = "1")
+            @PathVariable long catId,
+            @Parameter(description = "an Entity 'user' in database")
+            @RequestBody UserCat user) {
+        if (repository.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        userCatRepository.deleteById(id);
-        userCatRepository.save(user, id, catId);
+        repository.delete(id);
+        controllerService.save(id, catId, user);
         return ResponseEntity.ok().body(user.getId());
     }
 
@@ -114,7 +130,7 @@ public class UserCatController {
     )
     @GetMapping("/")
     public ResponseEntity<List<UserCat>> getAll() {
-        return ResponseEntity.ok().body(userCatRepository.findAll());
+        return ResponseEntity.ok().body(repository.findAll());
     }
 
 
@@ -133,10 +149,10 @@ public class UserCatController {
     )
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteUser(@Parameter @PathVariable long id) {
-        if (userCatRepository.findById(id).isEmpty()) {
+        if (repository.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        userCatRepository.deleteById(id);
+        repository.delete(id);
         return ResponseEntity.ok().build();
     }
 }

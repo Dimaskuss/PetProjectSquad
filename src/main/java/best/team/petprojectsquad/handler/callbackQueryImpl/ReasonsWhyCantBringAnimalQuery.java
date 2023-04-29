@@ -13,6 +13,7 @@ import java.util.List;
 @Component
 @AllArgsConstructor
 public class ReasonsWhyCantBringAnimalQuery implements InputHandlerQuery {
+
     private final ReasonsWhyCantBringAnimalQueryService reasonsWhyCantBringAnimalQueryService;
 
     @Override
