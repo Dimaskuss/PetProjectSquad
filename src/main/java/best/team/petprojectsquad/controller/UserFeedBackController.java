@@ -21,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping(value = "/UserFeedBack")
 @Tag(name = "UserFeedBack", description = "UserFeedback entity in DB")
-public class UserFeedBackController {
+public class UserFeedBackController{
     UserFeedBackRepository userFeedBack;
 
     private final UserFeedBackControllerService userRepository;
