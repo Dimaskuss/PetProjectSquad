@@ -27,12 +27,14 @@ public class UserCat {
     @JoinColumn(name = "user_id")
     private User user;
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "cat_id")
     private Cat cat;
     @Column(name = "chat_id", nullable = false, unique = true)
     private long chatId;
     @Column(name = "phone")
     private int phoneNumber;
+    @JsonIgnore
     @Column(name = "trial_period")
     private int trialPeriod = 30;
 

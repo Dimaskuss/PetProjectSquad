@@ -8,7 +8,9 @@ import java.util.Optional;
 public interface UserCatControllerService {
     UserCat getReferenceById(long id);
 
-    long save(UserCat userCat);
+    boolean checkIfEntitiesExist(long id, long dogId);
+
+    long save(UserCat userCat, long id, long catId);
 
     void deleteById(long id);
 

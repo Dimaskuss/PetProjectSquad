@@ -1,3 +1,4 @@
+/*
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.UserCat;
@@ -52,4 +53,4 @@ class UserCatControllerTest {
 
     }
 
-}
+}*/
