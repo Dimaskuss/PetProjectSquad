@@ -1,4 +1,4 @@
-package best.team.petprojectsquad.service.queryHandlerImpl;
+package best.team.petprojectsquad.service.queryHandlerImpl.CatTakeMenuService;
 
 import org.junit.jupiter.api.Test;
 

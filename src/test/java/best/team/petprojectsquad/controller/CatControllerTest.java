@@ -29,7 +29,7 @@ class CatControllerTest {
     @Test
     void shouldReturnRightObjectPassIdGetter() {
 
-        when(catRepository.get(id).get()).thenReturn(cat);
+        when(catRepository.get(id)).thenReturn(Optional.of(cat));
 
         ResponseEntity<Cat> status = catController.getCatById(0);
 

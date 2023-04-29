@@ -14,30 +14,32 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith({MockitoExtension.class})
 class UserCatServiceImplTest {
+
     @Mock
-    UserCatRepository UserCatRepository;
+    UserCatRepository repository;
+
     @InjectMocks
-    UserCatServiceImpl UserCatControllerService;
+    UserCatServiceImpl service;
     long id = 0L;
-    best.team.petprojectsquad.entity.UserCat UserCat = new UserCat(0,null,null,2018,8911);
+    UserCat userCat = new UserCat(0,null,null,2018,8911);
 
     @Test
     void ShouldReturnRightReferenceById() {
-        assertEquals(UserCatRepository.findById(id), UserCatControllerService.findById(id));
+        assertEquals(repository.findById(id), service.get(id));
     }
     @Test
     void deleteById() {
-        UserCatControllerService.deleteById(0L);
-        assertNull(UserCatRepository.getReferenceById(0L));
+        service.delete(0L);
+        assertNull(repository.getReferenceById(0L));
     }
 
     @Test
     void findAll() {
-        assertEquals(UserCatRepository.findAll(), UserCatControllerService.findAll());
+        assertEquals(repository.findAll(), service.findAll());
     }
 
     @Test
     void findById() {
-        assertEquals(UserCatControllerService.findById(-0L), Optional.empty());
+        assertEquals(service.get(-0L), Optional.empty());
     }
 }

@@ -1,6 +1,6 @@
-package best.team.petprojectsquad.service.queryHandlerImpl;
+package best.team.petprojectsquad.service.queryHandlerImpl.CatInfoMenuService;
 
-import best.team.petprojectsquad.service.queryHandlerImpl.DogInfoMenuService.AddressDogQueryService;
+import best.team.petprojectsquad.service.queryHandlerImpl.CatInfoMenuService.AddressCatQueryService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SendPhoto;
@@ -12,24 +12,24 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AddressDogQueryServiceTest {
+class AddressCatQueryServiceTest {
 
-    private AddressDogQueryService addressDogQueryService = new AddressDogQueryService();
+    private AddressCatQueryService addressCatQueryService = new AddressCatQueryService();
     long id = 1005223990L;
 
     @Test
-    void shouldCreateReplyMessage() {
+    void shoudCreateReplyMessage() {
 
         List<BaseRequest> expectedArrayList = new ArrayList<>();
-        SendMessage sendMessage0 = new SendMessage(id, "Адрес: г. Первый, ул. Соседняя дом 15.");
-        SendMessage sendMessage1 = new SendMessage(id, "Рабочие часы приюта для собак:\nПонедельник - Пятница: 10:00 - 17:00\nСуббота - Воскресенье: 12:00 - 16:00\nCхема проезда:");
-        SendPhoto sendPhoto = new SendPhoto(id, new File("pictures/addressDog.png"));
+        SendMessage sendMessage0 = new SendMessage(id, "Адрес: г. Первый, ул. Средняя дом 8.");
+        SendMessage sendMessage1 = new SendMessage(id, "Рабочие часы приюта для кошек:\nПонедельник - Пятница: 10:00 - 19:00\nСуббота - Воскресенье: 11:00 - 17:00\nCхема проезда:");
+        SendPhoto sendPhoto = new SendPhoto(id, new File("pictures/addressCat.png"));
         expectedArrayList.add(sendMessage0);
         expectedArrayList.add(sendMessage1);
         expectedArrayList.add(sendPhoto);
 
 
-        List<BaseRequest> actualList = addressDogQueryService.getReplyMessage(id);
+        List<BaseRequest> actualList = addressCatQueryService.getReplyMessage(id);
 
         assertEquals(actualList.size(), expectedArrayList.size());
         assertEquals(actualList.get(0).getClass(), expectedArrayList.get(0).getClass());

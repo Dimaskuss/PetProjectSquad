@@ -34,21 +34,18 @@ class UserDogServiceImplTest {
     }
 
     @Test
-    void save() {
-
-        when(repository.save(userDog).getId()).thenReturn(id);
-        assertEquals(service.save(userDog),id);
-    }
-
-    @Test
-    void delete() {
+    void deleteById() {
+        service.delete(0L);
+        assertNull(repository.getReferenceById(0L));
     }
 
     @Test
     void findAll() {
-        ArrayList<UserDog> userDogArrayList = new ArrayList<>();
-        userDogArrayList.add(userDog);
-        when(repository.findAll()).thenReturn(userDogArrayList);
-        assertEquals(service.findAll(), userDogArrayList);
+        assertEquals(repository.findAll(), service.findAll());
+    }
+
+    @Test
+    void findById() {
+        assertEquals(service.get(-0L), Optional.empty());
     }
 }

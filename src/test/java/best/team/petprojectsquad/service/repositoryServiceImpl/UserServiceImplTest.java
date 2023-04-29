@@ -1,6 +1,7 @@
 package best.team.petprojectsquad.service.repositoryServiceImpl;
 
 import best.team.petprojectsquad.entity.User;
+import best.team.petprojectsquad.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,29 +15,29 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
     @Mock
-    best.team.petprojectsquad.repository.UserRepository UserRepository;
+    UserRepository repository;
     @InjectMocks
-    UserServiceImpl UserControllerService;
+    UserServiceImpl service;
     long id = 0L;
     User User = new User(1L,"name");
 
     @Test
     void ShouldReturnRightReferenceById() {
-        assertEquals(UserRepository.findById(id), UserControllerService.findById(id));
+        assertEquals(repository.findById(id), service.get(id));
     }
     @Test
     void deleteById() {
-        UserControllerService.deleteById(0L);
-        assertNull(UserRepository.getReferenceById(0L));
+        service.delete(0L);
+        assertNull(repository.getReferenceById(0L));
     }
 
     @Test
     void findAll() {
-        assertEquals(UserRepository.findAll(), UserControllerService.findAll());
+        assertEquals(repository.findAll(), service.findAll());
     }
 
     @Test
     void findById() {
-        assertEquals(UserControllerService.findById(-0L), Optional.empty());
+        assertEquals(service.get(-0L), Optional.empty());
     }
 }

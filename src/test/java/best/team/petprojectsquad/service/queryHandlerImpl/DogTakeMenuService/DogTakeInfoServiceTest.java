@@ -1,6 +1,6 @@
-package best.team.petprojectsquad.service.queryHandlerImpl;
+package best.team.petprojectsquad.service.queryHandlerImpl.DogTakeMenuService;
 
-import best.team.petprojectsquad.service.queryHandlerImpl.DogTakeMenuService.TipsDogTrainerService;
+import best.team.petprojectsquad.service.queryHandlerImpl.DogTakeMenuService.DogTakeInfoService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;
@@ -10,9 +10,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TipsDogTrainerServiceTest {
+class DogTakeInfoServiceTest {
 
-    private final TipsDogTrainerService tipsDogTrainerService = new TipsDogTrainerService();
+    private final DogTakeInfoService dogTakeInfoService = new DogTakeInfoService();
     long id = 1005223990L;
 
     @Test
@@ -20,14 +20,13 @@ class TipsDogTrainerServiceTest {
 
         List<BaseRequest> expectedArrayList = new ArrayList<>();
         SendMessage sendMessage = new SendMessage(id, """
-                Собачий приют приветствует вас. Ниже представлены советы кинолога по первичному общению с собакой:
-                Совет 1,
-                Совет 2,
-                Совет 3;
+                Собачий приют приветствует вас. Ниже представлена информация, которая поможет Вам разобраться
+                с бюрократическими (оформление договора)
+                и бытовыми (как подготовиться к жизни с животным) вопросами:
                 """);
         expectedArrayList.add(sendMessage);
 
-        List<BaseRequest> actualList = tipsDogTrainerService.getReplyMessage(id);
+        List<BaseRequest> actualList = dogTakeInfoService.getReplyMessage(id);
 
         assertEquals(actualList.size(), expectedArrayList.size());
         assertEquals(actualList.get(0).getClass(), expectedArrayList.get(0).getClass());

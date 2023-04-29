@@ -1,7 +1,7 @@
-package best.team.petprojectsquad.service.queryHandlerImpl;
+package best.team.petprojectsquad.service.queryHandlerImpl.CatReportMenuService;
 
 import best.team.petprojectsquad.Cache.UserDataCache;
-import best.team.petprojectsquad.service.queryHandlerImpl.DogReportMenuService.ReportDogService;
+import best.team.petprojectsquad.service.queryHandlerImpl.CatReportMenuService.ReportCatService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;
@@ -14,14 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
-class ReportDogServiceTest {
+class ReportCatServiceTest {
 
     @Mock
     UserDataCache userDataCache;
 
     @InjectMocks
-    private ReportDogService reportDogService;
+    private ReportCatService reportCatService;
 
     long id = 1005223990L;
 
@@ -32,7 +33,7 @@ class ReportDogServiceTest {
         SendMessage sendMessage = new SendMessage(id, "Отправьте в сообщении фото с информацией о питомце:");
         expectedArrayList.add(sendMessage);
 
-        List<BaseRequest> actualList = reportDogService.getReplyMessage(id);
+        List<BaseRequest> actualList = reportCatService.getReplyMessage(id);
 
         assertEquals(actualList.size(), expectedArrayList.size());
         assertEquals(actualList.get(0).getClass(), expectedArrayList.get(0).getClass());

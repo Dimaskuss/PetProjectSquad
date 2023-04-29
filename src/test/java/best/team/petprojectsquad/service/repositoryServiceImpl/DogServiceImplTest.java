@@ -14,31 +14,32 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class DogServiceImplTest {
+
     @Mock
-    DogRepository dogRepository;
+    DogRepository repository;
 
     @InjectMocks
-    DogServiceImpl dogControllerService;
+    DogServiceImpl service;
     long id = 0L;
     Dog dog = new Dog(0,null,null,2018,null);
 
     @Test
     void ShouldReturnRightReferenceById() {
-        assertEquals(dogRepository.findById(id), dogControllerService.findById(id));
+        assertEquals(repository.findById(id), service.get(id));
     }
     @Test
     void deleteById() {
-        dogControllerService.deleteById(0L);
-        assertNull(dogRepository.getReferenceById(0L));
+        service.delete(0L);
+        assertNull(repository.getReferenceById(0L));
     }
 
     @Test
     void findAll() {
-        assertEquals(dogRepository.findAll(), dogControllerService.findAll());
+        assertEquals(repository.findAll(), service.findAll());
     }
 
     @Test
     void findById() {
-        assertEquals(dogControllerService.findById(-0L), Optional.empty());
+        assertEquals(service.get(-0L), Optional.empty());
     }
 }
