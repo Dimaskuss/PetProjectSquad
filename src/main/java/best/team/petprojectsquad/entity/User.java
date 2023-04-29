@@ -1,12 +1,16 @@
 package best.team.petprojectsquad.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import java.util.List;
 
-@Data
+
+@Getter
+@Setter
+@EqualsAndHashCode
 @Entity
 @Table(name = "user_table")
 @NoArgsConstructor
@@ -15,6 +19,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class User {
 
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
@@ -22,12 +27,14 @@ public class User {
     private long chatId;
     @Column(name = "name")
     private String name;
-    @OneToOne
+    @OneToMany
+    @JsonIgnore
     @JoinColumn(name = "user_cat_id", nullable = true)
-    private UserCat catList;
-    @OneToOne
+    private List<UserCat> catList;
+    @OneToMany
+    @JsonIgnore
     @JoinColumn(name = "user_dog_id", nullable = true)
-    private UserDog dogList;
+    private List<UserDog> dogList;
 
     public User(long chatId) {
         this.chatId = chatId;

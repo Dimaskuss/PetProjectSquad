@@ -1,6 +1,10 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.UserDog;
+import best.team.petprojectsquad.repository.DogRepository;
+import best.team.petprojectsquad.repository.UserRepository;
+import best.team.petprojectsquad.service.controllerService.DogControllerService;
+import best.team.petprojectsquad.service.controllerService.UserControllerService;
 import best.team.petprojectsquad.service.controllerService.UserDogControllerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -41,12 +45,13 @@ public class UserDogController {
             }, tags = "User"
     )
     @GetMapping(value = "/{id}")
+
     public ResponseEntity<UserDog> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
         return ResponseEntity.ok(userDogRepository.getReferenceById(id));
     }
 
     @Operation(
-            summary = "Adding user, returning id of added user",
+            summary = "Adding dog user, returning id of added user",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -54,13 +59,20 @@ public class UserDogController {
                     ),
                     @ApiResponse(
                             responseCode = "400",
-                            description = "Some fields may be empty, try to fill them correctly using example"
+                            description = "Some fields may be empty or may contain irrelevant type! Or there is no Entity by this id in DB"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Dog by this id has been taken"
                     )
             }, tags = "User"
     )
-    @PostMapping("/")
-    public ResponseEntity<Long> addUser(@Parameter(description = "An Entity 'user' in database") @RequestBody UserDog user) {
-        return ResponseEntity.ok().body(userDogRepository.save(user));
+    @PostMapping("/id{id}/dogId{dogId}")
+    public ResponseEntity<Long> addUser(@Parameter(description = "id of a user in a user.DB", example = "1") @PathVariable long id, @Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId, @Parameter(description = "An Entity 'user' in database") @RequestBody UserDog user) {
+        if (userDogRepository.checkIfEntitiesExist(id, dogId)) {
+            return ResponseEntity.ok().body(userDogRepository.save(user, id, dogId));
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @Operation(
@@ -76,17 +88,17 @@ public class UserDogController {
                     ),
                     @ApiResponse(
                             responseCode = "400",
-                            description = "Some fields in body may be empty, or may contain irrelevant type! Try to fill fields correctly using example"
+                            description = "Some fields may be empty, or there is no Entity bн this id in DB"
                     )
             }, tags = "User"
     )
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody UserDog user) {
+    @PutMapping(value = "/id{id}/dogId{dogId}")
+    public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a user.DB", example = "1") @PathVariable long id, @Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId, @Parameter(description = "an Entity 'user' in database") @RequestBody UserDog user) {
         if (userDogRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         userDogRepository.deleteById(id);
-        userDogRepository.save(user);
+        userDogRepository.save(user, id, dogId);
         return ResponseEntity.ok().body(user.getId());
     }
 

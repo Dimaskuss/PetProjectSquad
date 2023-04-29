@@ -16,7 +16,7 @@ public class DogControllerServiceImpl implements DogControllerService {
 
     @Override
     public Dog getReferenceById(long id) {
-        return dogRepository.getReferenceById(id);
+        return dogRepository.findById(id).get();
     }
 
     @Override

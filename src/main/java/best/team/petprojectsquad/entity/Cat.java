@@ -1,22 +1,24 @@
 package best.team.petprojectsquad.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 //Добавил кеширование для ускорения работы приложения во все entity
 @Entity
 @Table(name = "cat")
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
 @NoArgsConstructor
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Cat {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
@@ -28,6 +30,9 @@ public class Cat {
     private int yearOfBirthday;
     @Column(name = "description")
     private String description;
+
+    //Аннотация для игнорирования json в REST API
+    @JsonIgnore
     @OneToOne(mappedBy = "cat")
     private UserCat userCat;
 

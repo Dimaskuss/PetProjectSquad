@@ -1,21 +1,22 @@
 package best.team.petprojectsquad.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 
 @Entity
 @Table(name = "dog")
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @NoArgsConstructor
-@AllArgsConstructor
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Dog {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
@@ -27,6 +28,7 @@ public class Dog {
     private int yearOfBirthday;
     @Column(name = "description")
     private String description;
+    @JsonIgnore
     @OneToOne(mappedBy = "dog")
     private UserDog userDog;
 
