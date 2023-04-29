@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/superUser")
 @AllArgsConstructor
 @Tag(name = "SuperUserVolunteer", description = "Any user, which control any UserDog or UserCat")
-public class SuperUserVolunteerController {
+public class SuperUserVolunteerController  {
     private final SuperUserVolunteerControllerService superUserVolunteerControllerService;
 
     @Operation(
