@@ -1,7 +1,6 @@
 package best.team.petprojectsquad.service.controllerServiceImpl;
 
 import best.team.petprojectsquad.entity.User;
-import best.team.petprojectsquad.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,7 +22,7 @@ class UserControllerServiceImplTest {
 
     @Test
     void ShouldReturnRightReferenceById() {
-        assertEquals(UserRepository.getReferenceById(id), UserControllerService.getReferenceById(id));
+        assertEquals(UserRepository.findById(id), UserControllerService.findById(id));
     }
     @Test
     void deleteById() {

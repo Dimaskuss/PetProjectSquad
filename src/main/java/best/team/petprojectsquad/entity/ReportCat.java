@@ -1,10 +1,8 @@
 package best.team.petprojectsquad.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.time.LocalDate;
@@ -19,9 +17,10 @@ import java.time.LocalDate;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ReportCat {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
     @Column(name = "report")
     private String report;
 
@@ -32,8 +31,15 @@ public class ReportCat {
     private String photoId;
 
     @Column(name = "report_accepted")
-    private boolean reportAccepted;
+    private boolean reportAccepted = false;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_cat")
     private UserCat userCat;
+
+    public ReportCat(String report, LocalDate dateReport, String photoId) {
+        this.report = report;
+        this.dateReport = dateReport;
+        this.photoId = photoId;
+    }
 }

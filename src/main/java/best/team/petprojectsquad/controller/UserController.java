@@ -60,6 +60,10 @@ public class UserController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Some fields may be empty, try to fill them correctly using example"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "This chat_id had been already taken"
                     )
             }, tags = "User"
     )
