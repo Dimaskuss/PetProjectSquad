@@ -2,9 +2,7 @@ package best.team.petprojectsquad.controller;
 
 
 import best.team.petprojectsquad.entity.UserCat;
-import best.team.petprojectsquad.repository.UserCatRepository;
 import best.team.petprojectsquad.service.controllerService.UserCatControllerService;
-import best.team.petprojectsquad.service.controllerService.UserDogControllerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -49,7 +47,7 @@ public class UserCatController {
     }
 
     @Operation(
-            summary = "Adding user, returning id of added user",
+            summary = "Adding cat user, returning id of added user",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -57,13 +55,20 @@ public class UserCatController {
                     ),
                     @ApiResponse(
                             responseCode = "400",
-                            description = "Some fields may be empty, try to fill them correctly using example"
+                            description = "Some fields may be empty or may contain irrelevant type! Or there is no Entity by this id in DB"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Cat by this id has been taken"
                     )
             }, tags = "User"
     )
-    @PostMapping("/")
-    public ResponseEntity<Long> addUser(@Parameter (description = "An Entity 'user' in database") @RequestBody UserCat user) {
-        return ResponseEntity.ok().body(userCatRepository.save(user));
+    @PostMapping("/id{id}/catId{catId}")
+    public ResponseEntity<Long> addUser(@Parameter(description = "id of a user in a user.DB", example = "1") @PathVariable long id, @Parameter(description = "id of a cat in a cat.DB", example = "1") @PathVariable long catId, @Parameter(description = "An Entity 'user' in database") @RequestBody UserCat user) {
+        if (userCatRepository.checkIfEntitiesExist(id, catId)) {
+            return ResponseEntity.ok().body(userCatRepository.save(user, id, catId));
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @Operation(
@@ -84,12 +89,12 @@ public class UserCatController {
             }, tags = "User"
     )
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody UserCat user) {
+    public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a user.DB", example = "1") @PathVariable long id, @Parameter(description = "id of a cat in a cat.DB", example = "1") @PathVariable long catId, @Parameter(description = "an Entity 'user' in database") @RequestBody UserCat user) {
         if (userCatRepository.findById(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         userCatRepository.deleteById(id);
-        userCatRepository.save(user);
+        userCatRepository.save(user, id, catId);
         return ResponseEntity.ok().body(user.getId());
     }
 
