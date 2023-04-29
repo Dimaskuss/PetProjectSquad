@@ -18,7 +18,7 @@ public class InfoMenuHandler implements InputHandlerMessage {
 
     @Override
     public List<BaseRequest> handle(Message inputMessage) {
-        return infoHandlerService.getReplyMessage(inputMessage.chat().id(), inputMessage.text());
+        return infoHandlerService.getReplyMessage(inputMessage);
     }
 
     @Override

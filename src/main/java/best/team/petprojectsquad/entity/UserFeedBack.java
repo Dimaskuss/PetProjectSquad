@@ -5,17 +5,22 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Data
 @Entity
 @Table(name = "user_feedback")
 @NoArgsConstructor
 @AllArgsConstructor
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserFeedBack {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
+
     @Column(name = "phone_number")
     private String phoneNumber;
 
@@ -28,10 +33,9 @@ public class UserFeedBack {
     @Column(name = "feedback")
     private boolean feedback;
 
-    public UserFeedBack(String phoneNumber, String name, long chatId,  boolean feedback) {
+    public UserFeedBack(String phoneNumber, long chatId, String name) {
         this.phoneNumber = phoneNumber;
-        this.name = name;
         this.chatId = chatId;
-        this.feedback = feedback;
+        this.name = name;
     }
 }

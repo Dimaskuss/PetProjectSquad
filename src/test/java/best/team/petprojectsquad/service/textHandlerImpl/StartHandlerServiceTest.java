@@ -1,6 +1,9 @@
 package best.team.petprojectsquad.service.textHandlerImpl;
 
+import best.team.petprojectsquad.listener.TelegramBotUpdateListenerTest;
 import best.team.petprojectsquad.repository.UserRepository;
+import com.pengrad.telegrambot.BotUtils;
+import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SendPhoto;
@@ -12,6 +15,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +32,7 @@ class StartHandlerServiceTest {
     long id = 10052239900L;
     String text = "/start";
     @Test
-    void shouldReturnReplyMessage() {
+    void shouldReturnReplyMessage() throws URISyntaxException, IOException {
 
         List<BaseRequest> expectedArrayList = new ArrayList<>();
 
@@ -36,11 +43,14 @@ class StartHandlerServiceTest {
 //                "Мы очень будем рады любой помощи.");
         SendMessage sendMessage = new SendMessage(id, "Выберите интересующий Вас приют:");
 
+        String json = Files.readString(Path.of(
+                (TelegramBotUpdateListenerTest.class.getResource("update.json")).toURI()));
+        Update update = BotUtils.fromJson(json.replace("%text%", "/info"), Update.class);
 //        expectedArrayList.add(sendPhoto);
         expectedArrayList.add(sendMessage);
-        when(startHandlerService.getReplyMessage(id,text)).thenReturn(expectedArrayList);
+        when(startHandlerService.getReplyMessage(update.message())).thenReturn(expectedArrayList);
 
-        List<BaseRequest> actualList = startHandlerService.getReplyMessage(id, text);
+        List<BaseRequest> actualList = startHandlerService.getReplyMessage(update.message());
 
         assertEquals(actualList.get(0).getClass(), expectedArrayList.get(0).getClass());
 //        assertEquals(actualList.get(1).getClass(), expectedArrayList.get(1).getClass());

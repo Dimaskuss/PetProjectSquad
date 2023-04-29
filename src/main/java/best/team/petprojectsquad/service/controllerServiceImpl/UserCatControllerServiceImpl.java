@@ -21,8 +21,7 @@ public class UserCatControllerServiceImpl implements UserCatControllerService {
 
     @Override
     public long save(UserCat userCat) {
-        userCatRepository.save(userCat);
-        return userCat.getId();
+        return userCatRepository.save(userCat).getId();
     }
 
     @Override

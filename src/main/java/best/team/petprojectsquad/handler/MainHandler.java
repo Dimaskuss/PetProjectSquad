@@ -2,6 +2,7 @@ package best.team.petprojectsquad.handler;
 
 import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.BotState;
+import best.team.petprojectsquad.service.ReminderImpl;
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
@@ -27,7 +28,7 @@ public class MainHandler {
 
         Message message = update.message();
 
-        if (update.message() != null && update.message().text() != null) {
+        if (update.message() != null && (update.message().text() != null || message.photo() != null)) {
             log.info("New message from User:{}, chatId: {},  with text: {}"
                     , message.from().username()
                     , message.chat().id()
@@ -56,11 +57,11 @@ public class MainHandler {
      */
     public List<BaseRequest> handleInputMessage(Message message) {
 
-        //извлекаем из сообщения текст
         switch (message.text()) {
             case "/start" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.START);
             case "/info" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.INFO);
-            case "/superUser" -> userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.SUPER_USER_VOLUNTEER);
+            case "/superUser" ->
+                    userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.SUPER_USER_VOLUNTEER);
 
             default -> userDataCache.getUsersCurrentBotState(message.chat().id());
         }
@@ -88,26 +89,41 @@ public class MainHandler {
             case "/dogSafety" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_SAFETY);
             case "/callback" -> userDataCache.setUsersCurrentBotState(chatId, BotState.SHELTER_CALLBACK);
             case "/callVolunteer" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CALL_VOLUNTEER);
-            case "/reasonsWhy" -> userDataCache.setUsersCurrentBotState(chatId, BotState.REASONS_WHY_CANT_BRING_AN_ANIMAL);
+            case "/reasonsWhy" ->
+                    userDataCache.setUsersCurrentBotState(chatId, BotState.REASONS_WHY_CANT_BRING_AN_ANIMAL);
             case "/catTakeInfo" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_TAKE_INFO);
             case "/dogTakeInfo" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_TAKE_INFO);
             case "/rulesBeforeGettingCat" -> userDataCache.setUsersCurrentBotState(chatId, BotState.RULES_TAKE_CAT);
             case "/rulesBeforeGettingDog" -> userDataCache.setUsersCurrentBotState(chatId, BotState.RULES_TAKE_DOG);
             case "/catListOfDocuments" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_TAKE_DOCUMENTS);
             case "/dogListOfDocuments" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_TAKE_DOCUMENTS);
-            case "/catTransportRecommendations" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_TRANSPORT_RECOMMENDATION);
-            case "/dogTransportRecommendations" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_TRANSPORT_RECOMMENDATION);
-            case "/homeRecommendationsKitten" -> userDataCache.setUsersCurrentBotState(chatId, BotState.HOME_RECOMMENDATION_KITTEN);
-            case "/homeRecommendationsPuppy" -> userDataCache.setUsersCurrentBotState(chatId, BotState.HOME_RECOMMENDATION_PUPPY);
-            case "/homeRecommendationsAdultCat" -> userDataCache.setUsersCurrentBotState(chatId, BotState.HOME_RECOMMENDATION_ADULT_CAT);
-            case "/homeRecommendationsAdultDog" -> userDataCache.setUsersCurrentBotState(chatId, BotState.HOME_RECOMMENDATION_ADULT_DOG);
-            case "/homeRecommendationsCatWithDisabilities" -> userDataCache.setUsersCurrentBotState(chatId, BotState.HOME_RECOMMENDATION_DIS_CAT);
-            case "/homeRecommendationsDogWithDisabilities" -> userDataCache.setUsersCurrentBotState(chatId, BotState.HOME_RECOMMENDATION_DIS_DOG);
+            case "/catTransportRecommendations" ->
+                    userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_TRANSPORT_RECOMMENDATION);
+            case "/dogTransportRecommendations" ->
+                    userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_TRANSPORT_RECOMMENDATION);
+            case "/homeRecommendationsKitten" ->
+                    userDataCache.setUsersCurrentBotState(chatId, BotState.HOME_RECOMMENDATION_KITTEN);
+            case "/homeRecommendationsPuppy" ->
+                    userDataCache.setUsersCurrentBotState(chatId, BotState.HOME_RECOMMENDATION_PUPPY);
+            case "/homeRecommendationsAdultCat" ->
+                    userDataCache.setUsersCurrentBotState(chatId, BotState.HOME_RECOMMENDATION_ADULT_CAT);
+            case "/homeRecommendationsAdultDog" ->
+                    userDataCache.setUsersCurrentBotState(chatId, BotState.HOME_RECOMMENDATION_ADULT_DOG);
+            case "/homeRecommendationsCatWithDisabilities" ->
+                    userDataCache.setUsersCurrentBotState(chatId, BotState.HOME_RECOMMENDATION_DIS_CAT);
+            case "/homeRecommendationsDogWithDisabilities" ->
+                    userDataCache.setUsersCurrentBotState(chatId, BotState.HOME_RECOMMENDATION_DIS_DOG);
             case "/tipsDogTrainer" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_TIPS_TRAINER);
-            case "/listVerifiedDogTrainers" -> userDataCache.setUsersCurrentBotState(chatId, BotState.VERIFIED_TRAINERS);
+            case "/listVerifiedDogTrainers" ->
+                    userDataCache.setUsersCurrentBotState(chatId, BotState.VERIFIED_TRAINERS);
             case "/dogListReasonsNegative" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_TAKE_NEGATIVE);
             case "/catSendContact" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CONTACTS_CAT);
             case "/dogSendContact" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CONTACTS_DOG);
+            case "/catReportMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_REPORT_MENU);
+            case "/dogReportMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_REPORT_MENU);
+            case "/catReport" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_REPORT);
+            case "/dogReport" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_REPORT);
+            case "/formReport" -> userDataCache.setUsersCurrentBotState(chatId, BotState.FORM_REPORT);
 
             default -> log.error("Нет обработки такого запроса с кнопки:" + callbackQuery.data());
         }
@@ -115,4 +131,6 @@ public class MainHandler {
 
         return botStateContext.processInputQuery(botState, chatId);
     }
+
+
 }

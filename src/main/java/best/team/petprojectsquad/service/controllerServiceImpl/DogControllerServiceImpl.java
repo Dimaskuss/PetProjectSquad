@@ -21,8 +21,7 @@ public class DogControllerServiceImpl implements DogControllerService {
 
     @Override
     public long save(Dog dog) {
-        dogRepository.save(dog);
-        return dog.getId();
+        return dogRepository.save(dog).getId();
     }
 
     @Override
