@@ -10,11 +10,11 @@ public class UserCatTest {
         UserCat userCat = new UserCat();
         userCat.setId(1);
         userCat.setChatId(123456789);
-        userCat.setPhoneNumber(5551234);
+        userCat.setPhoneNumber("5551234");
 
         assertEquals(1, userCat.getId());
         assertEquals(123456789, userCat.getChatId());
-        assertEquals(5551234, userCat.getPhoneNumber());
+        assertEquals("5551234", userCat.getPhoneNumber());
     }
 
     @Test

@@ -34,7 +34,7 @@ public class UserDog {
     @JoinColumn(name = "dog_id")
     private Dog dog;
     @Column(name = "phone")
-    private int phoneNumber;
+    private String phoneNumber;
     @Column(name = "trial_period")
     @JsonIgnore
     private int trialPeriod = 30;
@@ -43,7 +43,7 @@ public class UserDog {
         this.chatId = chatId;
     }
 
-    public UserDog(long id, long chatId, int phoneNumber) {
+    public UserDog(long id, long chatId, String phoneNumber) {
         this.id = id;
         this.chatId = chatId;
         this.phoneNumber = phoneNumber;

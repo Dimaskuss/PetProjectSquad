@@ -1,6 +1,7 @@
 /*
 package best.team.petprojectsquad.controller;
 
+import best.team.petprojectsquad.entity.Cat;
 import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.service.controllerService.UserCatControllerService;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,11 @@ class UserCatControllerTest {
     @InjectMocks
     private UserCatController userCatController;
 
-    private UserCat userCat = new UserCat();
-    private Long id = 0L;
+    @InjectMocks
+    private CatController catController;
+
+    private UserCat userCat = new UserCat(123, "1");
+    private Long id = 1L;
 
     @Test
     void shouldReturnRightObjectPassIdGetter() {
@@ -39,18 +43,19 @@ class UserCatControllerTest {
     @Test
     void shouldReturnRightObjectPassAdd() {
 
-        when(userCatRepository.save(userCat)).thenReturn(id);
-        ResponseEntity<Long> idNewUserCat = userCatController.addUser(userCat);
-        assertEquals(idNewUserCat.getBody(), id);
+        when(userCatRepository.save(userCat, 123, 1)).thenReturn(id);
+        ResponseEntity<Long> idNewUserCat = userCatController.addUser(id, 1, userCat);
+        assertEquals(idNewUserCat, id);
     }
 
     @Test
     void shouldReturnRightObjectDelete() {
 
-        when(userCatRepository.save(userCat)).thenReturn(id);
+        when(userCatRepository.save(userCat, 123, 1)).thenReturn(id);
         when(userCatRepository.findById(id)).thenReturn(Optional.of(userCat));
-        ResponseEntity<Long> idEditUserCat = userCatController.editUser(id, userCat);
+        ResponseEntity<Long> idEditUserCat = userCatController.editUser(id, 1,userCat);
 
     }
 
-}*/
+}
+*/

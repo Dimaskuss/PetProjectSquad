@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
         @InjectMocks
         private UserFeedBackController userFeedBackController;
 
-        private UserFeedBack userFeedBack = new UserFeedBack(0L,null, 1, null,true);
+        private UserFeedBack userFeedBack = new UserFeedBack("+79117076105", 123, "Egor");
         private Long id = 0L;
 
         @Test

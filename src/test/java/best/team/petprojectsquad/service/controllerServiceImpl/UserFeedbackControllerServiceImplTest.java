@@ -1,6 +1,5 @@
 package best.team.petprojectsquad.service.controllerServiceImpl;
 
-import best.team.petprojectsquad.entity.SuperUserVolunteer;
 import best.team.petprojectsquad.entity.UserFeedBack;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
         @InjectMocks
         UserFeedBackControllerServiceImpl UserControllerService;
         long id = 0L;
-        best.team.petprojectsquad.entity. UserFeedBack  userFeedBack = new UserFeedBack(1L,null, 1, null,true);
+        best.team.petprojectsquad.entity. UserFeedBack  userFeedBack = new UserFeedBack("+79117076105", 87373, "Egor");
 
         @Test
         void ShouldReturnRightReferenceById() {
