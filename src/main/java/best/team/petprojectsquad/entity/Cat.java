@@ -1,6 +1,8 @@
 package best.team.petprojectsquad.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -16,6 +18,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Cat {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
@@ -27,6 +30,9 @@ public class Cat {
     private int yearOfBirthday;
     @Column(name = "description")
     private String description;
+
+    //Аннотация для игнорирования json в REST API
+    @JsonIgnore
     @OneToOne(mappedBy = "cat")
     private UserCat userCat;
 

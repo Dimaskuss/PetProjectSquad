@@ -3,7 +3,6 @@ package best.team.petprojectsquad.service.controllerServiceImpl;
 import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.repository.UserCatRepository;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -24,7 +23,7 @@ class UserCatControllerServiceImplTest {
 
     @Test
     void ShouldReturnRightReferenceById() {
-        assertEquals(UserCatRepository.getReferenceById(id), UserCatControllerService.getReferenceById(id));
+        assertEquals(UserCatRepository.findById(id), UserCatControllerService.findById(id));
     }
     @Test
     void deleteById() {

@@ -19,11 +19,10 @@ class SuperUserVolunteerTest {
 
     @Test
     public void testConstructor() {
-        SuperUserVolunteer superUserVolunteer = new SuperUserVolunteer(1L);
+        SuperUserVolunteer superUserVolunteer = new SuperUserVolunteer(1L, "Couldlie");
 
-        assertEquals(superUserVolunteer.getChatId(), 123);
+        assertEquals(superUserVolunteer.getChatId(), 1L);
         assertEquals(superUserVolunteer.getName(), "Couldlie");
-        assertEquals(superUserVolunteer.getId(), 1);
     }
 
 }

@@ -24,7 +24,7 @@ class CatControllerServiceImplTest {
 
     @Test
     void ShouldReturnRightReferenceById() {
-        assertEquals(CatRepository.findById(id).get(), CatControllerService.findById(id).get());
+        assertEquals(CatRepository.findById(id), CatControllerService.findById(id));
     }
     @Test
     void deleteById() {
