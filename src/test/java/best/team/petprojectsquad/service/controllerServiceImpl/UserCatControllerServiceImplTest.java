@@ -19,7 +19,7 @@ class UserCatControllerServiceImplTest {
     @InjectMocks
     UserCatControllerServiceImpl UserCatControllerService;
     long id = 0L;
-    best.team.petprojectsquad.entity.UserCat UserCat = new UserCat(0,null,null,2018,8911);
+    best.team.petprojectsquad.entity.UserCat UserCat = new UserCat(0,null,null,2018,"8911");
 
     @Test
     void ShouldReturnRightReferenceById() {
