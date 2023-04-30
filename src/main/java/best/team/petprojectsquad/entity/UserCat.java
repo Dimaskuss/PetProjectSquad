@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import java.util.List;
-
 @Entity
 @Table(name = "user_cat")
 @Getter
@@ -33,7 +31,7 @@ public class UserCat {
     @Column(name = "chat_id", nullable = false, unique = true)
     private long chatId;
     @Column(name = "phone")
-    private int phoneNumber;
+    private String phoneNumber;
     @JsonIgnore
     @Column(name = "trial_period")
     private int trialPeriod = 30;
@@ -42,10 +40,15 @@ public class UserCat {
         this.chatId = chatId;
     }
 
-    public UserCat(long id, User user, Cat cat, long chatId, int phoneNumber) {
+    public UserCat(long id, User user, Cat cat, long chatId, String phoneNumber) {
         this.id = id;
         this.user = user;
         this.cat = cat;
+        this.chatId = chatId;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public UserCat(long chatId, String phoneNumber) {
         this.chatId = chatId;
         this.phoneNumber = phoneNumber;
     }
