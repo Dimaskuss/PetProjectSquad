@@ -1,8 +1,7 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.Cat;
-import best.team.petprojectsquad.repository.CatRepository;
-import best.team.petprojectsquad.service.controllerService.CatControllerService;
+import best.team.petprojectsquad.service.RepositoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -11,7 +10,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +21,8 @@ import java.util.List;
 @RequestMapping(value = "/Cats")
 @Tag(name = "Cat", description = "Cat entity in DB")
 public class CatController {
-    private final CatControllerService catRepository;
+
+    private final RepositoryService<Cat> repository;
 
     @Operation(
             summary = "Getting cat by it's id",
@@ -44,7 +43,7 @@ public class CatController {
     )
     @GetMapping(value = "/{id}")
     public ResponseEntity<Cat> getCatById(@Parameter(description = "id of a cat in a DB", example = "1") @PathVariable long id) {
-        return ResponseEntity.ok(catRepository.getReferenceById(id));
+        return ResponseEntity.ok(repository.get(id).get());
     }
 
     @Operation(
@@ -62,7 +61,7 @@ public class CatController {
     )
     @PostMapping("/")
     public ResponseEntity<Long> addCat(@Parameter (description = "an Entity 'cat' in database") @RequestBody Cat cat) {
-        return ResponseEntity.ok().body(catRepository.save(cat));
+        return ResponseEntity.ok().body(repository.save(cat));
     }
 
     @Operation(
@@ -84,11 +83,11 @@ public class CatController {
     )
     @PutMapping(value = "/{id}")
     public ResponseEntity<Long> editCat(@Parameter(description = "id of a cat in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'cat' in database") @RequestBody Cat cat) {
-        if (catRepository.findById(id).isEmpty()) {
+        if (repository.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        catRepository.deleteById(id);
-        catRepository.save(cat);
+        repository.delete(id);
+        repository.save(cat);
         return ResponseEntity.ok().body(cat.getId());
     }
 
@@ -108,7 +107,7 @@ public class CatController {
     )
     @GetMapping("/")
     public ResponseEntity<List<Cat>> getAll() {
-        return ResponseEntity.ok().body(catRepository.findAll());
+        return ResponseEntity.ok().body(repository.findAll());
     }
 
 
@@ -127,10 +126,10 @@ public class CatController {
     )
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteCat(@Parameter @PathVariable long id) {
-        if (catRepository.findById(id).isEmpty()) {
+        if (repository.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        catRepository.deleteById(id);
+        repository.delete(id);
         return ResponseEntity.ok().build();
     }
 }

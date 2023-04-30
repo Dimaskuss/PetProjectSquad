@@ -13,6 +13,7 @@ import java.util.List;
 @Component
 @AllArgsConstructor
 public class SuperUserHandler implements InputHandlerMessage {
+
     private final SuperUserService superUserService;
 
     @Override

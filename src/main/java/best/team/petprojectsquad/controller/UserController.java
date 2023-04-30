@@ -1,11 +1,7 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.User;
-import best.team.petprojectsquad.entity.UserDog;
-import best.team.petprojectsquad.repository.UserDogRepository;
-import best.team.petprojectsquad.repository.UserRepository;
-import best.team.petprojectsquad.service.controllerService.UserCatControllerService;
-import best.team.petprojectsquad.service.controllerService.UserControllerService;
+import best.team.petprojectsquad.service.RepositoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -18,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,7 +21,8 @@ import java.util.List;
 @AllArgsConstructor
 @Tag(name = "User", description = "Any user, which haven't got any animals")
 public class UserController {
-    private final UserControllerService userRepository;
+
+    private final RepositoryService<User> repository;
 
     @Operation(
             summary = "Getting user by it's id",
@@ -47,7 +43,7 @@ public class UserController {
     )
     @GetMapping(value = "/{id}")
     public ResponseEntity<User> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
-        return ResponseEntity.ok(userRepository.getReferenceById(id));
+        return ResponseEntity.ok(repository.get(id).get());
     }
 
     @Operation(
@@ -69,7 +65,7 @@ public class UserController {
     )
     @PostMapping("/")
     public ResponseEntity<Long> addUser(@Parameter (description = "An Entity 'user' in database") @RequestBody User user) {
-        return ResponseEntity.ok().body(userRepository.save(user));
+        return ResponseEntity.ok().body(repository.save(user));
     }
 
     @Operation(
@@ -91,11 +87,11 @@ public class UserController {
     )
     @PutMapping(value = "/{id}")
     public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'user' in database") @RequestBody User user) {
-        if (userRepository.findById(id).isEmpty()) {
+        if (repository.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        userRepository.deleteById(id);
-        userRepository.save(user);
+        repository.delete(id);
+        repository.save(user);
         return ResponseEntity.ok().body(user.getId());
     }
 
@@ -115,7 +111,7 @@ public class UserController {
     )
     @GetMapping("/")
     public ResponseEntity<List<User>> getAll() {
-        return ResponseEntity.ok().body(userRepository.findAll());
+        return ResponseEntity.ok().body(repository.findAll());
     }
 
 
@@ -134,10 +130,10 @@ public class UserController {
     )
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteUser(@Parameter @PathVariable long id) {
-        if (userRepository.findById(id).isEmpty()) {
+        if (repository.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        userRepository.deleteById(id);
+        repository.delete(id);
         return ResponseEntity.ok().build();
     }
 }

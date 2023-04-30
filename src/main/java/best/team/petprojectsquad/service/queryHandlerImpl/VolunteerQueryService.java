@@ -3,7 +3,9 @@ package best.team.petprojectsquad.service.queryHandlerImpl;
 import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.BotState;
 import best.team.petprojectsquad.service.QueryHandlerService;
+import best.team.petprojectsquad.service.textHandlerImpl.ValidatePhoneService;
 import com.pengrad.telegrambot.request.BaseRequest;
+import com.pengrad.telegrambot.request.SendMessage;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +15,18 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class VolunteerQueryService implements QueryHandlerService {
+
     private final UserDataCache userDataCache;
-    //:TODO Добавить также запись в колонку ( с какого приюта пришел пользователь )
+
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
 
-        userDataCache.setUsersCurrentBotState(id, BotState.GET_VOLUNTEER_REPLY);
+        SendMessage sendMessage = new SendMessage(id, "Отправьте сообщением Ваше Имя и номер телефона для связи " +
+                "в формате \"Имя +79315556677\"");
+        requestArrayList.add(sendMessage);
+
+        userDataCache.setUsersCurrentBotState(id, BotState.VALIDATE_PHONE);
 
         return requestArrayList;
     }

@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import java.util.List;
-
 @Entity
 @Table(name = "user_cat")
 @Getter

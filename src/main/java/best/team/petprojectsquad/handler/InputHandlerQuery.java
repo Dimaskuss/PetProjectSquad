@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface InputHandlerQuery {
 
-    //интерфейс для всех обработчиков кнопок
-
     List<BaseRequest> handle(long chatId);
 
     BotState getHandlerName();

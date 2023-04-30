@@ -2,7 +2,6 @@ package best.team.petprojectsquad.handler.callbackQueryImpl;
 
 import best.team.petprojectsquad.entity.BotState;
 import best.team.petprojectsquad.service.queryHandlerImpl.CallbackQueryService;
-import best.team.petprojectsquad.service.queryHandlerImpl.InfoCatQueryService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;

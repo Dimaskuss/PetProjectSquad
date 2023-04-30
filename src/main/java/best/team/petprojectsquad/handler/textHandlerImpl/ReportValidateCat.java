@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ReportValidateCat implements InputHandlerMessage {
 
-private final ReportValidateCatService reportValidateCatService;
+    private final ReportValidateCatService reportValidateCatService;
 
     @Override
     public List<BaseRequest> handle(Message inputMessage) {
@@ -24,5 +24,5 @@ private final ReportValidateCatService reportValidateCatService;
     @Override
     public BotState getHandlerName() {
         return null;
-    }
+    } //todo
 }

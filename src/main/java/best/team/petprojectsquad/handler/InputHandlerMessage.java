@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface InputHandlerMessage {
 
-    //интерфейс для всех обработчиков текстовых сообщений
-
     /**
      * Обработка сообщения, полученного от пользователя
      *

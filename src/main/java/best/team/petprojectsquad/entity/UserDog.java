@@ -2,11 +2,8 @@ package best.team.petprojectsquad.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.AssertFalse;
 import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import java.util.List;
 
 @Entity
 @Table(name = "user_dog")

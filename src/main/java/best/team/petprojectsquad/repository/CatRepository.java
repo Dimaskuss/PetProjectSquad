@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 //Что в последствии увеличит производительность, уменьшит вероятное кол-во запросов в БД
 @Cacheable
 public interface CatRepository extends JpaRepository<Cat,Long> {
-
 }
