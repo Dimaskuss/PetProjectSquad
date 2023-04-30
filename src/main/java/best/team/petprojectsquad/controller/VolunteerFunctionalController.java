@@ -2,6 +2,7 @@ package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.service.controllerService.VolunteerFunctionalControllerService;
 import com.pengrad.telegrambot.request.SendMessage;
+import com.pengrad.telegrambot.response.SendResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -28,9 +29,11 @@ public class VolunteerFunctionalController {
                     )
             }
     )
-    @PostMapping("/id")
-    public ResponseEntity<SendMessage> sendUserRemarkMessage(@Parameter(description = "id of a user in a user.DB", example = "1")
+    @PostMapping("/{id}")
+    public ResponseEntity<SendResponse> sendUserRemarkMessage(@Parameter(description = "id of a user in a user.DB", example = "1")
                                         @PathVariable long id) {
-        return volunteerService.sendRemark(id);
+//        todo: получить id пользователя
+//        long chatId = userRepository.getReferenceById(id).getChatId();
+        return ResponseEntity.ok().body(volunteerService.sendRemark(id));
     }
 }

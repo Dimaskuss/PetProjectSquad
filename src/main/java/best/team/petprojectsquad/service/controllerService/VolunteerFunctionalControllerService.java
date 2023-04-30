@@ -1,7 +1,7 @@
 package best.team.petprojectsquad.service.controllerService;
 
-import com.pengrad.telegrambot.request.SendMessage;
+import com.pengrad.telegrambot.response.SendResponse;
 
 public interface VolunteerFunctionalControllerService {
-    SendMessage sendRemark(long id);
+    SendResponse sendRemark(long id);
 }
