@@ -2,11 +2,8 @@ package best.team.petprojectsquad.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.AssertFalse;
 import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import java.util.List;
 
 @Entity
 @Table(name = "user_dog")
@@ -34,7 +31,7 @@ public class UserDog {
     @JoinColumn(name = "dog_id")
     private Dog dog;
     @Column(name = "phone")
-    private int phoneNumber;
+    private String phoneNumber;
     @Column(name = "trial_period")
     @JsonIgnore
     private int trialPeriod = 30;
@@ -43,7 +40,7 @@ public class UserDog {
         this.chatId = chatId;
     }
 
-    public UserDog(long id, long chatId, int phoneNumber) {
+    public UserDog(long id, long chatId, String phoneNumber) {
         this.id = id;
         this.chatId = chatId;
         this.phoneNumber = phoneNumber;
