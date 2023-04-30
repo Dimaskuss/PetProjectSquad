@@ -22,7 +22,8 @@ public class VolunteerQueryService implements QueryHandlerService {
     public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
 
-        SendMessage sendMessage = new SendMessage(id, "Отправьте сообщением Ваш номер телефона для связи, в формате +79315556677");
+        SendMessage sendMessage = new SendMessage(id, "Отправьте сообщением Ваше Имя и номер телефона для связи " +
+                "в формате \"Имя +79315556677\"");
         requestArrayList.add(sendMessage);
 
         userDataCache.setUsersCurrentBotState(id, BotState.VALIDATE_PHONE);
