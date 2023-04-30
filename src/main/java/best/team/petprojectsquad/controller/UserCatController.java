@@ -68,16 +68,14 @@ public class UserCatController {
                     )
             }, tags = "User"
     )
-    @PostMapping("/id{id}/catId{catId}")
+    @PostMapping("/catId{catId}")
     public ResponseEntity<Long> addUserCat(
-            @Parameter(description = "id of a user in a user.DB", example = "1")
-            @PathVariable long id,
             @Parameter(description = "id of a cat in a cat.DB", example = "1")
             @PathVariable long catId,
             @Parameter(description = "An Entity 'user' in database")
             @RequestBody UserCat userCat) {
-        if (controllerService.checkIfEntitiesExist(id, catId)) {
-            return ResponseEntity.ok().body(controllerService.save(id, catId, userCat));
+        if (controllerService.checkIfEntitiesExist(userCat.getUserId(), catId)) {
+            return ResponseEntity.ok().body(controllerService.save(userCat.getUserId(), userCat));
         }
         return ResponseEntity.badRequest().build();
     }
@@ -101,17 +99,16 @@ public class UserCatController {
     )
     @PutMapping(value = "/{id}")
     public ResponseEntity<Long> editUser(
-            @Parameter(description = "id of a user in a user.DB", example = "1")
-            @PathVariable long id, @Parameter(description = "id of a cat in a cat.DB", example = "1")
+            @Parameter(description = "id of a cat in a cat.DB", example = "1")
             @PathVariable long catId,
             @Parameter(description = "an Entity 'user' in database")
-            @RequestBody UserCat user) {
-        if (repository.get(id).isEmpty()) {
+            @RequestBody UserCat userCat) {
+        if (repository.get(userCat.getUserId()).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        repository.delete(id);
-        controllerService.save(id, catId, user);
-        return ResponseEntity.ok().body(user.getId());
+        repository.delete(userCat.getUserId());
+        controllerService.save(userCat.getUserId(), userCat);
+        return ResponseEntity.ok().body(userCat.getId());
     }
 
     @Operation(

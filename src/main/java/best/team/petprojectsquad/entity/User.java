@@ -24,14 +24,6 @@ public class User {
     private long chatId;
     @Column(name = "name")
     private String name;
-//    @OneToMany
-//    @JsonIgnore
-//    @JoinColumn(name = "user_cat_id", nullable = true)
-//    private List<UserCat> catList;
-//    @OneToMany
-//    @JsonIgnore
-//    @JoinColumn(name = "user_dog_id", nullable = true)
-//    private List<UserDog> dogList;
 
     public User(long chatId) {
         this.chatId = chatId;

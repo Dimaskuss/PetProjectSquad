@@ -22,7 +22,6 @@ import java.util.List;
 @RequestMapping(value = "/UserDog")
 @Tag(name = "UserDog", description = "a user with dog")
 public class UserDogController {
-
     private final UserDogControllerService controllerService;
     private final RepositoryService<UserDog> repository;
 
@@ -66,10 +65,10 @@ public class UserDogController {
                     )
             }, tags = "User"
     )
-    @PostMapping("/id{id}/dogId{dogId}")
-    public ResponseEntity<Long> addUser(@Parameter(description = "id of a user in a user.DB", example = "1") @PathVariable long id, @Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId, @Parameter(description = "An Entity 'user' in database") @RequestBody UserDog userDog) {
-        if (controllerService.checkIfEntitiesExist(id, dogId)) {
-            return ResponseEntity.ok().body(controllerService.save(userDog, id, dogId));
+    @PostMapping("/dogId{dogId}")
+    public ResponseEntity<Long> addUser(@Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId, @Parameter(description = "An Entity 'user' in database") @RequestBody UserDog userDog) {
+        if (controllerService.checkIfEntitiesExist(userDog.getUserId(), dogId)) {
+            return ResponseEntity.ok().body(controllerService.save(userDog, dogId));
         }
         return ResponseEntity.badRequest().build();
     }
@@ -92,12 +91,14 @@ public class UserDogController {
             }, tags = "User"
     )
     @PutMapping(value = "/id{id}/dogId{dogId}")
-    public ResponseEntity<Long> editUser(@Parameter(description = "id of a user in a user.DB", example = "1") @PathVariable long id, @Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId, @Parameter(description = "an Entity 'user' in database") @RequestBody UserDog userDog) {
-        if (repository.get(id).isEmpty()) {
+    public ResponseEntity<Long> editUser(@Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId,
+                                         @Parameter(description = "an Entity 'user' in database")
+                                         @RequestBody UserDog userDog) {
+        if (repository.get(userDog.getUserId()).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        repository.delete(id);
-        controllerService.save(userDog, id, dogId);
+        repository.delete(userDog.getUserId());
+        controllerService.save(userDog, dogId);
         return ResponseEntity.ok().body(userDog.getId());
     }
 

@@ -17,8 +17,8 @@ public class UserDogControllerService {
         return userService.get(id).isPresent() && dogService.get(dogId).isPresent();
     }
 
-    public long save(UserDog userDog, long id, long dogId) {
-        userDog.setUser(userService.get(id).get());
+    public long save(UserDog userDog, long dogId) {
+        userDog.setUserId(userDog.getUserId());
         userDog.setDog(dogService.get(dogId).get());
         return userDogService.save(userDog);
     }

@@ -20,10 +20,10 @@ public class UserDog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
-    @JsonIgnore
-    @ManyToOne
+
+    //:TODO сделать проверку по айди!
     @JoinColumn(name = "user_id")
-    private User user;
+    private long userId;
     @Column(name = "chat_id", nullable = false, unique = true)
     private long chatId;
     @OneToOne

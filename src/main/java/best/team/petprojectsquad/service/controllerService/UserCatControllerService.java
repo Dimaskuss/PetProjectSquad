@@ -20,9 +20,11 @@ public class UserCatControllerService {
         return userService.get(id).isPresent() && catService.get(dogId).isPresent();
     }
 
-    public long save(long userId, long catId,UserCat userCat ) {
-        userCat.setUser(userService.get(userId).get());
+    public long save(long catId,UserCat userCat ) {
+        userCat.setUserId(userCat.getUserId());
         userCat.setCat(catService.get(catId).get());
         return userCatService.save(userCat);
     }
+
+
 }
