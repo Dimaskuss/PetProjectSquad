@@ -18,13 +18,14 @@ public class BotStateContext {
      * 2) (ключ)BotState.START  (значение) startMenuHandler -> объект класса StartMenuHandler
      */
     private final Map<BotState, InputHandlerMessage> messageHandlers = new HashMap<>();
-
     private final Map<BotState, InputHandlerQuery> queryHandlers = new HashMap<>();
-    
-     public BotStateContext(List<InputHandlerMessage> messageHandlers, List<InputHandlerQuery> queryHandlers) {
+    private final Map<BotState, InputHandlerSendMessageQuery> InputHandlerSendMessageQueries = new HashMap<>();
+
+    public BotStateContext(List<InputHandlerMessage> messageHandlers, List<InputHandlerQuery> queryHandlers, List<InputHandlerSendMessageQuery> InputHandlerSendMessageQueries) {
 
         messageHandlers.forEach(handler -> this.messageHandlers.put(handler.getHandlerName(), handler));
         queryHandlers.forEach(queryHandler -> this.queryHandlers.put(queryHandler.getHandlerName(), queryHandler));
+        InputHandlerSendMessageQueries.forEach(inputHandlerSendMessageQuery -> this.InputHandlerSendMessageQueries.put(inputHandlerSendMessageQuery.getHandlerName(), inputHandlerSendMessageQuery));
     }
 
     /**

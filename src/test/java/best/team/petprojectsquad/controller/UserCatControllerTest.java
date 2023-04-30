@@ -3,7 +3,7 @@ package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.Cat;
 import best.team.petprojectsquad.entity.UserCat;
-import best.team.petprojectsquad.service.controllerService.UserCatControllerService;
+import best.team.petprojectsquad.service.controllerServiceImpl.UserCatControllerService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

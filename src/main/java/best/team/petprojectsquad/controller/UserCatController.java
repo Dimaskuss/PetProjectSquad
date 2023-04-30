@@ -3,7 +3,7 @@ package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.service.RepositoryService;
-import best.team.petprojectsquad.service.controllerService.UserCatControllerService;
+import best.team.petprojectsquad.service.controllerServiceImpl.UserCatControllerServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -24,7 +24,7 @@ import java.util.List;
 @Tag(name = "UserCat", description = "a user with cat")
 public class UserCatController {
 
-    private final UserCatControllerService controllerService;
+    private final UserCatControllerServiceImpl controllerService;
     private final RepositoryService<UserCat> repository;
 
     @Operation(

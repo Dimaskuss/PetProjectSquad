@@ -2,7 +2,7 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.UserDog;
-import best.team.petprojectsquad.service.controllerService.UserDogControllerService;
+import best.team.petprojectsquad.service.controllerServiceImpl.UserDogControllerService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

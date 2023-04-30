@@ -34,16 +34,21 @@ public class UserFeedBack {
     @Column(name = "feedback")
     private boolean feedback = true;
 
+    @Column(name = "shelter_type")
+    private String shelterType;
+
     //Конструктор для заказа обратного звонка
-    public UserFeedBack(String phoneNumber, long chatId, String name) {
+    public UserFeedBack(String phoneNumber, long chatId, String name, String shelterType)  {
         this.phoneNumber = phoneNumber;
         this.chatId = chatId;
         this.name = name;
+        this.shelterType = shelterType;
     }
 
     //конструктор для волонтера(отсутствует номер телефона)
-    public UserFeedBack(long chatId, String name) {
+    public UserFeedBack(long chatId, String name, String shelterType) {
         this.chatId = chatId;
         this.name = name;
+        this.shelterType = shelterType;
     }
 }

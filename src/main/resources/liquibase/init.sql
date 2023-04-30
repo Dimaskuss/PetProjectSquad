@@ -136,5 +136,4 @@ ALTER TABLE user_cat ADD COLUMN user_id BIGINT;
 ALTER TABLE user_dog ADD COLUMN user_id BIGINT;
 
 -- --changeset couldlie:1.4
--- ALTER TABLE user_cat ADD COLUMN user_cat_id BIGINT;
--- ALTER TABLE user_dog ADD COLUMN user_dog_id BIGINT;
+ALTER TABLE user_feedback ADD COLUMN shelter_type VARCHAR(10);

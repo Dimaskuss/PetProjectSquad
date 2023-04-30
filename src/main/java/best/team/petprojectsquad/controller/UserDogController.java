@@ -2,7 +2,7 @@ package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.UserDog;
 import best.team.petprojectsquad.service.RepositoryService;
-import best.team.petprojectsquad.service.controllerService.UserDogControllerService;
+import best.team.petprojectsquad.service.controllerServiceImpl.UserDogControllerServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping(value = "/UserDog")
 @Tag(name = "UserDog", description = "a user with dog")
 public class UserDogController {
-    private final UserDogControllerService controllerService;
+    private final UserDogControllerServiceImpl controllerService;
     private final RepositoryService<UserDog> repository;
 
     @Operation(

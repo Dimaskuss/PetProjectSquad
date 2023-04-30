@@ -16,18 +16,21 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class GetVolunteerReplyHandlerService implements TextHandlerService {
+public class TelegramBotHandlerSendMessageQueryService implements TextHandlerService {
 
-    private final UserFeedBackRepository userFeedBackRepository;
+    private UserFeedBackRepository userFeedBackRepository;
 
     private final UserDataCache userDataCache;
+
     @Override
     public List<BaseRequest> getReplyMessage(Message message) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
+
+        //:TODO реализовать внос DOG или CAT в колонку
         userFeedBackRepository.save(new UserFeedBack(message.chat().id(), message.from().username(), "Dog"));
+        SendMessage sendMessage = new SendMessage(message.chat().id(), "Ваш запрос обработан, ожидайте обратной связи!");
         userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.START);
-        SendMessage sendMessage = new SendMessage(message.chat().id(), "Ваш запрос успешно обработан, волонтер вам напишет");
-        requestArrayList.add(sendMessage);
+
         return requestArrayList;
     }
 }

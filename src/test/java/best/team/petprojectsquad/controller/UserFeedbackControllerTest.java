@@ -1,6 +1,5 @@
 package best.team.petprojectsquad.controller;
 
-import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.entity.UserFeedBack;
 import best.team.petprojectsquad.service.controllerService.UserFeedBackControllerService;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BooleanSupplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +27,7 @@ import static org.mockito.Mockito.when;
         @InjectMocks
         private UserFeedBackController userFeedBackController;
 
-        private UserFeedBack userFeedBack = new UserFeedBack("+79117076105", 123, "Egor");
+        private UserFeedBack userFeedBack = new UserFeedBack("+79117076105", 123, "Dog", "Egor");
         private Long id = 0L;
 
         @Test
