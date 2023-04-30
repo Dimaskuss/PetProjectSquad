@@ -15,8 +15,8 @@ public class VolunteerQuery implements InputHandlerQuery {
     private final VolunteerQueryService volunteerQueryService;
 
     @Override
-    public List<BaseRequest> handle(long chatId) {
-        return volunteerQueryService.getReplyMessage(chatId);
+    public List<BaseRequest> handle(long id) {
+        return volunteerQueryService.getReplyMessage(id);
     }
 
     @Override

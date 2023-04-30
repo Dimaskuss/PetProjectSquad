@@ -4,6 +4,7 @@ public enum BotState {
     START("/start"),
     INFO("/info"),
     CALL_VOLUNTEER("/callVolunteer"),
+    GET_VOLUNTEER_REPLY("/getVolunteerReply"),
     VALIDATE_PHONE("/validatePhone"),
     CAT_SHELTER_MENU("/catShelterMenu"),
     DOG_SHELTER_MENU("/dogShelterMenu"),
