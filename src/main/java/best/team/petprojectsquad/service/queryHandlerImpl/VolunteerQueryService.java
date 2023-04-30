@@ -15,7 +15,9 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class VolunteerQueryService implements QueryHandlerService {
+
     private final UserDataCache userDataCache;
+
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();

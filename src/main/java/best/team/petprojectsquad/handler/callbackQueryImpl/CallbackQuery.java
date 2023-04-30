@@ -3,7 +3,6 @@ package best.team.petprojectsquad.handler.callbackQueryImpl;
 import best.team.petprojectsquad.entity.BotState;
 import best.team.petprojectsquad.handler.InputHandlerQuery;
 import best.team.petprojectsquad.service.queryHandlerImpl.CallbackQueryService;
-import best.team.petprojectsquad.service.queryHandlerImpl.SafetyCatQueryService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
