@@ -23,7 +23,6 @@ import java.util.List;
 @RequestMapping(value = "/UserCat")
 @Tag(name = "UserCat", description = "a user with cat")
 public class UserCatController {
-
     private final UserCatControllerServiceImpl controllerService;
     private final RepositoryService<UserCat> repository;
 
@@ -97,7 +96,7 @@ public class UserCatController {
                     )
             }, tags = "User"
     )
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{catId}")
     public ResponseEntity<Long> editUser(
             @Parameter(description = "id of a cat in a cat.DB", example = "1")
             @PathVariable long catId,

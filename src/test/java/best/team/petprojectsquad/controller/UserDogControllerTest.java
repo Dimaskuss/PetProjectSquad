@@ -1,56 +1,58 @@
-/*
 package best.team.petprojectsquad.controller;
 
+import best.team.petprojectsquad.entity.User;
 import best.team.petprojectsquad.entity.UserDog;
-import best.team.petprojectsquad.service.controllerServiceImpl.UserDogControllerService;
+import best.team.petprojectsquad.repository.UserDogRepository;
+import best.team.petprojectsquad.service.RepositoryService;
+import best.team.petprojectsquad.service.controllerServiceImpl.UserDogControllerServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserDogControllerTest {
     @Mock
-    UserDogControllerService userDogRepository;
-
+    RepositoryService<UserDog> repositoryService;
     @InjectMocks
     private UserDogController userDogController;
+    @MockBean
+    private UserDogControllerServiceImpl userDogControllerService;
 
-    private UserDog userDog = new UserDog(0, 0, 0);
-    private Long id = 0L;
+    private long id = 1;
+
+    UserDog userDog = new UserDog(0, 1, "123");
 
     @Test
-    void shouldReturnRightObjectPassIdGetter() {
+    void getUserById() {
+        when(repositoryService.get(id)).thenReturn(Optional.ofNullable(userDog));
 
-        when(userDogRepository.getReferenceById(id)).thenReturn(userDog);
-
-        ResponseEntity<UserDog> status = userDogController.getUserById(0);
+        ResponseEntity<UserDog> status = userDogController.getUserById(id);
 
         assertEquals(status.getBody(), userDog);
     }
 
     @Test
-    void shouldReturnRightObjectPassAdd() {
-
-        when(userDogRepository.save(userDog)).thenReturn(id);
-        ResponseEntity<Long> idNewUserDog = userDogController.addUser(userDog);
-        assertEquals(idNewUserDog.getBody(), id);
+    void editUser() {
     }
 
     @Test
-    void shouldReturnRightObjectDelete() {
-
-        when(userDogRepository.save(userDog)).thenReturn(id);
-        when(userDogRepository.findById(id)).thenReturn(Optional.of(userDog));
-        ResponseEntity<Long> idEditUserDog = userDogController.editUser(id, userDog);
+    void getAll() {
 
     }
 
-}*/
+    @Test
+    void deleteUser() {
+    }
+}

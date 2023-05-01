@@ -30,7 +30,7 @@ class UserFeedBackTest {
 
         assertEquals(userFeedBack.getChatId(), 123);
         assertEquals(userFeedBack.getPhoneNumber(), phoneNumber);
-        assertFalse(userFeedBack.isFeedback());
+        assertTrue(userFeedBack.isFeedback());
         assertEquals(userFeedBack.getName(), "Couldlie");
     }
 }

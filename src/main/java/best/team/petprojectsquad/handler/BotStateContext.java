@@ -19,13 +19,10 @@ public class BotStateContext {
      */
     private final Map<BotState, InputHandlerMessage> messageHandlers = new HashMap<>();
     private final Map<BotState, InputHandlerQuery> queryHandlers = new HashMap<>();
-    private final Map<BotState, InputHandlerSendMessageQuery> InputHandlerSendMessageQueries = new HashMap<>();
 
-    public BotStateContext(List<InputHandlerMessage> messageHandlers, List<InputHandlerQuery> queryHandlers, List<InputHandlerSendMessageQuery> InputHandlerSendMessageQueries) {
-
+    public BotStateContext(List<InputHandlerMessage> messageHandlers, List<InputHandlerQuery> queryHandlers) {
         messageHandlers.forEach(handler -> this.messageHandlers.put(handler.getHandlerName(), handler));
         queryHandlers.forEach(queryHandler -> this.queryHandlers.put(queryHandler.getHandlerName(), queryHandler));
-        InputHandlerSendMessageQueries.forEach(inputHandlerSendMessageQuery -> this.InputHandlerSendMessageQueries.put(inputHandlerSendMessageQuery.getHandlerName(), inputHandlerSendMessageQuery));
     }
 
     /**

@@ -1,5 +1,7 @@
+/*
 package best.team.petprojectsquad.controller;
 
+import best.team.petprojectsquad.entity.ReportCat;
 import best.team.petprojectsquad.entity.UserDog;
 import best.team.petprojectsquad.service.RepositoryService;
 import best.team.petprojectsquad.service.controllerServiceImpl.UserDogControllerServiceImpl;
@@ -19,11 +21,11 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/UserDog")
-@Tag(name = "UserDog", description = "a user with dog")
-public class UserDogController {
+@RequestMapping(value = "/ReportCat")
+@Tag(name = "Report")
+public class ReportCatController {
     private final UserDogControllerServiceImpl controllerService;
-    private final RepositoryService<UserDog> repository;
+    private final RepositoryService<ReportCat> repository;
 
     @Operation(
             summary = "Getting user by it's id",
@@ -44,7 +46,7 @@ public class UserDogController {
     )
     @GetMapping(value = "/{id}")
 
-    public ResponseEntity<UserDog> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
+    public ResponseEntity<ReportCat> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
         return ResponseEntity.ok(repository.get(id).get());
     }
 
@@ -66,9 +68,10 @@ public class UserDogController {
             }, tags = "User"
     )
     @PostMapping("/dogId{dogId}")
-    public ResponseEntity<Long> addUser(@Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId, @Parameter(description = "An Entity 'user' in database") @RequestBody UserDog userDog) {
-        if (controllerService.checkIfEntitiesExist(userDog.getUserId(), dogId)) {
-            return ResponseEntity.ok().body(controllerService.save(userDog, dogId));
+    public ResponseEntity<Long> addUser(@Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId,
+                                        @Parameter(description = "An Entity 'user' in database") @RequestBody ReportCat reportCat) {
+        if (controllerService.checkIfEntitiesExist(reportCat.g, dogId)) {
+            return ResponseEntity.ok().body(controllerService.save(reportCat, dogId));
         }
         return ResponseEntity.badRequest().build();
     }
@@ -144,3 +147,4 @@ public class UserDogController {
         return ResponseEntity.ok().build();
     }
 }
+*/
