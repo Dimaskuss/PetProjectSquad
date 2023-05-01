@@ -32,11 +32,23 @@ public class UserFeedBack {
     private String name;
 
     @Column(name = "feedback")
-    private boolean feedback;
+    private boolean feedback = true;
 
-    public UserFeedBack(String phoneNumber, long chatId, String name) {
+    @Column(name = "shelter_type")
+    private String shelterType;
+
+    //Конструктор для заказа обратного звонка
+    public UserFeedBack(String phoneNumber, long chatId, String name, String shelterType)  {
         this.phoneNumber = phoneNumber;
         this.chatId = chatId;
         this.name = name;
+        this.shelterType = shelterType;
+    }
+
+    //конструктор для волонтера(отсутствует номер телефона)
+    public UserFeedBack(long chatId, String name, String shelterType) {
+        this.chatId = chatId;
+        this.name = name;
+        this.shelterType = shelterType;
     }
 }

@@ -27,8 +27,7 @@ class DogControllerTest {
 
     @Test
     void shouldReturnRightObjectPassIdGetter() {
-
-        when(dogRepository.get(id).get()).thenReturn(dog);
+        when(dogRepository.get(id)).thenReturn(Optional.ofNullable(dog));
 
         ResponseEntity<Dog> status = DogController.getDogById(0);
 

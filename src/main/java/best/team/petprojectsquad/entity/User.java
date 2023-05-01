@@ -7,7 +7,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.List;
 
-
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -28,13 +27,9 @@ public class User {
     @Column(name = "name")
     private String name;
     @OneToMany
-    @JsonIgnore
-    @JoinColumn(name = "user_cat_id", nullable = true)
-    private List<UserCat> catList;
+    private List<UserCat> userCat;
     @OneToMany
-    @JsonIgnore
-    @JoinColumn(name = "user_dog_id", nullable = true)
-    private List<UserDog> dogList;
+    private List<UserDog> userDog;
 
     public User(long chatId) {
         this.chatId = chatId;

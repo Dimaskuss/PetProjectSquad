@@ -15,43 +15,43 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 
-    @ExtendWith(MockitoExtension.class)
-    class SuperUserVolunteerControllerTest {
-        @Mock
-        SuperUserVolunteerControllerService superUserVolunteerControllerService;
+@ExtendWith(MockitoExtension.class)
+class SuperUserVolunteerControllerTest {
+    @Mock
+    SuperUserVolunteerControllerService superUserVolunteerControllerService;
 
-        @InjectMocks
-        private SuperUserVolunteerController superUserVolunteerController;
+    @InjectMocks
+    private SuperUserVolunteerController superUserVolunteerController;
 
-        private SuperUserVolunteer superUserVolunteer = new SuperUserVolunteer(0L, null, 0);
-        private Long id = 0L;
+    private SuperUserVolunteer superUserVolunteer = new SuperUserVolunteer(0, "egor");
+    private Long id = 0L;
 
-        @Test
-        void shouldReturnRightObjectPassIdGetter() {
+    @Test
+    void shouldReturnRightObjectPassIdGetter() {
 
-            when(superUserVolunteerControllerService.getReferenceById(id)).thenReturn(superUserVolunteer);
+        when(superUserVolunteerControllerService.getReferenceById(id)).thenReturn(superUserVolunteer);
 
-            ResponseEntity<SuperUserVolunteer> status = superUserVolunteerController.getUserById(0);
+        ResponseEntity<SuperUserVolunteer> status = superUserVolunteerController.getUserById(0);
 
-            assertEquals(status.getBody(), superUserVolunteer);
-        }
+        assertEquals(status.getBody(), superUserVolunteer);
+    }
 
-        @Test
-        void shouldReturnRightObjectPassAdd() {
+    @Test
+    void shouldReturnRightObjectPassAdd() {
 
-            when(superUserVolunteerControllerService.save(superUserVolunteer)).thenReturn(id);
-            ResponseEntity<Long> idNewUserCat = superUserVolunteerController.addUser(superUserVolunteer);
-            assertEquals(idNewUserCat.getBody(), id);
-        }
+        when(superUserVolunteerControllerService.save(superUserVolunteer)).thenReturn(id);
+        ResponseEntity<Long> idNewUserCat = superUserVolunteerController.addUser(superUserVolunteer);
+        assertEquals(idNewUserCat.getBody(), id);
+    }
 
-        @Test
-        void shouldReturnRightObjectDelete() {
+    @Test
+    void shouldReturnRightObjectDelete() {
 
-            when(superUserVolunteerControllerService.save(superUserVolunteer)).thenReturn(id);
-            when(superUserVolunteerControllerService.findById(id)).thenReturn(Optional.of(superUserVolunteer));
-            ResponseEntity<Long> idEditUserCat = superUserVolunteerController.editUser(id, superUserVolunteer);
-
-        }
-
+        when(superUserVolunteerControllerService.save(superUserVolunteer)).thenReturn(id);
+        when(superUserVolunteerControllerService.findById(id)).thenReturn(Optional.of(superUserVolunteer));
+        ResponseEntity<Long> idEditUserCat = superUserVolunteerController.editUser(id, superUserVolunteer);
 
     }
+
+
+}

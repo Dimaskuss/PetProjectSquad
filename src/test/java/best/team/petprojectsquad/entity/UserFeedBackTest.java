@@ -26,11 +26,11 @@ class UserFeedBackTest {
 
     @Test
     public void testConstructor() {
-        UserFeedBack userFeedBack = new UserFeedBack(phoneNumber, chatId, "Couldlie");
+        UserFeedBack userFeedBack = new UserFeedBack(phoneNumber, chatId, "Couldlie", "Dog");
 
         assertEquals(userFeedBack.getChatId(), 123);
         assertEquals(userFeedBack.getPhoneNumber(), phoneNumber);
-        assertFalse(userFeedBack.isFeedback());
+        assertTrue(userFeedBack.isFeedback());
         assertEquals(userFeedBack.getName(), "Couldlie");
     }
 }

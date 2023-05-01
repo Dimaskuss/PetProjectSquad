@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import java.util.List;
-
 @Entity
 @Table(name = "user_cat")
 @Getter
@@ -22,10 +20,8 @@ public class UserCat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
-    @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "user_id")
-    private User user;
+    private long userId;
     @OneToOne
     @JsonIgnore
     @JoinColumn(name = "cat_id")
@@ -33,19 +29,28 @@ public class UserCat {
     @Column(name = "chat_id", nullable = false, unique = true)
     private long chatId;
     @Column(name = "phone")
-    private int phoneNumber;
+    private String phoneNumber;
     @JsonIgnore
     @Column(name = "trial_period")
     private int trialPeriod = 30;
+    @JsonIgnore
+    @ManyToOne
+    private User user;
+    private UserNeedHelp userNeedHelp;
 
     public UserCat(long chatId) {
         this.chatId = chatId;
     }
 
-    public UserCat(long id, User user, Cat cat, long chatId, int phoneNumber) {
+    public UserCat(long id, long userId, Cat cat, long chatId, String phoneNumber) {
         this.id = id;
-        this.user = user;
+        this.userId = userId;
         this.cat = cat;
+        this.chatId = chatId;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public UserCat(long chatId, String phoneNumber) {
         this.chatId = chatId;
         this.phoneNumber = phoneNumber;
     }

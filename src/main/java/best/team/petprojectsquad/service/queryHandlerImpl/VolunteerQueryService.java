@@ -1,9 +1,10 @@
 package best.team.petprojectsquad.service.queryHandlerImpl;
 
-import best.team.petprojectsquad.Cache.UserDataCache;
-import best.team.petprojectsquad.entity.BotState;
+import best.team.petprojectsquad.entity.User;
+import best.team.petprojectsquad.entity.UserFeedBack;
+import best.team.petprojectsquad.repository.UserFeedBackRepository;
+import best.team.petprojectsquad.repository.UserRepository;
 import best.team.petprojectsquad.service.QueryHandlerService;
-import best.team.petprojectsquad.service.textHandlerImpl.ValidatePhoneService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import lombok.AllArgsConstructor;
@@ -15,19 +16,17 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class VolunteerQueryService implements QueryHandlerService {
-
-    private final UserDataCache userDataCache;
-
+    private UserRepository userRepository;
+    private UserFeedBackRepository userFeedBackRepository;
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
-
-        SendMessage sendMessage = new SendMessage(id, "Отправьте сообщением Ваше Имя и номер телефона для связи " +
-                "в формате \"Имя +79315556677\"");
+        if (!userFeedBackRepository.existsByChatId(id)) {
+            User user = userRepository.getUserFeedBackByChatId(id);
+            userFeedBackRepository.save(new UserFeedBack(id, "user.getName()", "Dog"));
+        }
+        SendMessage sendMessage = new SendMessage(id, "Ваш запрос успешно зарегистрирован, ожидайте обратной связи!");
         requestArrayList.add(sendMessage);
-
-        userDataCache.setUsersCurrentBotState(id, BotState.VALIDATE_PHONE);
-
         return requestArrayList;
     }
 }

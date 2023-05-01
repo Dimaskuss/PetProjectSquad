@@ -2,8 +2,7 @@ package best.team.petprojectsquad.handler.textHandlerImpl;
 
 import best.team.petprojectsquad.entity.BotState;
 import best.team.petprojectsquad.listener.TelegramBotUpdateListenerTest;
-import best.team.petprojectsquad.service.textHandlerImpl.StartHandlerService;
-import best.team.petprojectsquad.service.textHandlerImpl.ValidatePhoneService;
+import best.team.petprojectsquad.service.textHandlerImpl.CatValidatePhoneService;
 import com.pengrad.telegrambot.BotUtils;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.BaseRequest;
@@ -25,12 +24,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ValidatePhoneHandlerTest {
+class CatValidatePhoneHandlerTest {
 
     @Mock
-    private ValidatePhoneService service;
+    private CatValidatePhoneService service;
     @InjectMocks
-    private ValidatePhoneHandler validatePhoneHandler;
+    private CatValidatePhoneHandler catValidatePhoneHandler;
 
     long id = 123;
     String text = "/validatePhone";
@@ -48,7 +47,7 @@ class ValidatePhoneHandlerTest {
 
         when(service.getReplyMessage(update.message())).thenReturn(expectedArrayList);
 
-        List<BaseRequest> actualList = validatePhoneHandler.handle(update.message());
+        List<BaseRequest> actualList = catValidatePhoneHandler.handle(update.message());
 
         assertEquals(actualList.size(), expectedArrayList.size());
         assertEquals(actualList.get(0).getClass(), expectedArrayList.get(0).getClass());
@@ -59,7 +58,7 @@ class ValidatePhoneHandlerTest {
     @Test
     void shouldReturnHandlerName() {
 
-        assertEquals(validatePhoneHandler.getHandlerName(), BotState.VALIDATE_PHONE);
+        assertEquals(catValidatePhoneHandler.getHandlerName(), BotState.VALIDATE_PHONE);
 
     }
 }
