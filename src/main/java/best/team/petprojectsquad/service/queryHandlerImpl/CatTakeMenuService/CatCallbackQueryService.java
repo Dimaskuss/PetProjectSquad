@@ -1,4 +1,4 @@
-package best.team.petprojectsquad.service.queryHandlerImpl;
+package best.team.petprojectsquad.service.queryHandlerImpl.CatTakeMenuService;
 
 import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.BotState;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class CallbackQueryService implements QueryHandlerService {
+public class CatCallbackQueryService implements QueryHandlerService {
 
     private final UserDataCache userDataCache;
 
@@ -24,7 +24,7 @@ public class CallbackQueryService implements QueryHandlerService {
         SendMessage sendMessage = new SendMessage(id, "Отправьте сообщением Ваш номер телефона для связи, в формате +79315556677");
         requestArrayList.add(sendMessage);
 
-        userDataCache.setUsersCurrentBotState(id, BotState.CALL_VOLUNTEER);
+        userDataCache.setUsersCurrentBotState(id, BotState.CAT_VALIDATE_CALLBACK);
 
         return requestArrayList;
     }

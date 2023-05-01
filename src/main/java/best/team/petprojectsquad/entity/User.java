@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import java.util.List;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -24,6 +26,10 @@ public class User {
     private long chatId;
     @Column(name = "name")
     private String name;
+    @OneToMany
+    private List<UserCat> userCat;
+    @OneToMany
+    private List<UserDog> userDog;
 
     public User(long chatId) {
         this.chatId = chatId;

@@ -33,6 +33,10 @@ public class UserCat {
     @JsonIgnore
     @Column(name = "trial_period")
     private int trialPeriod = 30;
+    @JsonIgnore
+    @ManyToOne
+    private User user;
+    private UserNeedHelp userNeedHelp;
 
     public UserCat(long chatId) {
         this.chatId = chatId;
