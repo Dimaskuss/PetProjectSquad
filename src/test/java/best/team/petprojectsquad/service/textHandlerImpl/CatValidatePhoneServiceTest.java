@@ -19,9 +19,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class ValidatePhoneServiceTest {
+class CatValidatePhoneServiceTest {
     @Autowired
-    private ValidatePhoneService validatePhoneService;
+    private CatValidatePhoneService catValidatePhoneService;
 
     private String message = "89356657658";
     private long id = 123;
@@ -36,7 +36,7 @@ class ValidatePhoneServiceTest {
                 (TelegramBotUpdateListenerTest.class.getResource("update.json")).toURI()));
         Update update = BotUtils.fromJson(json.replace("%text%", "test"), Update.class);
 
-        List<BaseRequest> replyMessage = validatePhoneService.getReplyMessage(update.message());
+        List<BaseRequest> replyMessage = catValidatePhoneService.getReplyMessage(update.message());
         assertEquals(replyMessage.size(), requestArrayList.size());
         assertEquals(replyMessage.get(0).getParameters(), requestArrayList.get(0).getParameters());
     }

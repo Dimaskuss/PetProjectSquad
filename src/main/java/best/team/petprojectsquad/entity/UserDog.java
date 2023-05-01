@@ -20,8 +20,6 @@ public class UserDog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
-
-    //:TODO сделать проверку по айди!
     @JoinColumn(name = "user_id")
     private long userId;
     @Column(name = "chat_id", nullable = false, unique = true)
@@ -35,6 +33,10 @@ public class UserDog {
     @Column(name = "trial_period")
     @JsonIgnore
     private int trialPeriod = 30;
+    @JsonIgnore
+    @ManyToOne
+    private User user;
+    private UserNeedHelp userNeedHelp;
 
     public UserDog(long chatId) {
         this.chatId = chatId;

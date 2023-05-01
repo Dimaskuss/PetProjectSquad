@@ -1,5 +1,6 @@
 package best.team.petprojectsquad.service.repositoryServiceImpl;
 
+import best.team.petprojectsquad.entity.User;
 import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.repository.UserCatRepository;
 import best.team.petprojectsquad.service.RepositoryService;
@@ -33,5 +34,9 @@ public class UserCatServiceImpl implements RepositoryService<UserCat> {
     @Override
     public List<UserCat> findAll() {
         return userCatRepository.findAll();
+    }
+
+    public Optional<UserCat> getByUser(User user) {
+        return userCatRepository.findByUser(user);
     }
 }
