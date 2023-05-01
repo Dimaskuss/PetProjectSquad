@@ -11,10 +11,8 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class VolunteerQueryForAll implements InputHandlerQuery {
-
-    private final VolunteerQueryService volunteerQueryService;
-
+public class VolunteerQuery implements InputHandlerQuery {
+    private VolunteerQueryService volunteerQueryService;
     @Override
     public List<BaseRequest> handle(long chatId) {
         return volunteerQueryService.getReplyMessage(chatId);

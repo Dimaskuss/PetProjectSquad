@@ -4,14 +4,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserCatControllerTest {
+class UserControllerTest {
 
     @Test
     void getUserById() {
     }
 
     @Test
-    void addUserCat() {
+    void addUser() {
     }
 
     @Test

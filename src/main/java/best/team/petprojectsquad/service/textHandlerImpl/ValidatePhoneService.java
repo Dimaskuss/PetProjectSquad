@@ -26,7 +26,7 @@ public class ValidatePhoneService implements TextHandlerService {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         if (checkPhone(message.text())) {
             if (!userFeedBackRepository.existsByChatId(message.chat().id())) {
-                userFeedBackRepository.save(new UserFeedBack(message.text(), message.chat().id(), message.from().username()));
+                userFeedBackRepository.save(new UserFeedBack(message.text(), message.chat().id(), message.from().username(), "Dog"));
             }
             SendMessage sendMessage = new SendMessage(message.chat().id(), "Волонтер в ближайшее время Вам перезвонит.");
             requestArrayList.add(sendMessage);
