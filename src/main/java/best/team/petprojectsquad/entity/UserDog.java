@@ -31,14 +31,17 @@ public class UserDog {
     @Column(name = "trial_period")
     @JsonIgnore
     private int trialPeriod = 30;
-    @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private User user;
     private boolean userNeedHelp;
 
     public UserDog(long chatId) {
         this.chatId = chatId;
+    }
+
+    public UserDog(User user) {
+        this.user = user;
     }
 
     public UserDog(long id, long chatId, String phoneNumber) {

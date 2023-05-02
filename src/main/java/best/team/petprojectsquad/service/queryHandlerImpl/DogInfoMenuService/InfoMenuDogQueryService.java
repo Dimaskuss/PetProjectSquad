@@ -32,7 +32,7 @@ public class InfoMenuDogQueryService implements QueryHandlerService {
                         {new InlineKeyboardButton("Режим работы, адрес и схема проезда").callbackData("/dogAddress")},
                         {new InlineKeyboardButton("Телефон охраны для оформления пропуска").callbackData("/dogPass")},
                         {new InlineKeyboardButton("Рекомендации о технике безопасности").callbackData("/dogSafety")},
-                        {new InlineKeyboardButton("Заказать обратный звонок").callbackData("/callback")},
+                        {new InlineKeyboardButton("Заказать обратный звонок").callbackData("/dogCallback")},
                         {new InlineKeyboardButton("Связаться с волонтером").callbackData("/callVolunteer")}
                 });
 

@@ -7,11 +7,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.List;
 
-@Getter
-@Setter
-@EqualsAndHashCode
 @Entity
-@Table(name = "user")
+@Data
+@Table(name = "users")
 @NoArgsConstructor
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -26,9 +24,11 @@ public class User {
     private long chatId;
     @Column(name = "name")
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<UserCat> userCat;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<UserDog> userDog;
 
     public User(long chatId) {
