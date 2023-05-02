@@ -34,4 +34,6 @@ public class UserServiceImpl implements RepositoryService<User> {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    public Optional<User> findByChatId(long chatId){ return userRepository.findByChatId(chatId);}
 }

@@ -27,6 +27,8 @@ public enum BotState {
     DOG_REPORT_VALIDATE("/dogReportValidate"),
     CAT_SHELTER_CALLBACK("/catCallback"),
     DOG_SHELTER_CALLBACK("/dogCallback"),
+    CAT_VALIDATE_CALLBACK("/catValidateCallback"),
+    DOG_VALIDATE_CALLBACK("/dogValidateCallback"),
     CAT_TAKE_INFO("/catTakeInfo"),
     DOG_TAKE_INFO("/dogTakeInfo"),
     RULES_TAKE_CAT("/rulesBeforeGettingCat"),
