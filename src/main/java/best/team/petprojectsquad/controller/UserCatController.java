@@ -69,12 +69,12 @@ public class UserCatController {
     )
     @PostMapping("/catId{catId}")
     public ResponseEntity<Long> addUserCat(
-            @Parameter(description = "id of a cat in a cat.DB", example = "1")
-            @PathVariable long catId,
-            @Parameter(description = "An Entity 'user' in database")
+            @Parameter(description = "id of a cat in a cat.DB", example = "1") @PathVariable long catId,
+            @Parameter(description = "id of a user in a uder.DB", example = "1") @PathVariable long id,
+            @Parameter(description = "An Entity 'userCat' in database")
             @RequestBody UserCat userCat) {
-        if (controllerService.checkIfEntitiesExist(userCat.getUserId(), catId)) {
-            return ResponseEntity.ok().body(controllerService.save(userCat.getUserId(), userCat));
+        if (controllerService.checkIfEntitiesExist(id, catId)) {
+            return ResponseEntity.ok().body(controllerService.save(catId, id, userCat));
         }
         return ResponseEntity.badRequest().build();
     }
@@ -98,16 +98,16 @@ public class UserCatController {
     )
     @PutMapping(value = "/{catId}")
     public ResponseEntity<Long> editUser(
-            @Parameter(description = "id of a cat in a cat.DB", example = "1")
-            @PathVariable long catId,
-            @Parameter(description = "an Entity 'user' in database")
+            @Parameter(description = "id of a cat in a cat.DB", example = "1") @PathVariable long catId,
+            @Parameter(description = "id of a cat in a cat.DB", example = "1") @PathVariable long id,
+            @Parameter(description = "an Entity 'userCat' in database")
             @RequestBody UserCat userCat) {
-        if (repository.get(userCat.getUserId()).isEmpty()) {
-            return ResponseEntity.noContent().build();
+        if (controllerService.checkIfEntitiesExist(id, catId)) {
+            repository.delete(userCat.getId());
+            controllerService.save(catId,id, userCat);
+            return ResponseEntity.ok().body(userCat.getId());
         }
-        repository.delete(userCat.getUserId());
-        controllerService.save(userCat.getUserId(), userCat);
-        return ResponseEntity.ok().body(userCat.getId());
+        return ResponseEntity.noContent().build();
     }
 
     @Operation(

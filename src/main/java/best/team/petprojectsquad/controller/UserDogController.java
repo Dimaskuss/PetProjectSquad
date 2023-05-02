@@ -66,9 +66,11 @@ public class UserDogController {
             }, tags = "User"
     )
     @PostMapping("/dogId{dogId}")
-    public ResponseEntity<Long> addUser(@Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId, @Parameter(description = "An Entity 'user' in database") @RequestBody UserDog userDog) {
-        if (controllerService.checkIfEntitiesExist(userDog.getUserId(), dogId)) {
-            return ResponseEntity.ok().body(controllerService.save(userDog, dogId));
+    public ResponseEntity<Long> addUser(@Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId,
+                                        @Parameter(description = "id of a user in a user.DB", example = "1") @PathVariable long id,
+                                        @Parameter(description = "An Entity 'user' in database") @RequestBody UserDog userDog) {
+        if (controllerService.checkIfEntitiesExist(id, dogId)) {
+            return ResponseEntity.ok().body(controllerService.save(userDog,id, dogId));
         }
         return ResponseEntity.badRequest().build();
     }
@@ -92,14 +94,15 @@ public class UserDogController {
     )
     @PutMapping(value = "/dogId{dogId}")
     public ResponseEntity<Long> editUser(@Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId,
-                                         @Parameter(description = "an Entity 'user' in database")
+                                         @Parameter(description = "id of a user in a user.DB", example = "1") @PathVariable long id,
+                                         @Parameter(description = "an Entity 'userDog' in database")
                                          @RequestBody UserDog userDog) {
-        if (repository.get(userDog.getUserId()).isEmpty()) {
-            return ResponseEntity.noContent().build();
+        if (controllerService.checkIfEntitiesExist(id, dogId)) {
+            repository.delete(userDog.getId());
+            controllerService.save(userDog,id, dogId);
+            return ResponseEntity.ok().body(userDog.getId());
         }
-        repository.delete(userDog.getUserId());
-        controllerService.save(userDog, dogId);
-        return ResponseEntity.ok().body(userDog.getId());
+        return ResponseEntity.noContent().build();
     }
 
     @Operation(
