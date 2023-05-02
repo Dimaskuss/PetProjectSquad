@@ -21,13 +21,11 @@ public class UserDogControllerServiceImpl implements UserDogControllerService {
     }
 
     @Override
-    public long save(UserDog userDog, long catId) {
-        if (checkIfEntitiesExist(userDog.getUserId(), catId)) { //проверка
-            userDog.setUserId(userDog.getUserId());
-            userDog.setDog(dogRepository.findById(catId).get());
+    public long save(UserDog userDog, long id, long dogId) {
+
+            userDog.setUser(userRepository.getReferenceById(id));
+            userDog.setDog(dogRepository.findById(dogId).get());
             return userDogRepository.save(userDog).getId();
-        }
-        throw new IllegalArgumentException();
     }
 
 

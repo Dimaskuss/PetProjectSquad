@@ -29,7 +29,7 @@ public class DogValidatePhoneService implements TextHandlerService, ValidatePhon
         if (checkPhone(message.text())) {
             if (userDogService.getByUser(userService.get(message.chat().id()).get()).isEmpty()){
                 UserDog userDog = new UserDog();
-                userDog.setUserNeedHelp(UserNeedHelp.YES);
+                userDog.setUserNeedHelp(true);
                 userDog.setUser(userService.get(message.chat().id()).get());
                 userDog.setPhoneNumber(message.text());
             }
