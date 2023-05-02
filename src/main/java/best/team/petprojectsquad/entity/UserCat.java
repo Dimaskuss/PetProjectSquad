@@ -33,6 +33,7 @@ public class UserCat {
     private int trialPeriod = 30;
     @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
     private boolean userNeedHelp;
 

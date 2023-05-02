@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 @Entity
-@Table(name = "user_table")
+@Table(name = "user")
 @NoArgsConstructor
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -28,7 +28,7 @@ public class User {
     private String name;
     @OneToMany
     private List<UserCat> userCat;
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<UserDog> userDog;
 
     public User(long chatId) {
