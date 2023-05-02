@@ -143,3 +143,16 @@ ALTER TABLE user_dog ADD COLUMN user_dog_id BIGINT;
 ALTER TABLE user_cat ADD COLUMN user_need_help BOOLEAN;
 ALTER TABLE user_dog ADD COLUMN user_need_help BOOLEAN;
 ALTER TABLE user_feedback ADD COLUMN shelter_type VARCHAR(20);
+
+--changeset couldlie:1.6
+ALTER TABLE user_table RENAME TO "user";
+
+--changeset couldlie:1.7
+CREATE TABLE user_user_cat(
+    user_id BIGINT,
+    user_cat_id BIGINT
+);
+CREATE TABLE user_user_dog(
+    user_id BIGINT,
+    user_dog_id BIGINT
+);
