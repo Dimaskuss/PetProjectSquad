@@ -3,11 +3,6 @@ package best.team.petprojectsquad.service.textHandlerImpl;
 import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.BotState;
 import best.team.petprojectsquad.entity.UserCat;
-import best.team.petprojectsquad.entity.UserFeedBack;
-import best.team.petprojectsquad.entity.UserNeedHelp;
-import best.team.petprojectsquad.repository.UserCatRepository;
-import best.team.petprojectsquad.repository.UserFeedBackRepository;
-import best.team.petprojectsquad.repository.UserRepository;
 import best.team.petprojectsquad.service.TextHandlerService;
 import best.team.petprojectsquad.service.ValidatePhone;
 import best.team.petprojectsquad.service.repositoryServiceImpl.UserCatServiceImpl;
@@ -36,7 +31,7 @@ public class CatValidatePhoneService implements TextHandlerService, ValidatePhon
         if (checkPhone(message.text())) {
             if (userCatService.getByUser(userService.get(message.chat().id()).get()).isEmpty()){
                 UserCat userCat = new UserCat();
-                userCat.setUserNeedHelp(UserNeedHelp.YES);
+                userCat.setUserNeedHelp(true);
                 userCat.setUser(userService.get(message.chat().id()).get());
                 userCat.setPhoneNumber(message.text());
             }

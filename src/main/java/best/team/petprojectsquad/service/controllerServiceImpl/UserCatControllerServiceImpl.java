@@ -23,13 +23,10 @@ public class UserCatControllerServiceImpl implements UserCatControllerService {
     }
 
     @Override
-    public long save(long catId, UserCat userCat) {
-        if (checkIfEntitiesExist(userCat.getUserId(), catId)) { //проверка
-            userCat.setUserId(userCat.getUserId());
+    public long save(long catId,long id, UserCat userCat) {
+            userCat.setUser(userRepository.findById(id).get());
             userCat.setCat(catRepository.findById(catId).get());
             return userCatRepository.save(userCat).getId();
-        }
-        throw new IllegalArgumentException();
     }
 
 

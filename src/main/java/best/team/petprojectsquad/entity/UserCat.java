@@ -20,8 +20,6 @@ public class UserCat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
-    @JoinColumn(name = "user_id")
-    private long userId;
     @OneToOne
     @JsonIgnore
     @JoinColumn(name = "cat_id")
@@ -36,15 +34,14 @@ public class UserCat {
     @JsonIgnore
     @ManyToOne
     private User user;
-    private UserNeedHelp userNeedHelp;
+    private boolean userNeedHelp;
 
     public UserCat(long chatId) {
         this.chatId = chatId;
     }
 
-    public UserCat(long id, long userId, Cat cat, long chatId, String phoneNumber) {
+    public UserCat(long id, Cat cat, long chatId, String phoneNumber) {
         this.id = id;
-        this.userId = userId;
         this.cat = cat;
         this.chatId = chatId;
         this.phoneNumber = phoneNumber;

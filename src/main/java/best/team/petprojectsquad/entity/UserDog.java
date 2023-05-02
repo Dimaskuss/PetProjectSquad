@@ -20,8 +20,6 @@ public class UserDog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
-    @JoinColumn(name = "user_id")
-    private long userId;
     @Column(name = "chat_id", nullable = false, unique = true)
     private long chatId;
     @OneToOne
@@ -36,7 +34,7 @@ public class UserDog {
     @JsonIgnore
     @ManyToOne
     private User user;
-    private UserNeedHelp userNeedHelp;
+    private boolean userNeedHelp;
 
     public UserDog(long chatId) {
         this.chatId = chatId;
