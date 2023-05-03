@@ -25,6 +25,7 @@ import java.util.List;
 @RequestMapping(value = "/ReportCat")
 @Tag(name = "Report")
 public class ReportCatController  {
+
     private final UserCatControllerServiceImpl controllerService;
     private final RepositoryService<ReportCat> repository;
 

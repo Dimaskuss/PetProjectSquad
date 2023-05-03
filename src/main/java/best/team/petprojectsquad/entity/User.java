@@ -17,7 +17,6 @@ import java.util.List;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User {
-
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)

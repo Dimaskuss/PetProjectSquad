@@ -26,13 +26,10 @@ public class ReportDog {
     private long id;
     @Column(name = "report")
     private String report;
-
     @Column(name = "report_date")
     private LocalDate dateReport;
-
     @Column(name = "photo_id")
     private String photoId;
-
     @Column(name = "report_accepted")
     private boolean reportAccepted = false;
     @JsonIgnore
