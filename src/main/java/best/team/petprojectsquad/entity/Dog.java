@@ -12,6 +12,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
+@AllArgsConstructor
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Dog {
@@ -39,4 +40,5 @@ public class Dog {
         this.yearOfBirthday = yearOfBirthday;
         this.description = description;
     }
+    //TODO:РАЗОБРАТЬСЯ С АННОТАЦИЯМИ, STACKOVERFLOW ERROR
 }
