@@ -1,10 +1,11 @@
-/*
+
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.ReportCat;
-import best.team.petprojectsquad.entity.UserDog;
+import best.team.petprojectsquad.entity.UserCat;
+
 import best.team.petprojectsquad.service.RepositoryService;
-import best.team.petprojectsquad.service.controllerServiceImpl.UserDogControllerServiceImpl;
+import best.team.petprojectsquad.service.controllerServiceImpl.UserCatControllerServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -23,8 +24,8 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping(value = "/ReportCat")
 @Tag(name = "Report")
-public class ReportCatController {
-    private final UserDogControllerServiceImpl controllerService;
+public class ReportCatController  {
+    private final UserCatControllerServiceImpl controllerService;
     private final RepositoryService<ReportCat> repository;
 
     @Operation(
@@ -35,7 +36,7 @@ public class ReportCatController {
                             description = "User in database with id",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = UserDog.class)
+                                    schema = @Schema(implementation = UserCat.class)
                             )
                     ),
                     @ApiResponse(
@@ -70,8 +71,8 @@ public class ReportCatController {
     @PostMapping("/dogId{dogId}")
     public ResponseEntity<Long> addUser(@Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId,
                                         @Parameter(description = "An Entity 'user' in database") @RequestBody ReportCat reportCat) {
-        if (controllerService.checkIfEntitiesExist(reportCat.g, dogId)) {
-            return ResponseEntity.ok().body(controllerService.save(reportCat, dogId));
+        if (controllerService.checkIfEntitiesExist(reportCat.getId(), dogId)) {
+            return ResponseEntity.ok().body(controllerService.save(reportCat.getId(), dogId,reportCat.getUserCat()));
         }
         return ResponseEntity.badRequest().build();
     }
@@ -93,16 +94,16 @@ public class ReportCatController {
                     )
             }, tags = "User"
     )
-    @PutMapping(value = "/dogId{dogId}")
-    public ResponseEntity<Long> editUser(@Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId,
+    @PutMapping(value = "/catId{dogId}")
+    public ResponseEntity<Long> editUser(@Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long catId,
                                          @Parameter(description = "an Entity 'user' in database")
-                                         @RequestBody UserDog userDog) {
-        if (repository.get(userDog.getUserId()).isEmpty()) {
+                                         @RequestBody UserCat userCat) {
+        if (repository.get(userCat.getId()).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        repository.delete(userDog.getUserId());
-        controllerService.save(userDog, dogId);
-        return ResponseEntity.ok().body(userDog.getId());
+        repository.delete(userCat.getId());
+        controllerService.save(userCat.getId(), catId,userCat);
+        return ResponseEntity.ok().body(userCat.getId());
     }
 
     @Operation(
@@ -113,14 +114,14 @@ public class ReportCatController {
                             description = "Users has been returned successfully",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = UserDog[].class)
+                                    array = @ArraySchema(schema = @Schema(implementation = UserCat[].class)
                                     )
                             )
                     )
             }, tags = "User"
     )
     @GetMapping("/")
-    public ResponseEntity<List<UserDog>> getAll() {
+    public ResponseEntity<List<ReportCat>> getAll() {
         return ResponseEntity.ok().body(repository.findAll());
     }
 
@@ -147,4 +148,4 @@ public class ReportCatController {
         return ResponseEntity.ok().build();
     }
 }
-*/
+
