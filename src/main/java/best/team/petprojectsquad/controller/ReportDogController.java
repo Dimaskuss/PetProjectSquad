@@ -24,7 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping(value = "/ReportDog")
 @Tag(name = "Report")
-public class ReportDogController {
+public class ReportDogController  {
     private final UserDogControllerServiceImpl controllerService;
     private final RepositoryService<ReportCat> repository;
 
