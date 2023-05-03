@@ -27,8 +27,8 @@ import static org.mockito.Mockito.when;
         @InjectMocks
         private UserFeedBackController userFeedBackController;
 
-        private UserFeedBack userFeedBack = new UserFeedBack("+79117076105", 123, "Dog", "Egor");
-        private Long id = 0L;
+        private UserFeedBack userFeedBack = new UserFeedBack("+79117076105", 123, "Dog");
+        private final Long id = 0L;
 
         @Test
         void shouldReturnRightObjectPassIdGetter() {

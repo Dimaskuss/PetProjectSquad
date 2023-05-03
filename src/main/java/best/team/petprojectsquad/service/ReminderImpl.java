@@ -16,7 +16,6 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -62,5 +61,4 @@ public class ReminderImpl implements Reminder {
                 reportDog.get(reportDog.size() - 1).getDateReport());
         return Math.abs(period.getDays());
     }
-
 }

@@ -31,6 +31,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<UserDog> userDog;
 
+
+    //TODO: phone сделать, сделать перенос в user_feedback
+
     public User(long chatId) {
         this.chatId = chatId;
     }

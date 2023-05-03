@@ -160,3 +160,10 @@ CREATE TABLE users_user_dog(
 --changeset couldlie:1.8
 ALTER TABLE user_cat ADD COLUMN status VARCHAR(30);
 ALTER TABLE user_dog ADD COLUMN status VARCHAR(30);
+
+--changeset couldlie:1.9
+ALTER TABLE user_feedback DROP COLUMN shelter_type;
+
+--changeset couldlie:2.0
+DROP TABLE users_user_cat;
+DROP TABLE users_user_dog;

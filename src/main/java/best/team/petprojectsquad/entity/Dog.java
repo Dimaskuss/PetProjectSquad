@@ -40,5 +40,4 @@ public class Dog {
         this.yearOfBirthday = yearOfBirthday;
         this.description = description;
     }
-    //TODO:РАЗОБРАТЬСЯ С АННОТАЦИЯМИ, STACKOVERFLOW ERROR
 }
