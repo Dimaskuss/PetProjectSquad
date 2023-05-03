@@ -23,6 +23,7 @@ public class VolunteerQueryService implements QueryHandlerService {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         if (!userFeedBackRepository.existsByChatId(id)) {
             User user = userRepository.getUserFeedBackByChatId(id);
+            //TODO: придумать че с shelter type
             userFeedBackRepository.save(new UserFeedBack(id, "user.getName()", "Dog"));
         }
         SendMessage sendMessage = new SendMessage(id, "Ваш запрос успешно зарегистрирован, ожидайте обратной связи!");
