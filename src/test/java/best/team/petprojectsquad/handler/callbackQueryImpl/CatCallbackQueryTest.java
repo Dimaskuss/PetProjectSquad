@@ -44,7 +44,7 @@ class CatCallbackQueryTest {
         assertEquals(actualList.get(0).getParameters().get("chat_id"),expectedArrayList.get(0).getParameters().get("chat_id"));
     }
 
-    private BotState botState = BotState.SHELTER_CALLBACK;
+    private BotState botState = BotState.CAT_SHELTER_CALLBACK;
 
     @Test
     void shouldReturnHandlerName() {

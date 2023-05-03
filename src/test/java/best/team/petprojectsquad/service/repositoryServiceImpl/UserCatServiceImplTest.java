@@ -21,7 +21,7 @@ class UserCatServiceImplTest {
     @InjectMocks
     UserCatServiceImpl service;
     long id = 0L;
-    UserCat userCat = new UserCat(0,0,null,2018,"8911");
+    UserCat userCat = new UserCat(0, null, 123, "Str");
 
     @Test
     void ShouldReturnRightReferenceById() {

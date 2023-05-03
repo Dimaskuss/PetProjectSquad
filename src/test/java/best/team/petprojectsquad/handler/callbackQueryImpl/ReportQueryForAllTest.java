@@ -44,7 +44,7 @@ class ReportQueryForAllTest {
         assertEquals(actualList.get(0).getParameters().get("chat_id"),expectedArrayList.get(0).getParameters().get("chat_id"));
     }
 
-    private BotState botState = BotState.DOG_SHELTER_MENU;
+    private BotState botState = BotState.FORM_REPORT;
 
     @Test
     void shouldReturnHandlerName() {

@@ -57,8 +57,7 @@ class CatValidatePhoneHandlerTest {
 
     @Test
     void shouldReturnHandlerName() {
-
-        assertEquals(catValidatePhoneHandler.getHandlerName(), BotState.VALIDATE_PHONE);
+        assertEquals(catValidatePhoneHandler.getHandlerName(), BotState.CAT_VALIDATE_CALLBACK);
 
     }
 }
