@@ -29,7 +29,6 @@ public class Cat {
     private int yearOfBirthday;
     @Column(name = "description")
     private String description;
-
     //Аннотация для игнорирования json в REST API
     @JsonIgnore
     @OneToOne(mappedBy = "cat")

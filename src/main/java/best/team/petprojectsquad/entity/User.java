@@ -26,10 +26,13 @@ public class User {
     private long chatId;
     @Column(name = "name")
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<UserCat> userCat;
     @OneToMany(mappedBy = "user")
     private List<UserDog> userDog;
+
+
+    //TODO: phone сделать, сделать перенос в user_feedback
 
     public User(long chatId) {
         this.chatId = chatId;
