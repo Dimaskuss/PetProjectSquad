@@ -15,7 +15,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserDog {
-
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +31,6 @@ public class UserDog {
     @Column(name = "trial_period")
     @JsonIgnore
     private int trialPeriod = 30;
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -44,6 +42,10 @@ public class UserDog {
 
     public UserDog(long chatId) {
         this.chatId = chatId;
+    }
+
+    public UserDog(User user) {
+        this.user = user;
     }
 
     public UserDog(long id, long chatId, String phoneNumber) {

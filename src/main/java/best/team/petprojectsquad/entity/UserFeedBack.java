@@ -15,25 +15,19 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserFeedBack {
-
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderColumn
     private long id;
-
     @Column(name = "phone_number")
     private String phoneNumber;
-
     @Column(name = "chat_id")
     private long chatId;
-
     @Column(name = "name")
     private String name;
-
     @Column(name = "feedback")
     private boolean feedback = true;
-
     @Column(name = "shelter_type")
     private String shelterType;
 

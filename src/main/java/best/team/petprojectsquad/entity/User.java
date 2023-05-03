@@ -17,7 +17,6 @@ import java.util.List;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User {
-
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +26,8 @@ public class User {
     private long chatId;
     @Column(name = "name")
     private String name;
-    @JsonIgnore
     @OneToMany
     private List<UserCat> userCat;
-    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<UserDog> userDog;
 

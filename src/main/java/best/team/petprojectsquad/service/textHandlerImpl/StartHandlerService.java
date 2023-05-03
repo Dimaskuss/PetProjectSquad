@@ -29,7 +29,7 @@ public class StartHandlerService implements TextHandlerService {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         Keyboard keyboard = getMainMenuKeyboard();
         if (!userRepository.existsByChatId(message.chat().id())) {
-            User user = new User(message.chat().id());
+            User user = new User(message.chat().id(),message.from().username());
             userRepository.save(user);
             SendPhoto sendPhoto = new SendPhoto(message.chat().id(), new File("src/main/resources/mainMenu.png"));
             sendPhoto.caption("""

@@ -87,7 +87,8 @@ public class MainHandler {
             case "/dogPass" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_PASS);
             case "/catSafety" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_SHELTER_SAFETY);
             case "/dogSafety" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_SAFETY);
-            case "/callback" -> userDataCache.setUsersCurrentBotState(chatId, BotState.SHELTER_CALLBACK);
+            case "/catCallback" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_SHELTER_CALLBACK);
+            case "/dogCallback" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_SHELTER_CALLBACK);
             case "/callVolunteer" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CALL_VOLUNTEER);
             case "/reasonsWhy" ->
                     userDataCache.setUsersCurrentBotState(chatId, BotState.REASONS_WHY_CANT_BRING_AN_ANIMAL);
