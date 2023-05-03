@@ -35,7 +35,7 @@ public class ReminderImpl implements Reminder {
         return idUser;
     }
 
-    private List<Long> catIdUserFail() {
+    private List<Long> catIdUserFail() { //todo реализовать выборку в базе а не на сервере в стриме
         return userCatRepository.findAll().stream().
                 filter(userCat -> userCat.getTrialPeriod() > 0).
                 map(UserCat::getId).filter(userId -> getPeriodCat(userId) > 1).toList();
@@ -48,7 +48,7 @@ public class ReminderImpl implements Reminder {
         return Math.abs(period.getDays());
     }
 
-    private List<Long> dogIdUserFail() {
+    private List<Long> dogIdUserFail() { //todo реализовать выборку в базе а не на сервере в стриме
         return userDogRepository.findAll().stream().
                 filter(userDog -> userDog.getTrialPeriod() > 0).
                 map(UserDog::getId).filter(userId -> getPeriodDog(userId) > 1).toList();

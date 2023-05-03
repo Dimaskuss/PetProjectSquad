@@ -30,6 +30,13 @@ public class StartHandlerService implements TextHandlerService {
         Keyboard keyboard = getMainMenuKeyboard();
         if (!userRepository.existsByChatId(message.chat().id())) {
             User user = new User(message.chat().id(),message.from().username());
+            //todo внести всю инфу о юзере в базу данных + добавить поля в entity User
+//            message.from().id();
+//            message.from().username();
+//            message.from().firstName();
+//            message.from().lastName();
+
+
             userRepository.save(user);
             SendPhoto sendPhoto = new SendPhoto(message.chat().id(), new File("src/main/resources/mainMenu.png"));
             sendPhoto.caption("""
