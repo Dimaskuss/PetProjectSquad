@@ -4,7 +4,10 @@ import best.team.petprojectsquad.entity.Cat;
 import best.team.petprojectsquad.repository.CatRepository;
 import best.team.petprojectsquad.service.RepositoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +17,7 @@ import java.util.Optional;
 public class CatServiceImpl implements RepositoryService<Cat> {
 
     private CatRepository catRepository;
+
 
     @Override
     public Optional<Cat> get(long id) {

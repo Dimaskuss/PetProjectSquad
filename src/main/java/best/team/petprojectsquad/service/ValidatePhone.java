@@ -6,5 +6,4 @@ public interface ValidatePhone {
         String regex = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$";
         return phone.matches(regex);
     }
-
 }
