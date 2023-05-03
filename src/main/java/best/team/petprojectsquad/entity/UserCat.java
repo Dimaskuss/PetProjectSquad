@@ -31,7 +31,7 @@ public class UserCat {
     @JsonIgnore
     @Column(name = "trial_period")
     private int trialPeriod = 30;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     private boolean userNeedHelp;

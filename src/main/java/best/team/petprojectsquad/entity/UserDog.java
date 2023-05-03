@@ -31,7 +31,7 @@ public class UserDog {
     @Column(name = "trial_period")
     @JsonIgnore
     private int trialPeriod = 30;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     private boolean userNeedHelp;
