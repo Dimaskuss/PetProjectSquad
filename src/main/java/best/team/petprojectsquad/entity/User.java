@@ -11,8 +11,9 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @NoArgsConstructor
+@AllArgsConstructor
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User {
@@ -26,8 +27,10 @@ public class User {
     private long chatId;
     @Column(name = "name")
     private String name;
+    @JsonIgnore
     @OneToMany
     private List<UserCat> userCat;
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<UserDog> userDog;
 

@@ -67,10 +67,10 @@ public class UserCatController {
                     )
             }, tags = "User"
     )
-    @PostMapping("/catId{catId}")
+    @PostMapping("/id{id}catId{catId}")
     public ResponseEntity<Long> addUserCat(
             @Parameter(description = "id of a cat in a cat.DB", example = "1") @PathVariable long catId,
-            @Parameter(description = "id of a user in a uder.DB", example = "1") @PathVariable long id,
+            @Parameter(description = "id of a user in a user.DB", example = "1") @PathVariable long id,
             @Parameter(description = "An Entity 'userCat' in database")
             @RequestBody UserCat userCat) {
         if (controllerService.checkIfEntitiesExist(id, catId)) {
@@ -96,7 +96,7 @@ public class UserCatController {
                     )
             }, tags = "User"
     )
-    @PutMapping(value = "/{catId}")
+    @PutMapping(value = "/id{id}{catId}")
     public ResponseEntity<Long> editUser(
             @Parameter(description = "id of a cat in a cat.DB", example = "1") @PathVariable long catId,
             @Parameter(description = "id of a cat in a cat.DB", example = "1") @PathVariable long id,
