@@ -13,27 +13,27 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserServiceImpl implements RepositoryService<User> {
 
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     @Override
     public Optional<User> get(long id) {
-        return userRepository.findById(id);
+        return repository.findById(id);
     }
 
     @Override
     public long save(User user) {
-        return userRepository.save(user).getId();
+        return repository.save(user).getId();
     }
 
     @Override
     public void delete(long id) {
-        userRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
     @Override
     public List<User> findAll() {
-        return userRepository.findAll();
+        return repository.findAll();
     }
 
-    public Optional<User> findByChatId(long chatId){ return userRepository.findByChatId(chatId);}
+    public Optional<User> findByChatId(long chatId){ return repository.findByChatId(chatId);}
 }
