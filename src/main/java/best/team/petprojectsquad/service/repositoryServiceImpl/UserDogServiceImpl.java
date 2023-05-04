@@ -1,7 +1,6 @@
 package best.team.petprojectsquad.service.repositoryServiceImpl;
 
 import best.team.petprojectsquad.entity.User;
-import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.entity.UserDog;
 import best.team.petprojectsquad.repository.UserDogRepository;
 import best.team.petprojectsquad.service.RepositoryService;
@@ -39,5 +38,9 @@ public class UserDogServiceImpl implements RepositoryService<UserDog> {
 
     public Optional<UserDog> getByUser(User user) {
         return userDogRepository.findByUser(user);
+    }
+
+    public List<UserDog> findAllUsersOnTrialPeriod(){
+        return userDogRepository.findAllByTrialPeriodIsGreaterThan(0);
     }
 }

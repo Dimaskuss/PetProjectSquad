@@ -5,6 +5,7 @@ import best.team.petprojectsquad.entity.UserCat;
 import jakarta.persistence.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Cacheable
@@ -15,4 +16,6 @@ public interface UserCatRepository extends JpaRepository<UserCat, Long> {
     UserCat findByChatId(long chatId);
 
     Optional<UserCat> findByUser(User user);
+
+    List<UserCat> findAllByTrialPeriodIsGreaterThan(int trialPeriod);
 }

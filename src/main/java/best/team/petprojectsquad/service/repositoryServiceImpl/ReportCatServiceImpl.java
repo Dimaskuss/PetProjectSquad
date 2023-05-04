@@ -35,4 +35,7 @@ public class ReportCatServiceImpl implements RepositoryService<ReportCat> {
         return reportCatRepository.findAll();
     }
 
+    public List<ReportCat> findAllByUserCatId(long id) {
+        return reportCatRepository.findAllByUserCatId(id);
+    }
 }
