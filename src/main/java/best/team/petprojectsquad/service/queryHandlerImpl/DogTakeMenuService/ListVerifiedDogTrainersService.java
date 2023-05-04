@@ -7,16 +7,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class ListVerifiedDogTrainersService implements QueryHandlerService {
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         SendMessage sendMessage = new SendMessage(id, """
-                Собачий приют приветствует вас. Ниже представлены рекомендации по проверенным кинологам для дальнейшего обращения к ним:
-                Совет 1,
-                Совет 2,
-                Совет 3;
+                Актуальный список проверенных кинологов вы можете получить у наших волонтеров,
+                так же вы можете найти кинолога самостоятельно на следующих ресурсах:
+                https://k-9.kz/
+                https://www.olx.kz/
                 """);
         requestArrayList.add(sendMessage);
 

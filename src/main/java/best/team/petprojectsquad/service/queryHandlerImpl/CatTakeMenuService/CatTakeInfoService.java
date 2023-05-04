@@ -32,23 +32,23 @@ public class CatTakeInfoService implements QueryHandlerService {
 
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
                 new InlineKeyboardButton[][]{
-                        {new InlineKeyboardButton("правила знакомства с животным до того, как забрать его из приюта")
-                                .callbackData("/rulesBeforeGettingCat")},
-                        {new InlineKeyboardButton("список документов, необходимых для того, чтобы взять животное из приюта")
-                                .callbackData("/catListOfDocuments")},
-                        {new InlineKeyboardButton("список рекомендаций по транспортировке животного")
-                                .callbackData("/catTransportRecommendations")},
-                        {new InlineKeyboardButton("список рекомендаций по обустройству дома для котенка")
-                                .callbackData("/homeRecommendationsKitten")},
-                        {new InlineKeyboardButton("список рекомендаций по обустройству дома для взрослого животного")
-                                .callbackData("/homeRecommendationsAdultCat")},
-                        {new InlineKeyboardButton("список рекомендаций по обустройству дома для для животного с " +
-                                "ограниченными возможностями").callbackData("/homeRecommendationsCatWithDisabilities")},
-                        {new InlineKeyboardButton("список причин, почему могут отказать и не дать забрать животное из приюта")
-                                .callbackData("/catListReasonsNegative")},
-                        {new InlineKeyboardButton("записать контактные данные для связи")
-                                .callbackData("/catSendContact")},
-                        {new InlineKeyboardButton("связаться с волонтером").callbackData("/callVolunteer")}
+                        {new InlineKeyboardButton("Правила знакомства с будущим питомцем").
+                                callbackData("/rulesBeforeGettingCat")},
+                        {new InlineKeyboardButton("Список документов, чтобы взять питомца из приюта").
+                                callbackData("/catListOfDocuments")},
+                        {new InlineKeyboardButton("Рекомендации по транспортировке питомца").
+                                callbackData("/catTransportRecommendations")},
+                        {new InlineKeyboardButton("Обустройство дома для котенка").
+                                callbackData("/homeRecommendationsKitten")},
+                        {new InlineKeyboardButton("Обустройство дома для взрослой кошки").
+                                callbackData("/homeRecommendationsAdultCat")},
+                        {new InlineKeyboardButton("Обустройство дома для для питомца с ОВЗ").
+                                callbackData("/homeRecommendationsCatWithDisabilities")},
+                        {new InlineKeyboardButton("Почему могут отказать и не дать забрать питомца").
+                                callbackData("/reasonsWhy")},
+                        {new InlineKeyboardButton("Отправить контактные данные для связи").
+                                callbackData("/catCallback")},
+                        {new InlineKeyboardButton("Связаться с волонтером").callbackData("/callVolunteer")}
                 });
 
         return inlineKeyboard;
