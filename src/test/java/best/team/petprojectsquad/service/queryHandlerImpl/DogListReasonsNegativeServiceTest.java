@@ -1,6 +1,5 @@
 package best.team.petprojectsquad.service.queryHandlerImpl;
 
-import best.team.petprojectsquad.service.queryHandlerImpl.DogTakeMenuService.DogListReasonsNegativeService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;
@@ -11,21 +10,35 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DogListReasonsNegativeServiceTest {
-    private final DogListReasonsNegativeService dogListReasonsNegativeService = new DogListReasonsNegativeService();
+    private final ReasonsWhyCantBringAnimalQueryService reasonsWhyCantBringAnimalQueryService = new ReasonsWhyCantBringAnimalQueryService();
     long id = 1005223990L;
 
     @Test
     void shouldCreateReplyMessage() {
 
         List<BaseRequest> expectedArrayList = new ArrayList<>();
-        SendMessage sendMessage = new SendMessage(id, """
-                Это список список причин, почему могут отказать и не дать забрать собаку из приюта:
-                        Причина 1,
-                        Причина 2;
-                """);
-        expectedArrayList.add(sendMessage);
+        SendMessage sendMessage0 = new SendMessage(id, "Вам могут отказать по одной из причин:");
+        SendMessage sendMessage1 = new SendMessage(id, """
+                1. Несоответствие требованием безопасности. Волонтеры ведут некую статистику причин, по которым
+                пристроенные питомцы получают травмы.
+                2. Адекватность. Отказ от вакцинации и обработки от паразитов.
+                3. В доме есть другие животные. С одной стороны, это плюс, значит потенциальный владелец может ухаживать
+                за питомцем, с другой - некоторые животные пережили слишком много и плохо адаптируются к соседству.
+                4. Вы хотите взять питомца для ребенка. Очень часто родители берут в дом животное, как игрушку для
+                ребенка, наиграется - могут выкинуть.
+                5. Аллергия. Если Вы аллергик, Вам могут отказать, либо попросят пройти необходимые проверки у врача.
+                6. Вы берете питомца в подарок.
+                7. Пожилой одинокий человек.
+                8. Отсутствие собственного жилья. Дело в том, что не все арендодатели разрешают содержать животных в
+                квартире. Даже если Ваш нынешний владелец не против, никто не застрахован от переезда, а между питомцем
+                и домом, люди выбирают последнее.
+                9. Без объяснения причин. Не всегда волонтеру удобно озвучивать свои опасения.
+                  """);
 
-        List<BaseRequest> actualList = dogListReasonsNegativeService.getReplyMessage(id);
+        expectedArrayList.add(sendMessage0);
+        expectedArrayList.add(sendMessage1);
+
+        List<BaseRequest> actualList = reasonsWhyCantBringAnimalQueryService.getReplyMessage(id);
 
         assertEquals(actualList.size(), expectedArrayList.size());
         assertEquals(actualList.get(0).getClass(), expectedArrayList.get(0).getClass());

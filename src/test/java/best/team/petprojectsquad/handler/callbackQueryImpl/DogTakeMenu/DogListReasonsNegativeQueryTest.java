@@ -1,8 +1,8 @@
 package best.team.petprojectsquad.handler.callbackQueryImpl.DogTakeMenu;
 
 import best.team.petprojectsquad.entity.BotState;
-import best.team.petprojectsquad.handler.callbackQueryImpl.DogTakeMenu.DogListReasonsNegativeQuery;
-import best.team.petprojectsquad.service.queryHandlerImpl.DogTakeMenuService.DogListReasonsNegativeService;
+import best.team.petprojectsquad.handler.callbackQueryImpl.ReasonsWhyCantBringAnimalQuery;
+import best.team.petprojectsquad.service.queryHandlerImpl.ReasonsWhyCantBringAnimalQueryService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;
@@ -21,12 +21,12 @@ import static org.mockito.Mockito.when;
 class DogListReasonsNegativeQueryTest {
 
     @Mock
-    private DogListReasonsNegativeService dogListReasonsNegativeService;
+    private ReasonsWhyCantBringAnimalQueryService reasonsWhyCantBringAnimalQueryService;
 
     @InjectMocks
-    private DogListReasonsNegativeQuery dogListReasonsNegativeQuery;
+    private ReasonsWhyCantBringAnimalQuery reasonsWhyCantBringAnimalQuery;
 
-    private final BotState botState = BotState.DOG_TAKE_NEGATIVE;
+    private final BotState botState = BotState.REASONS_WHY_CANT_BRING_AN_ANIMAL;
     long id = 1005223990L;
 
     @Test
@@ -39,9 +39,9 @@ class DogListReasonsNegativeQueryTest {
                 """);
         expectedArrayList.add(sendMessage);
 
-        when(dogListReasonsNegativeService.getReplyMessage(id)).thenReturn(expectedArrayList);
+        when(reasonsWhyCantBringAnimalQueryService.getReplyMessage(id)).thenReturn(expectedArrayList);
 
-        List<BaseRequest> actualList = dogListReasonsNegativeQuery.handle(id);
+        List<BaseRequest> actualList = reasonsWhyCantBringAnimalQuery.handle(id);
 
         assertEquals(actualList.size(), expectedArrayList.size());
         assertEquals(actualList.get(0).getClass(), expectedArrayList.get(0).getClass());
@@ -52,7 +52,7 @@ class DogListReasonsNegativeQueryTest {
     @Test
     void shouldReturnHandlerName() {
 
-        assertEquals(dogListReasonsNegativeQuery.getHandlerName(), botState);
+        assertEquals(reasonsWhyCantBringAnimalQuery.getHandlerName(), botState);
 
     }
 

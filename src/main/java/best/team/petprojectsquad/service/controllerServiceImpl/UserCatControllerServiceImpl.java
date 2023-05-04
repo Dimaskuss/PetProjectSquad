@@ -17,18 +17,18 @@ public class UserCatControllerServiceImpl implements UserCatControllerService {
     private final CatRepository catRepository;
     private final UserCatRepository userCatRepository;
     private final UserRepository userRepository;
+
     @Override
-    public boolean checkIfEntitiesExist(long id, long catId) {
-        return userRepository.findById(id).isPresent() && catRepository.findById(catId).isPresent();
+    public boolean checkIfEntitiesExist(long userId, long catId) {
+        return userRepository.findById(userId).isPresent() && catRepository.findById(catId).isPresent();
     }
 
     @Override
-    public long save(long catId,long id, UserCat userCat) {
-            userCat.setUser(userRepository.findById(id).get());
-            userCat.setCat(catRepository.findById(catId).get());
-            return userCatRepository.save(userCat).getId();
+    public long save(long catId, long userId, UserCat userCat) {
+        userCat.setUser(userRepository.findById(userId).get());
+        userCat.setCat(catRepository.findById(catId).get());
+        return userCatRepository.save(userCat).getId();
     }
-
 
     @Override
     public UserCat getReferenceById(long id) {

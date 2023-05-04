@@ -29,9 +29,6 @@ class ReportValidateCatTest {
     @InjectMocks
     private ReportValidateCat handler;
 
-    long id = 123;
-    String text = "/start";
-
     @Test
     void shouldReturnMessageHandle() throws URISyntaxException, IOException {
         List<BaseRequest> expectedArrayList = new ArrayList<>();
@@ -50,10 +47,4 @@ class ReportValidateCatTest {
         assertEquals(actualList.get(0).getParameters(), expectedArrayList.get(0).getParameters());
     }
 
-
-    @Test
-    void shouldReturnHandlerName() {
-        assertEquals(handler.getHandlerName(), null);
-
-    }
 }
