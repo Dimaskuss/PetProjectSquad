@@ -8,13 +8,13 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.BaseRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Service
+@Component
 @AllArgsConstructor
 public class MainHandler {
 
@@ -25,14 +25,12 @@ public class MainHandler {
 
         List<BaseRequest> baseRequestList = new ArrayList<>();
 
-        Message message = update.message();
-
-        if (update.message() != null && (update.message().text() != null || message.photo() != null)) {
+        if (update.message() != null && update.message().text() != null) {
             log.info("New message from User:{}, chatId: {},  with text: {}"
-                    , message.from().username()
-                    , message.chat().id()
-                    , message.text());
-            baseRequestList.addAll(handleInputMessage(message));
+                    , update.message().from().username()
+                    , update.message().chat().id()
+                    , update.message().text());
+            baseRequestList.addAll(handleInputMessage(update.message()));
         }
 
         if (update.callbackQuery() != null) {
@@ -42,6 +40,19 @@ public class MainHandler {
                     , update.callbackQuery().data());
             baseRequestList.addAll(handleQueryMessage(update.callbackQuery()));
 
+        }
+
+        if (update.message() != null
+                && update.message().photo() != null
+                && (userDataCache.getUsersCurrentBotState(update.message().chat().id()) == BotState.CAT_REPORT_VALIDATE
+                || userDataCache.getUsersCurrentBotState(update.message().chat().id()) == BotState.DOG_REPORT_VALIDATE)) {
+
+            log.info("New photo from User:{}, chatId: {}"
+                    , update.message().from().username()
+                    , update.message().chat().id());
+
+            BotState botState = userDataCache.getUsersCurrentBotState(update.message().chat().id());
+            baseRequestList.addAll(botStateContext.processInputMessage(botState, update.message()));
         }
 
         return baseRequestList;

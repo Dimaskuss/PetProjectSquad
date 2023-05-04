@@ -26,8 +26,11 @@ public class ReportServiceForAll implements QueryHandlerService {
                 """);
         SendPhoto sendPhoto = new SendPhoto(id, new File("src/main/resources/pictures/report.png"));
         sendPhoto.caption("Кормим питомца: корм/бренд, питомец чувствует себя прекрасно, ведет себя ласково и дружелюбно.");
+        SendMessage sendMessage1 = new SendMessage(id,"для отправки отчета нажмите на кнопку:\n \"Отправить отчет о питомце.\"");
         requestArrayList.add(sendMessage);
         requestArrayList.add(sendPhoto);
+        requestArrayList.add(sendMessage1);
+
         return requestArrayList;
     }
 }
