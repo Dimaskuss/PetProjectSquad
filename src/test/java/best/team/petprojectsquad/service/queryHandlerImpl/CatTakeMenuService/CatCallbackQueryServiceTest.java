@@ -1,8 +1,7 @@
-package best.team.petprojectsquad.service.queryHandlerImpl;
+package best.team.petprojectsquad.service.queryHandlerImpl.CatTakeMenuService;
 
 import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.BotState;
-import best.team.petprojectsquad.service.queryHandlerImpl.CatTakeMenuService.CatCallbackQueryService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CatCatCallbackQueryServiceTest {
+class CatCallbackQueryServiceTest {
 
     @Mock
     private UserDataCache userDataCache;

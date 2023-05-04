@@ -39,4 +39,8 @@ public class UserCatServiceImpl implements RepositoryService<UserCat> {
     public Optional<UserCat> getByUser(User user) {
         return userCatRepository.findByUser(user);
     }
+
+    public List<UserCat> findAllUsersOnTrialPeriod(){
+        return userCatRepository.findAllByTrialPeriodIsGreaterThan(0);
+    }
 }

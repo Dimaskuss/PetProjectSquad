@@ -35,4 +35,7 @@ public class ReportDogServiceImpl implements RepositoryService<ReportDog> {
         return reportDogRepository.findAll();
     }
 
+    public List<ReportDog> findAllByUserDogId(long id) {
+        return reportDogRepository.findAllByUserDogId(id);
+    }
 }

@@ -4,10 +4,10 @@ import best.team.petprojectsquad.entity.ReportCat;
 import best.team.petprojectsquad.entity.ReportDog;
 import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.entity.UserDog;
-import best.team.petprojectsquad.repository.ReportCatRepository;
-import best.team.petprojectsquad.repository.ReportDogRepository;
-import best.team.petprojectsquad.repository.UserCatRepository;
-import best.team.petprojectsquad.repository.UserDogRepository;
+import best.team.petprojectsquad.service.repositoryServiceImpl.ReportCatServiceImpl;
+import best.team.petprojectsquad.service.repositoryServiceImpl.ReportDogServiceImpl;
+import best.team.petprojectsquad.service.repositoryServiceImpl.UserCatServiceImpl;
+import best.team.petprojectsquad.service.repositoryServiceImpl.UserDogServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +21,10 @@ import java.util.List;
 @AllArgsConstructor
 public class ReminderImpl implements Reminder {
 
-    private final UserCatRepository userCatRepository;
-    private final ReportCatRepository reportCatRepository;
-    private final UserDogRepository userDogRepository;
-    private final ReportDogRepository reportDogRepository;
+    private final UserCatServiceImpl userCatRepository;
+    private final ReportCatServiceImpl reportCatRepository;
+    private final UserDogServiceImpl userDogRepository;
+    private final ReportDogServiceImpl reportDogRepository;
 
     @Override
     public List<Long> idUserToSendReminder() {
@@ -34,9 +34,8 @@ public class ReminderImpl implements Reminder {
         return idUser;
     }
 
-    private List<Long> catIdUserFail() { //todo реализовать выборку в базе а не на сервере в стриме
-        return userCatRepository.findAll().stream().
-                filter(userCat -> userCat.getTrialPeriod() > 0).
+    private List<Long> catIdUserFail() {
+        return userCatRepository.findAllUsersOnTrialPeriod().stream().
                 map(UserCat::getId).filter(userId -> getPeriodCat(userId) > 1).toList();
     }
 
@@ -47,9 +46,8 @@ public class ReminderImpl implements Reminder {
         return Math.abs(period.getDays());
     }
 
-    private List<Long> dogIdUserFail() { //todo реализовать выборку в базе а не на сервере в стриме
-        return userDogRepository.findAll().stream().
-                filter(userDog -> userDog.getTrialPeriod() > 0).
+    private List<Long> dogIdUserFail() {
+        return userDogRepository.findAllUsersOnTrialPeriod().stream().
                 map(UserDog::getId).filter(userId -> getPeriodDog(userId) > 1).toList();
     }
 
