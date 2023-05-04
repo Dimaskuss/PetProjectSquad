@@ -34,7 +34,7 @@ public class ReportDog {
     private boolean reportAccepted = false;
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "user_dog")
+    @JoinColumn(name = "user_dog_id")
     private UserDog userDog;
 
     public ReportDog(String report, LocalDate dateReport, String photoId) {

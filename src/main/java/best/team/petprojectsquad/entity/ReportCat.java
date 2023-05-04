@@ -31,7 +31,7 @@ public class ReportCat {
     private boolean reportAccepted = false;
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "user_cat")
+    @JoinColumn(name = "user_cat_id")
     private UserCat userCat;
 
     public ReportCat(String report, LocalDate dateReport, String photoId) {
