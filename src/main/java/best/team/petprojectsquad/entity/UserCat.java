@@ -29,7 +29,7 @@ public class UserCat {
     private String phoneNumber;
     @JsonIgnore
     @Column(name = "trial_period")
-    private int trialPeriod = 30;
+    private int trialPeriod;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

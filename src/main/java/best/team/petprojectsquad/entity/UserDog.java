@@ -30,7 +30,7 @@ public class UserDog {
     private String phoneNumber;
     @Column(name = "trial_period")
     @JsonIgnore
-    private int trialPeriod = 30;
+    private int trialPeriod;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
