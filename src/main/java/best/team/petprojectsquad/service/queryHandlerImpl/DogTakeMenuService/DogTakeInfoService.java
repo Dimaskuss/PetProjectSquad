@@ -30,31 +30,30 @@ public class DogTakeInfoService implements QueryHandlerService {
 
     private Keyboard getTakeInfoCatMenuKeyboard() {
 
-        InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
+        return new InlineKeyboardMarkup(
                 new InlineKeyboardButton[][]{
-                        {new InlineKeyboardButton("правила знакомства с животным до того, как забрать его из приюта")
-                                .callbackData("/rulesBeforeGettingDog")},
-                        {new InlineKeyboardButton("список документов, необходимых для того, чтобы взять животное из приюта")
-                                .callbackData("/dogListOfDocuments")},
-                        {new InlineKeyboardButton("список рекомендаций по транспортировке животного")
-                                .callbackData("/dogTransportRecommendations")},
-                        {new InlineKeyboardButton("список рекомендаций по обустройству дома для щенка")
-                                .callbackData("/homeRecommendationsPuppy")},
-                        {new InlineKeyboardButton("список рекомендаций по обустройству дома для взрослого животного")
-                                .callbackData("/homeRecommendationsAdultDog")},
-                        {new InlineKeyboardButton("список рекомендаций по обустройству дома для для животного с " +
-                                "ограниченными возможностями").callbackData("/homeRecommendationsDogWithDisabilities")},
-                        {new InlineKeyboardButton("советы кинолога по первичному общению с собакой")
-                                .callbackData("/tipsDogTrainer")},
-                        {new InlineKeyboardButton("рекомендации по проверенным кинологам для дальнейшего обращения к ним")
-                                .callbackData("/listVerifiedDogTrainers")},
-                        {new InlineKeyboardButton("список причин, почему могут отказать и не дать забрать животное из приюта")
-                                .callbackData("/dogListReasonsNegative")},
-                        {new InlineKeyboardButton("записать контактные данные для связи")
-                                .callbackData("/dogSendContact")},
-                        {new InlineKeyboardButton("связаться с волонтером").callbackData("/callVolunteer")}
+                        {new InlineKeyboardButton("Правила знакомства с будущим питомцем").
+                                callbackData("/rulesBeforeGettingDog")},
+                        {new InlineKeyboardButton("Список документов, чтобы взять питомца из приюта").
+                                callbackData("/dogListOfDocuments")},
+                        {new InlineKeyboardButton("Рекомендации по транспортировке питомца").
+                                callbackData("/dogTransportRecommendations")},
+                        {new InlineKeyboardButton("Обустройство дома для щенка").
+                                callbackData("/homeRecommendationsPuppy")},
+                        {new InlineKeyboardButton("Обустройство дома для взрослой собаки").
+                                callbackData("/homeRecommendationsAdultDog")},
+                        {new InlineKeyboardButton("Обустройство дома для для питомца с ОВЗ").
+                                callbackData("/homeRecommendationsDogWithDisabilities")},
+                        {new InlineKeyboardButton("Советы кинолога по первичному общению с собакой").
+                                callbackData("/tipsDogTrainer")},
+                        {new InlineKeyboardButton("Рекомендации по проверенным кинологам").
+                                callbackData("/listVerifiedDogTrainers")},
+                        {new InlineKeyboardButton("Почему могут отказать и не дать забрать питомца").
+                                callbackData("/reasonsWhy")},
+                        {new InlineKeyboardButton("Отправить контактные данные для связи").
+                                callbackData("/dogCallback")},
+                        {new InlineKeyboardButton("Связаться с волонтером").
+                                callbackData("/callVolunteer")}
                 });
-
-        return inlineKeyboard;
     }
 }

@@ -2,7 +2,6 @@ package best.team.petprojectsquad.handler;
 
 import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.BotState;
-import best.team.petprojectsquad.service.ReminderImpl;
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
@@ -117,7 +116,6 @@ public class MainHandler {
             case "/tipsDogTrainer" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_TIPS_TRAINER);
             case "/listVerifiedDogTrainers" ->
                     userDataCache.setUsersCurrentBotState(chatId, BotState.VERIFIED_TRAINERS);
-            case "/dogListReasonsNegative" -> userDataCache.setUsersCurrentBotState(chatId, BotState.DOG_TAKE_NEGATIVE);
             case "/catSendContact" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CONTACTS_CAT);
             case "/dogSendContact" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CONTACTS_DOG);
             case "/catReportMenu" -> userDataCache.setUsersCurrentBotState(chatId, BotState.CAT_REPORT_MENU);
