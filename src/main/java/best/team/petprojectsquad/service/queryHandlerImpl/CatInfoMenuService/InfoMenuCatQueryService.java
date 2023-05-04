@@ -29,7 +29,7 @@ public class InfoMenuCatQueryService implements QueryHandlerService {
 
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
                 new InlineKeyboardButton[][]{
-                        {new InlineKeyboardButton("Информация о приюте").callbackData("/catInfo")},
+                        {new InlineKeyboardButton("Пару слов о нашем приюте").callbackData("/catInfo")},
                         {new InlineKeyboardButton("Режим работы, адрес и схема проезда").callbackData("/catAddress")},
                         {new InlineKeyboardButton("Телефон охраны для оформления пропуска").callbackData("/catPass")},
                         {new InlineKeyboardButton("Рекомендации о технике безопасности").callbackData("/catSafety")},

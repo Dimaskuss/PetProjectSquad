@@ -31,15 +31,19 @@ public class CatValidatePhoneService implements TextHandlerService, ValidatePhon
     public List<BaseRequest> getReplyMessage(Message message) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         if (checkPhone(message.text())) {
-            User user = userService.findByChatId(message.chat().id()).orElse(new User(message.messageId(), message.from().username()));
+            try {
+            User user = userService.findByChatId(message.chat().id()).orElseThrow(NullPointerException::new);
             UserCat userCat = userCatService.getByUser(user).orElse(new UserCat(user));
             userCat.setUserNeedHelp(true);
             userCat.setPhoneNumber(message.text());
+            userCat.setChatId(message.chat().id());
             userCatService.save(userCat);
-
             SendMessage sendMessage = new SendMessage(message.chat().id(), "Волонтер в ближайшее время Вам перезвонит.");
             requestArrayList.add(sendMessage);
             userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.START);
+            } catch (Exception e) {
+                log.error("Error in class CatValidatePhoneService:" + e.getMessage(), e);
+            }
         } else {
             SendMessage sendMessage = new SendMessage(message.chat().id(), "Телефон написан некорректно, пришлите еще раз в формате +79315556677");
             requestArrayList.add(sendMessage);

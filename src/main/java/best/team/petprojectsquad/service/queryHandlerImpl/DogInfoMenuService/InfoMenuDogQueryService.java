@@ -28,7 +28,7 @@ public class InfoMenuDogQueryService implements QueryHandlerService {
 
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
                 new InlineKeyboardButton[][]{
-                        {new InlineKeyboardButton("Информация о приюте").callbackData("/dogInfo")},
+                        {new InlineKeyboardButton("Пару слов о нашем приюте").callbackData("/dogInfo")},
                         {new InlineKeyboardButton("Режим работы, адрес и схема проезда").callbackData("/dogAddress")},
                         {new InlineKeyboardButton("Телефон охраны для оформления пропуска").callbackData("/dogPass")},
                         {new InlineKeyboardButton("Рекомендации о технике безопасности").callbackData("/dogSafety")},
