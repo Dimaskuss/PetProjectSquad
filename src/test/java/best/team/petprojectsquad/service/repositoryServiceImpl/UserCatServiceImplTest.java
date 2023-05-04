@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,5 +42,15 @@ class UserCatServiceImplTest {
     @Test
     void findById() {
         assertEquals(service.get(-0L), Optional.empty());
+    }
+
+    @Test
+    void findAllUsersOnTrialPeriod() {
+
+        List<UserCat> usersOnTrialExpected = repository.findAll().stream().filter(userCat -> userCat.getTrialPeriod()>0).toList();
+
+        List<UserCat> usersOnTrialActual = repository.findAllByTrialPeriodIsGreaterThan(0);
+
+        assertEquals(usersOnTrialExpected, usersOnTrialActual);
     }
 }

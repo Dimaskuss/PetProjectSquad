@@ -1,18 +1,23 @@
 package best.team.petprojectsquad.service.queryHandlerImpl.CatTakeMenuService;
 
-import best.team.petprojectsquad.service.QueryHandlerService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
-import org.springframework.stereotype.Service;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-@Service
-public class CatTransportRecommendationsService implements QueryHandlerService {
 
-    @Override
-    public List<BaseRequest> getReplyMessage(long id) {
-        List<BaseRequest> requestArrayList = new ArrayList<>();
+import static org.junit.jupiter.api.Assertions.*;
+
+class CatTransportRecommendationsServiceTest {
+
+    private final CatTransportRecommendationsService service = new CatTransportRecommendationsService();
+    long id = 1005223990L;
+
+    @Test
+    void shouldCreateReplyMessage() {
+
+        List<BaseRequest> expectedArrayList = new ArrayList<>();
         SendMessage sendMessage = new SendMessage(id, """
                 Рекомендации по транспортировке кошки:
                 1. Используйте специальный переносной контейнер для животных. Он должен быть достаточно большим, чтобы кот мог комфортно сидеть, поворачиваться и ложиться, а также обеспечивать достаточную вентиляцию.
@@ -23,10 +28,13 @@ public class CatTransportRecommendationsService implements QueryHandlerService {
                 6. Если путешествие длительное, то регулярно проверяйте состояние кота, давайте ему возможность выйти из контейнера и осмотреть окружающую среду, прогуляйтесь с ним на поводке, если это возможно.
                 7. Если вы путешествуете в другую страну или регион, убедитесь, что у вас есть необходимые документы, такие как ветеринарные сертификаты и прививочные карты, чтобы ваш кот мог безопасно путешествовать.
                 """);
+        expectedArrayList.add(sendMessage);
 
-        requestArrayList.add(sendMessage);
+        List<BaseRequest> actualList = service.getReplyMessage(id);
 
-        return requestArrayList;
+        assertEquals(actualList.size(), expectedArrayList.size());
+        assertEquals(actualList.get(0).getClass(), expectedArrayList.get(0).getClass());
+        assertEquals(actualList.get(0).getParameters().get("chat_id"),expectedArrayList.get(0).getParameters().get("chat_id"));
+
     }
- }
-
+}
