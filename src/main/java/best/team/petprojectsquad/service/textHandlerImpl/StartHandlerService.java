@@ -30,23 +30,16 @@ public class StartHandlerService implements TextHandlerService {
         Keyboard keyboard = getMainMenuKeyboard();
         if (!userRepository.existsByChatId(message.chat().id())) {
             User user = new User(message.chat().id(),message.from().username());
-            //todo внести всю инфу о юзере в базу данных + добавить поля в entity User
-//            message.from().id();
-//            message.from().username();
-//            message.from().firstName();
-//            message.from().lastName();
-
-
             userRepository.save(user);
             SendPhoto sendPhoto = new SendPhoto(message.chat().id(), new File("src/main/resources/mainMenu.png"));
             sendPhoto.caption("""
-                    Вас приветствует приют для домашних животных.\n
-                    Наш приют содержит бездомных, покалеченных и больных животных (без учёта постоянно прибывающих) и 
-                    очень нуждается в помощи и благотворительности на постоянной основе. Будем признательны за каждый 
-                    вклад.\n
+                    Вас приветствует приют для домашних животных.
+                    Наш приют содержит бездомных, покалеченных и больных животных (без учёта постоянно прибывающих) и
+                    очень нуждается в помощи и благотворительности на постоянной основе. Будем признательны за каждый
+                    вклад.
                     Если вы неравнодушны, приезжайте общаться с хвостиками, привезите им вкусняшки, помогите копейкой, 
                     им же немного нужно для счастья. А самое большое счастье для четвероногого друга - обрести свой 
-                    родной дом или чью-то родную душу.\n
+                    родной дом или чью-то родную душу.
                     Мы очень будем рады любой помощи.
                     """);
             requestArrayList.add(sendPhoto);
