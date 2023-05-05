@@ -19,70 +19,61 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/Cats")
-@Tag(name = "Cat", description = "Cat entity in DB")
+@Tag(name = "Cat", description = "Api for working with the cat entity in the database")
 public class CatController {
 
     private final RepositoryService<Cat> repository;
 
-    @Operation(
-            summary = "Getting cat by it's id",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Cat in database with id",
-                            content = @Content(
-                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = Cat.class)
-                            )
-                    ),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "There is no cat under that id!"
-                    )
-            }, tags = "Cat"
+    @Operation(summary = "Getting cat by it's id")
+    @ApiResponse(
+            responseCode = "200",
+            description = "Cat in database with id",
+            content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Cat.class))
+    )
+    @ApiResponse(
+            responseCode = "500",
+            description = "There is no cat under that id!"
     )
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Cat> getCatById(@Parameter(description = "id of a cat in a DB", example = "1") @PathVariable long id) {
+    public ResponseEntity<Cat> getCatById(@Parameter(description = "id of a cat in a database", example = "1")
+                                          @PathVariable long id) {
         return ResponseEntity.ok(repository.get(id).get());
     }
 
-    @Operation(
-            summary = "Adding cat, returning id of added cat",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Cat has been added to database successfully!"
-                    ),
-                    @ApiResponse(
-                            responseCode = "400",
-                            description = "Some fields may be empty, try to fill them correctly using example"
-                    )
-            }, tags = "Cat"
+    @Operation(summary = "Adding cat, returning id of added cat")
+    @ApiResponse(
+            responseCode = "200",
+            description = "Cat has been added to database successfully!"
+    )
+    @ApiResponse(
+            responseCode = "400",
+            description = "Some fields may be empty, try to fill them correctly using example"
     )
     @PostMapping("/")
-    public ResponseEntity<Long> addCat(@Parameter (description = "an Entity 'cat' in database") @RequestBody Cat cat) {
+    public ResponseEntity<Long> addCat(@Parameter(description = "Add Entity 'cat' in database")
+                                       @RequestBody Cat cat) {
         return ResponseEntity.ok().body(repository.save(cat));
     }
 
-    @Operation(
-            summary = "Editing cat",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Cat has been successfully edited, id has been successfully returned"
-                    ),
-                    @ApiResponse(
-                            responseCode = "204",
-                            description = "There is no cat in database by this id"
-                    ),
-                    @ApiResponse(
-                            responseCode = "400",
-                            description = "Some fields in body may be empty, or may contain irrelevant type! Try to fill fields correctly using example"
-                    )
-            }, tags = "Cat"
+    @Operation(summary = "Editing cat")
+    @ApiResponse(
+            responseCode = "200",
+            description = "Cat has been successfully edited, id has been successfully returned"
+    )
+    @ApiResponse(
+            responseCode = "204",
+            description = "There is no cat in database by this id"
+    )
+    @ApiResponse(
+            responseCode = "400",
+            description = "Some fields in body may be empty, or may contain irrelevant type! Try to fill fields correctly using example"
     )
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Long> editCat(@Parameter(description = "id of a cat in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'cat' in database") @RequestBody Cat cat) {
+    public ResponseEntity<Long> editCat(@Parameter(description = "id of a cat in a DB", example = "1")
+                                        @PathVariable long id,
+                                        @Parameter(description = "an Entity 'cat' in database")
+                                        @RequestBody Cat cat) {
         if (repository.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -91,41 +82,31 @@ public class CatController {
         return ResponseEntity.ok().body(cat.getId());
     }
 
-    @Operation(
-            summary = "Getting all cats",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Cats has been returned successfully",
-                            content = @Content(
-                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = Cat[].class)
-                                    )
-                            )
-                    )
-            }, tags = "Cat"
+    @Operation(summary = "Getting all cats")
+    @ApiResponse(
+            responseCode = "200",
+            description = "Cats has been returned successfully",
+            content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(schema = @Schema(implementation = Cat[].class))
+            )
     )
     @GetMapping("/")
     public ResponseEntity<List<Cat>> getAll() {
         return ResponseEntity.ok().body(repository.findAll());
     }
 
-
-    @Operation(
-            summary = "Deleting cat by it's id",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Cat has been Successfully removed"
-                    ),
-                    @ApiResponse(
-                            responseCode = "204",
-                            description = "There is no cat in database by this id"
-                    )
-            }, tags = "Cat"
+    @Operation(summary = "Deleting cat by it's id")
+    @ApiResponse(
+            responseCode = "200",
+            description = "Cat has been Successfully removed"
+    )
+    @ApiResponse(
+            responseCode = "204",
+            description = "There is no cat in database by this id"
     )
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteCat(@Parameter @PathVariable long id) {
+    public ResponseEntity<Void> deleteCat(@Parameter(description = "id for removing a cat from the database", example = "1")
+                                          @PathVariable long id) {
         if (repository.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }

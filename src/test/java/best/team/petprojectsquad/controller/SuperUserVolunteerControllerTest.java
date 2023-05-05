@@ -14,7 +14,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-
 @ExtendWith(MockitoExtension.class)
 class SuperUserVolunteerControllerTest {
     @Mock
@@ -28,17 +27,13 @@ class SuperUserVolunteerControllerTest {
 
     @Test
     void shouldReturnRightObjectPassIdGetter() {
-
         when(superUserVolunteerControllerService.getReferenceById(id)).thenReturn(superUserVolunteer);
-
         ResponseEntity<SuperUserVolunteer> status = superUserVolunteerController.getUserById(0);
-
         assertEquals(status.getBody(), superUserVolunteer);
     }
 
     @Test
     void shouldReturnRightObjectPassAdd() {
-
         when(superUserVolunteerControllerService.save(superUserVolunteer)).thenReturn(id);
         ResponseEntity<Long> idNewUserCat = superUserVolunteerController.addUser(superUserVolunteer);
         assertEquals(idNewUserCat.getBody(), id);
@@ -46,7 +41,6 @@ class SuperUserVolunteerControllerTest {
 
     @Test
     void shouldReturnRightObjectDelete() {
-
         when(superUserVolunteerControllerService.save(superUserVolunteer)).thenReturn(id);
         when(superUserVolunteerControllerService.findById(id)).thenReturn(Optional.of(superUserVolunteer));
         ResponseEntity<Long> idEditUserCat = superUserVolunteerController.editUser(id, superUserVolunteer);

@@ -32,7 +32,6 @@ import static org.mockito.Mockito.when;
 
         @Test
         void shouldReturnRightObjectPassIdGetter() {
-
             when(userFeedBackControllerService.getReferenceById(id)).thenReturn(userFeedBack);
 
             ResponseEntity<UserFeedBack> status = userFeedBackController.getUserById(id);

@@ -1,7 +1,7 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.ReportCat;
-import best.team.petprojectsquad.entity.UserDog;
+import best.team.petprojectsquad.entity.ReportDog;
 import best.team.petprojectsquad.service.RepositoryService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,28 +12,28 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
-public class ReportCatControllerTest {
+class ReportDogControllerTest {
     @Mock
-    RepositoryService<ReportCat> repositoryReportCat;
+    RepositoryService<ReportDog> repositoryReportDog;
     @InjectMocks
-    private ReportCatController reportCatController;
+    private ReportDogController reportDogController;
     long id = 132L;
-    ReportCat reportCat = new ReportCat("report", null, "1");
+    ReportDog reportDog = new ReportDog("report", null, "1");
 
     @Test
     void shouldReturnReportById() {
-        when(repositoryReportCat.get(id)).thenReturn(Optional.ofNullable(reportCat));
-        ResponseEntity<ReportCat> status = reportCatController.getReportById(id);
-        assertEquals(status.getBody(), reportCat);
+        when(repositoryReportDog.get(id)).thenReturn(Optional.ofNullable(reportDog));
+        ResponseEntity<ReportDog> status = reportDogController.getReportById(id);
+        assertEquals(status.getBody(), reportDog);
     }
 
     @Test
     void shouldReturnIdAddedReport() {
-        when(repositoryReportCat.save(reportCat)).thenReturn(id);
-        ResponseEntity<Long> idReportCat = reportCatController.addReport(reportCat);
+        when(repositoryReportDog.save(reportDog)).thenReturn(id);
+        ResponseEntity<Long> idReportCat = reportDogController.addReport(reportDog);
         assertEquals(idReportCat.getBody(), id);
     }
 

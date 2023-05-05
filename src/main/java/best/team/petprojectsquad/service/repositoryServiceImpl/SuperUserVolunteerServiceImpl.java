@@ -1,4 +1,4 @@
-package best.team.petprojectsquad.service.controllerServiceImpl;
+package best.team.petprojectsquad.service.repositoryServiceImpl;
 
 import best.team.petprojectsquad.entity.SuperUserVolunteer;
 import best.team.petprojectsquad.repository.SuperUserVolunteerRepository;

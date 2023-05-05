@@ -35,8 +35,6 @@ public class VolunteerFunctionalController {
     @PostMapping("/{id}")
     public ResponseEntity<SendResponse> sendUserRemarkMessage(@Parameter(description = "id of a user in a user.DB", example = "1")
                                                               @PathVariable long id) {
-//        todo: получить id пользователя
-//        long chatId = userRepository.getReferenceById(id).getChatId();
         return ResponseEntity.ok().body(volunteerService.sendRemark(id));
     }
 

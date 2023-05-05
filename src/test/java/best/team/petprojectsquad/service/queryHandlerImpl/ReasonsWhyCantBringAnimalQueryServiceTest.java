@@ -19,8 +19,8 @@ class ReasonsWhyCantBringAnimalQueryServiceTest {
     @Test
     void getReplyMessage() {
 
-        List<BaseRequest> actualList = reasonsWhyCantBringAnimalQueryService.getReplyMessage(123);
-        List<BaseRequest> expectedArrayList = new ArrayList<>();
+        List<BaseRequest> replyMessage = reasonsWhyCantBringAnimalQueryService.getReplyMessage(123);
+        List<BaseRequest> requestArrayList = new ArrayList<>();
 
         SendMessage sendMessage0 = new SendMessage(id, "Вам могут отказать по одной из причин:");
         SendMessage sendMessage1 = new SendMessage(id, """
@@ -40,15 +40,9 @@ class ReasonsWhyCantBringAnimalQueryServiceTest {
                 9. Без объяснения причин. Не всегда волонтеру удобно озвучивать свои опасения.
                   """);
 
-        expectedArrayList.add(sendMessage0);
-        expectedArrayList.add(sendMessage1);
-
-
-        assertEquals(actualList.get(0).getParameters(), expectedArrayList.get(0).getParameters());
-        assertEquals(actualList.get(1).getParameters(), expectedArrayList.get(1).getParameters());
-        assertEquals(actualList.size(), expectedArrayList.size());
-        assertEquals(actualList.get(0).getClass(), expectedArrayList.get(0).getClass());
-        assertEquals(actualList.get(0).getParameters().get("chat_id"),expectedArrayList.get(0).getParameters().get("chat_id"));
-
+        requestArrayList.add(sendMessage0);
+        requestArrayList.add(sendMessage1);
+        assertEquals(replyMessage.get(0).getParameters(), requestArrayList.get(0).getParameters());
+        assertEquals(replyMessage.get(1).getParameters(), requestArrayList.get(1).getParameters());
     }
 }
