@@ -24,7 +24,6 @@ public class UserDogControllerServiceImpl implements UserDogControllerService {
 
     @Override
     public long save(UserDog userDog, long id, long dogId) {
-
             userDog.setUser(userRepository.getReferenceById(id));
             userDog.setDog(dogRepository.findById(dogId).get());
             return userDogRepository.save(userDog).getId();
