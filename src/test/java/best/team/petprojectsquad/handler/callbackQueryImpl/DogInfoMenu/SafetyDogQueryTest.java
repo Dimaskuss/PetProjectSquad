@@ -1,8 +1,7 @@
 package best.team.petprojectsquad.handler.callbackQueryImpl.DogInfoMenu;
 
 import best.team.petprojectsquad.entity.BotState;
-import best.team.petprojectsquad.handler.callbackQueryImpl.CatInfoMenu.SafetyCatQuery;
-import best.team.petprojectsquad.service.queryHandlerImpl.CatInfoMenuService.SafetyCatQueryService;
+import best.team.petprojectsquad.service.queryHandlerImpl.DogInfoMenuService.SafetyDogQueryService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;
@@ -21,13 +20,13 @@ import static org.mockito.Mockito.when;
 class SafetyDogQueryTest {
 
     @Mock
-    SafetyCatQueryService service;
+    SafetyDogQueryService service;
 
     @InjectMocks
-    private SafetyCatQuery catQuery;
+    private SafetyDogQuery dogQuery;
 
     long id = 1005223990L;
-    private BotState botState = BotState.CAT_SHELTER_SAFETY;
+    private final BotState botState = BotState.DOG_SHELTER_SAFETY;
 
     @Test
     void shouldReturnMessageHandle() {
@@ -37,7 +36,7 @@ class SafetyDogQueryTest {
 
         when(service.getReplyMessage(id)).thenReturn(expectedArrayList);
 
-        List<BaseRequest> actualList = catQuery.handle(id);
+        List<BaseRequest> actualList = dogQuery.handle(id);
 
         assertEquals(actualList.size(), expectedArrayList.size());
         assertEquals(actualList.get(0).getClass(), expectedArrayList.get(0).getClass());
@@ -48,7 +47,7 @@ class SafetyDogQueryTest {
     @Test
     void shouldReturnHandlerName() {
 
-        assertEquals(catQuery.getHandlerName(), botState);
+        assertEquals(dogQuery.getHandlerName(), botState);
 
     }
 }
