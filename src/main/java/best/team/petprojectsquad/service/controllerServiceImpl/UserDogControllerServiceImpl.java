@@ -12,9 +12,11 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class UserDogControllerServiceImpl implements UserDogControllerService {
+
     private final DogRepository dogRepository;
     private final UserDogRepository userDogRepository;
     private final UserRepository userRepository;
+
     @Override
     public boolean checkIfEntitiesExist(long id, long dogId) {
         return userRepository.findById(id).isPresent() && dogRepository.findById(dogId).isPresent();

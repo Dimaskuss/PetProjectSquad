@@ -14,6 +14,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class UserCatControllerServiceImpl implements UserCatControllerService {
+
     private final CatRepository catRepository;
     private final UserCatRepository userCatRepository;
     private final UserRepository userRepository;
