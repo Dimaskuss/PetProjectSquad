@@ -27,4 +27,9 @@ public interface UserCatRepository extends JpaRepository<UserCat, Long> {
     @Modifying
     @Query("UPDATE UserCat userCat set userCat.trialPeriod = userCat.trialPeriod - 1 where userCat.id = ?1")
     void setTrialPeriodMinus1(long id);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE UserCat userCat set userCat.status = ?2 where userCat.id = ?1")
+    void setUserCatStatus(long id, String status);
 }
