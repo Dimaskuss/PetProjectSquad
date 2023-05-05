@@ -26,4 +26,9 @@ public interface UserDogRepository extends JpaRepository<UserDog, Long> {
     @Modifying
     @Query("UPDATE UserDog userDog set userDog.trialPeriod = userDog.trialPeriod - 1 where userDog.id = ?1")
     void setTrialPeriodMinus1(long id);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE UserDog userDog set userDog.status = ?2 where userDog.id = ?1")
+    void setUserDogStatus(long id, String status);
 }

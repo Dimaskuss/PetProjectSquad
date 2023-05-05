@@ -20,7 +20,7 @@ public class VolunteerFunctionalControllerServiceImpl implements VolunteerFuncti
     private final UserDogRepository userDogRepository;
     private final ReportDogRepository reportDogRepository;
     private final ReportCatRepository reportCatRepository;
-    TelegramBot telegramBot;
+    private final TelegramBot telegramBot;
 
     @Override
     public SendResponse sendRemark(long id) {
@@ -37,77 +37,43 @@ public class VolunteerFunctionalControllerServiceImpl implements VolunteerFuncti
         SendMessage sendMessage;
         if (type.getShelterTypeInString().equals("DOG")) {
             long chatId = userDogRepository.getReferenceById(id).getChatId();
-            UserDog referenceById;
+            userDogRepository.setUserDogStatus(id, status.getState());
             switch (status) {
                 case SUCCESSFULLY_PASSED -> {
                     sendMessage = new SendMessage(chatId, "Дорогой усыновитель, вы отлично прошли проверку!");
-                    referenceById = userDogRepository.getReferenceById(id);
-                    userDogRepository.deleteById(id);
-                    referenceById.setStatus(status.getState());
-                    userDogRepository.save(referenceById);
                 }
                 case EXTENSION_FOR_30_DAYS -> {
                     sendMessage = new SendMessage(chatId, "Дорогой усыновитель, мы заметили, что ты заполняешь отчет не так подробно, как необходимо. Поэтому мы продлеваем " +
                                                           "твой испытательный срок на 30 дней!");
-                    referenceById = userDogRepository.getReferenceById(id);
-                    userDogRepository.deleteById(id);
-                    referenceById.setStatus(status.getState());
-                    userDogRepository.save(referenceById);
                 }
                 case EXTENSION_FOR_14_DAYS -> {
                     sendMessage = new SendMessage(chatId, "Дорогой усыновитель, мы заметили, что ты заполняешь отчет не так подробно, как необходимо. Поэтому мы продлеваем " +
                                                           "твой испытательный срок на 14 дней!");
-                    referenceById = userDogRepository.getReferenceById(id);
-                    userDogRepository.deleteById(id);
-                    referenceById.setStatus(status.getState());
-                    userDogRepository.save(referenceById);
                 }
                 case NOT_PASSED -> {
                     sendMessage = new SendMessage(chatId, "Дорогой усыновитель, мы заметили, что ты заполняешь отчет не так подробно, как необходимо. Что-то пошло не так " +
                                                           ", поэтому мы вынуждены изъять у тебя животного");
-                    referenceById = userDogRepository.getReferenceById(id);
-                    userDogRepository.deleteById(id);
-                    referenceById.setStatus(status.getState());
-                    userDogRepository.save(referenceById);
                 }
                 default -> sendMessage = new SendMessage(chatId, "");
             }
         } else {
-            UserCat userCat;
             long chatId = userCatRepository.getReferenceById(id).getChatId();
+            userCatRepository.setUserCatStatus(id, status.getState());
             switch (status) {
                 case SUCCESSFULLY_PASSED -> {
-
-                    //TODO: возможно сделать поле с номером телефона для обратной связи
                     sendMessage = new SendMessage(chatId, "Дорогой усыновитель, вы отлично прошли проверку, с чем мы вас поздравляем!!");
-                    userCat = userCatRepository.getReferenceById(id);
-                    userCatRepository.deleteById(id);
-                    userCat.setStatus(status.getState());
-                    userCatRepository.save(userCat);
                 }
                 case EXTENSION_FOR_30_DAYS -> {
                     sendMessage = new SendMessage(chatId, "Дорогой усыновитель, мы заметили, что ты заполняешь отчет не так подробно, как необходимо. Поэтому мы продлеваем " +
                                                           "твой испытательный срок на 30 дней!");
-                    userCat = userCatRepository.getReferenceById(id);
-                    userCatRepository.deleteById(id);
-                    userCat.setStatus(status.getState());
-                    userCatRepository.save(userCat);
                 }
                 case EXTENSION_FOR_14_DAYS -> {
                     sendMessage = new SendMessage(chatId, "Дорогой усыновитель, мы заметили, что ты заполняешь отчет не так подробно, как необходимо. Поэтому мы продлеваем " +
                                                           "твой испытательный срок на 14 дней!");
-                    userCat = userCatRepository.getReferenceById(id);
-                    userCatRepository.deleteById(id);
-                    userCat.setStatus(status.getState());
-                    userCatRepository.save(userCat);
                 }
                 case NOT_PASSED -> {
                     sendMessage = new SendMessage(chatId, "Дорогой усыновитель, мы заметили, что ты заполняешь отчет не так подробно, как необходимо. Что-то пошло не так " +
                                                           ", поэтому мы вынуждены изъять у тебя животного");
-                    userCat = userCatRepository.getReferenceById(id);
-                    userCatRepository.deleteById(id);
-                    userCat.setStatus(status.getState());
-                    userCatRepository.save(userCat);
                 }
                 default -> sendMessage = new SendMessage(chatId, "");
             }
@@ -130,8 +96,8 @@ public class VolunteerFunctionalControllerServiceImpl implements VolunteerFuncti
                 listOfDogUsers.add(userDog);
             }
         }
-        listOfUsers.add("Dog Users: " + listOfDogUsers.toString());
-        listOfUsers.add("Cat Users: " + listOfCatUsers.toString());
+        listOfUsers.add("Dog Users: " + listOfDogUsers);
+        listOfUsers.add("Cat Users: " + listOfCatUsers);
         return listOfUsers;
     }
 
