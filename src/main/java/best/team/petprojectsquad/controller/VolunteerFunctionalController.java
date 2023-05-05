@@ -127,11 +127,11 @@ public class VolunteerFunctionalController {
     )
     @PostMapping("/report/acceptOrReject/id{id}reportAccepted{reportAccepted}type{type}")
     public ResponseEntity<SendResponse> acceptOrRejectReport(@Parameter(description = "id of a report from report.DB", example = "1")
-                                                     @PathVariable long id,
-                                                     @Parameter(description = "Status of decision about report", example = "true")
-                                                     @PathVariable boolean reportAccepted,
-                                                     @Parameter(description = "Type of shelter", example = "CAT")
-                                                     @PathVariable String type) {
-       return ResponseEntity.ok(volunteerService.acceptOrRejectReportByUserId(id, reportAccepted, volunteerService.getEnumTypeOfShelter(type)));
+                                                             @PathVariable long id,
+                                                             @Parameter(description = "Status of decision about report", example = "true")
+                                                             @PathVariable boolean reportAccepted,
+                                                             @Parameter(description = "Type of shelter", example = "CAT")
+                                                             @PathVariable String type) {
+        return ResponseEntity.ok(volunteerService.acceptOrRejectReportByUserId(id, reportAccepted, volunteerService.getEnumTypeOfShelter(type)));
     }
 }

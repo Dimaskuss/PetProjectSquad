@@ -11,6 +11,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,14 +42,22 @@ class ReportDogControllerTest {
     }
 
     @Test
-    void editReport() {
+    void shouldReturnIdEditedReport() {
+//        todo добить тест
     }
 
     @Test
     void getAll() {
+        List<ReportDog> list = new ArrayList<>();
+        list.add(reportDog);
+        when(reportDogControllerService.findAll()).thenReturn(list);
+        ResponseEntity<List<ReportDog>> listReportCat = reportDogController.getAll();
+        assertEquals(Objects.requireNonNull(listReportCat.getBody()).size(), list.size());
     }
 
     @Test
-    void deleteReport() {
+    void shouldDeleteReport() {
+        ResponseEntity<Void> actual = reportDogController.deleteReport(id);;
+        assertNull(actual.getBody());
     }
 }

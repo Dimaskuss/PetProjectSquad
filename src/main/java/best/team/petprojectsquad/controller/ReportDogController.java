@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/ReportDog")
-@Tag(name = "Report", description = "Api for working with report on how cat feels in a new place")
+@Tag(name = "ReportDog", description = "Api for working with report on how dog feels in a new place")
 public class ReportDogController {
     private final ReportDogControllerService service;
     @Operation(summary = "Getting report by id")
@@ -55,8 +55,8 @@ public class ReportDogController {
             responseCode = "400",
             description = "Some fields may be empty or may contain irrelevant type!"
     )
-    @PostMapping("/userDogId{userDogId}")
-    public ResponseEntity<Long> addReport(@Parameter(description = "id of a userCat in a userDog.DB", example = "1") @PathVariable long userDogId,
+    @PostMapping("/{userDogId}")
+    public ResponseEntity<Long> addReport(@Parameter(description = "id of a userDog in a DB", example = "1") @PathVariable long userDogId,
                                           @Parameter(description = "An Entity 'reportDog' in database") @RequestBody ReportDog reportDog) {
         return ResponseEntity.ok().body(service.save(reportDog, userDogId));
     }
@@ -75,10 +75,11 @@ public class ReportDogController {
             description = "Some fields may be empty, or there is no Entity by this id in DB"
     )
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Long> editReport(@Parameter(description = "id of a report in a report.DB", example = "1")
+    public ResponseEntity<Long> editReport(@Parameter(description = "id of a report in a DB", example = "1")
                                            @PathVariable long id,
                                            @Parameter(description = "an Entity 'report' in database")
                                            @RequestBody ReportDog reportDog) {
+//        todo зачем юзердог id (проверить для едит-теста)
         long id1 = service.getReferenceById(id).getUserDog().getId();
         service.deleteById(id);
         service.save(reportDog, id1);
