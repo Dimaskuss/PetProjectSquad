@@ -27,8 +27,10 @@ public class User {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<UserCat> userCat;
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<UserDog> userDog;
 
 

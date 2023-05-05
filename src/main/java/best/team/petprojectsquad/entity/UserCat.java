@@ -29,9 +29,10 @@ public class UserCat {
     private String phoneNumber;
     @JsonIgnore
     @Column(name = "trial_period")
-    private int trialPeriod;
+    private int trialPeriod = 30;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
     @Column(name = "user_need_help")
     private boolean userNeedHelp =  false;

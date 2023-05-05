@@ -1,12 +1,7 @@
 package best.team.petprojectsquad.service.controllerServiceImpl;
 
-import best.team.petprojectsquad.entity.ShelterTypeOfTable;
-import best.team.petprojectsquad.entity.StatusOfDecision;
-import best.team.petprojectsquad.entity.UserCat;
-import best.team.petprojectsquad.entity.UserDog;
-import best.team.petprojectsquad.repository.UserCatRepository;
-import best.team.petprojectsquad.repository.UserDogRepository;
-import best.team.petprojectsquad.repository.UserRepository;
+import best.team.petprojectsquad.entity.*;
+import best.team.petprojectsquad.repository.*;
 import best.team.petprojectsquad.service.controllerService.VolunteerFunctionalControllerService;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
@@ -21,10 +16,10 @@ import java.util.List;
 @AllArgsConstructor
 public class VolunteerFunctionalControllerServiceImpl implements VolunteerFunctionalControllerService {
     private final UserRepository userRepository;
-
     private final UserCatRepository userCatRepository;
-
     private final UserDogRepository userDogRepository;
+    private final ReportDogRepository reportDogRepository;
+    private final ReportCatRepository reportCatRepository;
     TelegramBot telegramBot;
 
     @Override
@@ -161,6 +156,48 @@ public class VolunteerFunctionalControllerServiceImpl implements VolunteerFuncti
         };
         return shelterTypeOfTable;
     }
+
+    @Override
+    public List<String> getListOfReportUsers() {
+        List<String> returnList = new ArrayList<>();
+        returnList.add("Reports Dog" + reportDogRepository.findAll());
+        returnList.add("Reports Cat" + reportCatRepository.findAll());
+        return returnList;
+    }
+
+
+    @Override
+    public SendResponse acceptOrRejectReportByUserId(long idOfReport, boolean reportAccepted, ShelterTypeOfTable typeOfShelter) {
+        SendMessage sendMessage = null;
+        long chatId;
+        reportCatRepository.setReportAcceptedBy(idOfReport, reportAccepted);
+        switch (typeOfShelter) {
+            case CAT_SHELTER -> {
+                chatId = reportCatRepository.getReferenceById(idOfReport).getUserCat().getChatId();
+                long userCatId = reportCatRepository.getReferenceById(idOfReport).getUserCat().getId();
+                if (reportAccepted) {
+                    sendMessage = new SendMessage(chatId, "Ваш отчет принят!");
+                    userCatRepository.setTrialPeriodMinus1(userCatId);
+                } else {
+                    sendMessage = new SendMessage(chatId, "Ваш отчет не принят, пришлите его еще раз!");
+                    reportCatRepository.deleteById(idOfReport);
+                }
+            }
+            case DOG_SHELTER -> {
+                chatId = reportDogRepository.getReferenceById(idOfReport).getUserDog().getChatId();
+                long userDogId = reportDogRepository.getReferenceById(idOfReport).getUserDog().getId();
+                if (reportAccepted) {
+                    sendMessage = new SendMessage(chatId, "Ваш отчет принят!");
+                    userDogRepository.setTrialPeriodMinus1(userDogId);
+                } else {
+                    sendMessage = new SendMessage(chatId, "Ваш отчет не принят, пришлите его еще раз!");
+                    reportDogRepository.deleteById(idOfReport);
+                }
+            }
+        }
+        return telegramBot.execute(sendMessage);
+    }
 }
 
+//TODO: id в БД постоянно шагают
 //TODO: Добавить инструкции по дальнейшим шагам( что можно сделать ).
