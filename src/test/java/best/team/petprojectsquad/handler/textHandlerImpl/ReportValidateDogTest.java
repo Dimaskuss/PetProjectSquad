@@ -1,8 +1,7 @@
 package best.team.petprojectsquad.handler.textHandlerImpl;
 
-import best.team.petprojectsquad.entity.BotState;
 import best.team.petprojectsquad.listener.TelegramBotUpdateListenerTest;
-import best.team.petprojectsquad.service.textHandlerImpl.InfoHandlerService;
+import best.team.petprojectsquad.service.textHandlerImpl.ReportValidateDogService;
 import com.pengrad.telegrambot.BotUtils;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.BaseRequest;
@@ -24,37 +23,29 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class InfoMenuHandlerTest {
+class ReportValidateDogTest {
 
     @Mock
-    private InfoHandlerService service;
+    private ReportValidateDogService service;
     @InjectMocks
-    private InfoMenuHandler infoMenuHandler;
-    long id = 123;
-    String text = "/info";
+    private ReportValidateDog handler;
 
     @Test
     void shouldReturnMessageHandle() throws URISyntaxException, IOException {
-
         List<BaseRequest> expectedArrayList = new ArrayList<>();
-        SendMessage sendMessage0 = new SendMessage(id, "/info");
-        expectedArrayList.add(sendMessage0);
+        SendMessage sendMessage = new SendMessage(123, "Подпись отсутствует, пришлите фото с подписью для отчета.");
+        expectedArrayList.add(sendMessage);
 
         String json = Files.readString(Path.of(
                 (TelegramBotUpdateListenerTest.class.getResource("update.json")).toURI()));
-        Update update = BotUtils.fromJson(json.replace("%text%", "/info"), Update.class);
+        Update update = BotUtils.fromJson(json.replace("%text%", ""), Update.class);
 
         when(service.getReplyMessage(update.message())).thenReturn(expectedArrayList);
 
-        List<BaseRequest> actualList = infoMenuHandler.handle(update.message());
+        List<BaseRequest> actualList = handler.handle(update.message());
 
         assertEquals(actualList.size(), expectedArrayList.size());
-        assertEquals(actualList.get(0).getClass(), expectedArrayList.get(0).getClass());
-        assertEquals(actualList.get(0).getParameters().get("chat_id"), expectedArrayList.get(0).getParameters().get("chat_id"));
+        assertEquals(actualList.get(0).getParameters(), expectedArrayList.get(0).getParameters());
     }
 
-    @Test
-    void shouldReturnHandlerName() {
-        assertEquals(infoMenuHandler.getHandlerName(), BotState.INFO);
-    }
 }

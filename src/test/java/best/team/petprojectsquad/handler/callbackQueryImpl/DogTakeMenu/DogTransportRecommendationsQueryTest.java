@@ -1,7 +1,7 @@
 package best.team.petprojectsquad.handler.callbackQueryImpl.DogTakeMenu;
 
 import best.team.petprojectsquad.entity.BotState;
-import best.team.petprojectsquad.service.queryHandlerImpl.DogTakeMenuService.HomeRecommendationsAdultDogService;
+import best.team.petprojectsquad.service.queryHandlerImpl.DogTakeMenuService.DogTransportRecommendationsService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;
@@ -17,16 +17,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class HomeRecommendationsAdultDogQueryTest {
+class DogTransportRecommendationsQueryTest {
 
     @Mock
-    HomeRecommendationsAdultDogService service;
+    DogTransportRecommendationsService service;
 
     @InjectMocks
-    private HomeRecommendationsAdultDogQuery dogQuery;
+    private DogTransportRecommendationsQuery dogQuery;
 
     long id = 1005223990L;
-    private final BotState botState = BotState.HOME_RECOMMENDATION_ADULT_DOG;
+    private final BotState botState = BotState.DOG_TRANSPORT_RECOMMENDATION;
 
     @Test
     void shouldReturnMessageHandle() {
