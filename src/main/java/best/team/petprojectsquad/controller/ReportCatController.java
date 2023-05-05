@@ -118,5 +118,6 @@ public class ReportCatController {
         repositoryReportCat.delete(id);
         return ResponseEntity.ok().build();
     }
+
 }
 

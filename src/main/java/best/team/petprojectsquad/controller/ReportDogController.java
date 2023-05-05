@@ -119,6 +119,7 @@ public class ReportDogController {
         repositoryReportDog.delete(id);
         return ResponseEntity.ok().build();
     }
+
 }
 
 
