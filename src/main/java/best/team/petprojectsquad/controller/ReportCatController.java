@@ -79,7 +79,6 @@ public class ReportCatController {
                                                @PathVariable long reportId,
                                            @Parameter(description = "an Entity 'report' in database")
                                            @RequestBody ReportCat reportCat) {
-//        todo зачем юзеркэт, в таблице это поле null, а id у репорта автоматом добавляется
         long ids = controllerService.getReferenceById(reportId).getUserCat().getId();
         controllerService.deleteById(reportId);
         return ResponseEntity.ok().body(controllerService.save(reportCat, ids));

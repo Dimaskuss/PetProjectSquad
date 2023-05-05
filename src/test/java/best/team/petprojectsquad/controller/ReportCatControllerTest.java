@@ -28,7 +28,7 @@ public class ReportCatControllerTest {
     ReportCatControllerService reportCatControllerService;
     @InjectMocks
     private ReportCatController reportCatController;
-    long id = 132L;
+    long id = 0L;
     ReportCat reportCat = new ReportCat("report", null, "1");
     UserCat userCat = new UserCat();
 
@@ -48,12 +48,11 @@ public class ReportCatControllerTest {
 
     @Test
     void shouldReturnIdEditedReport() {
-//        todo добить тест
-//        userCat.setId(1);
-//        reportCat.setUserCat(userCat);
-//        when(reportCatControllerService.getReferenceById(id)).thenReturn(reportCat);
-//        ResponseEntity<Long> idReportCat = reportCatController.editReport(id , reportCat);
-//        assertEquals(idReportCat.getBody(), id);
+        userCat.setId(1);
+        reportCat.setUserCat(userCat);
+        when(reportCatControllerService.getReferenceById(id)).thenReturn(reportCat);
+        ResponseEntity<Long> idReportCat = reportCatController.editReport(id , reportCat);
+        assertEquals(idReportCat.getBody(), id);
     }
 
     @Test
