@@ -21,7 +21,8 @@ public class UserCatControllerServiceImpl implements UserCatControllerService {
 
     @Override
     public boolean checkIfEntitiesExist(long userId, long catId) {
-        return userRepository.findById(userId).isPresent() && catRepository.findById(catId).isPresent();
+        return userRepository.findById(userId).isPresent() &&
+                catRepository.findById(catId).isPresent();
     }
 
     @Override
