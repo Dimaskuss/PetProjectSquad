@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/UserDog")
-@Tag(name = "UserDog", description = "a user with dog")
+@Tag(name = "UserDog", description = "Api for working with new pet owners")
 public class UserDogController {
     private final UserDogControllerService userDogControllerService;
     private final RepositoryService<UserDog> repository;

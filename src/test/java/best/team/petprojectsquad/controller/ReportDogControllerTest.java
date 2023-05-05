@@ -3,6 +3,7 @@ package best.team.petprojectsquad.controller;
 import best.team.petprojectsquad.entity.ReportCat;
 import best.team.petprojectsquad.entity.ReportDog;
 import best.team.petprojectsquad.service.RepositoryService;
+import best.team.petprojectsquad.service.controllerService.ReportDogControllerService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +18,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ReportDogControllerTest {
     @Mock
-    RepositoryService<ReportDog> repositoryReportDog;
+    ReportDogControllerService reportDogControllerService;
     @InjectMocks
     private ReportDogController reportDogController;
     long id = 132L;
@@ -25,15 +26,15 @@ class ReportDogControllerTest {
 
     @Test
     void shouldReturnReportById() {
-        when(repositoryReportDog.get(id)).thenReturn(Optional.ofNullable(reportDog));
+        when(reportDogControllerService.getReferenceById(id)).thenReturn(reportDog);
         ResponseEntity<ReportDog> status = reportDogController.getReportById(id);
         assertEquals(status.getBody(), reportDog);
     }
 
     @Test
     void shouldReturnIdAddedReport() {
-        when(repositoryReportDog.save(reportDog)).thenReturn(id);
-        ResponseEntity<Long> idReportCat = reportDogController.addReport(reportDog);
+        when(reportDogControllerService.save(reportDog, id)).thenReturn(id);
+        ResponseEntity<Long> idReportCat = reportDogController.addReport(id, reportDog);
         assertEquals(idReportCat.getBody(), id);
     }
 
