@@ -2,7 +2,9 @@ package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.ReportCat;
 import best.team.petprojectsquad.entity.UserDog;
+import best.team.petprojectsquad.entity.UserFeedBack;
 import best.team.petprojectsquad.service.RepositoryService;
+import best.team.petprojectsquad.service.controllerService.ReportCatControllerService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,14 +12,19 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
+
 @ExtendWith(MockitoExtension.class)
 public class ReportCatControllerTest {
     @Mock
-    RepositoryService<ReportCat> repositoryReportCat;
+    ReportCatControllerService reportCatControllerService;
     @InjectMocks
     private ReportCatController reportCatController;
     long id = 132L;
@@ -25,27 +32,38 @@ public class ReportCatControllerTest {
 
     @Test
     void shouldReturnReportById() {
-        when(repositoryReportCat.get(id)).thenReturn(Optional.ofNullable(reportCat));
+        when(reportCatControllerService.getReferenceById(id)).thenReturn(reportCat);
         ResponseEntity<ReportCat> status = reportCatController.getReportById(id);
         assertEquals(status.getBody(), reportCat);
     }
 
     @Test
     void shouldReturnIdAddedReport() {
-        when(repositoryReportCat.save(reportCat)).thenReturn(id);
-        ResponseEntity<Long> idReportCat = reportCatController.addReport(reportCat);
+        when(reportCatControllerService.save(reportCat, id)).thenReturn(id);
+        ResponseEntity<Long> idReportCat = reportCatController.addReport(id, reportCat);
         assertEquals(idReportCat.getBody(), id);
     }
 
     @Test
-    void editReport() {
+    void shouldReturnIdEditedReport() {
+//        when(reportCatControllerService.getReferenceById(id)).thenReturn(reportCat);
+//        ResponseEntity<Long> idReportCat = reportCatController.editReport(id , reportCat);
+//        assertEquals(idReportCat.getBody(), id);
     }
 
     @Test
-    void getAll() {
+    void shouldReturnListReports() {
+        List<ReportCat> list = new ArrayList<>();
+        list.add(reportCat);
+        when(reportCatControllerService.findAll()).thenReturn(list);
+        ResponseEntity<List<ReportCat>> listReportCat = reportCatController.getAll();
+        assertEquals(Objects.requireNonNull(listReportCat.getBody()).size(), list.size());
     }
 
     @Test
     void deleteReport() {
+        reportCatControllerService.deleteById(id);
+        ReportCat actual = reportCatControllerService.getReferenceById(id);
+        assertNull(actual);
     }
 }

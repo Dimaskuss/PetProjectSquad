@@ -38,16 +38,10 @@ class ReminderImplTest {
     void idUserToSendReminder() {
 
         List<UserCat> userCats = new ArrayList<>();
-        List<ReportCat> reportCats = new ArrayList<>();
-
         when(userCatRepository.findAllUsersOnTrialPeriod()).thenReturn(userCats);
-        when(reportCatRepository.findAllByUserCatId(1)).thenReturn(reportCats);
 
         List<UserDog> userDogs = new ArrayList<>();
-        List<ReportDog> reportDogs = new ArrayList<>();
-
         when(userDogRepository.findAllUsersOnTrialPeriod()).thenReturn(userDogs);
-        when(reportDogRepository.findAllByUserDogId(1)).thenReturn(reportDogs);
 
         reminder.idUserToSendReminder();
     }

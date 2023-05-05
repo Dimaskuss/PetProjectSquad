@@ -64,7 +64,7 @@ public class ReportCatController {
     )
     @PostMapping("/userCatId{userCatId}")
     public ResponseEntity<Long> addReport(@Parameter(description = "id of a userCat in a userCat.DB", example = "1") @PathVariable long userCatId,
-                                        @Parameter(description = "An Entity 'user' in database") @RequestBody ReportCat reportCat) {
+                                          @Parameter(description = "An Entity 'user' in database") @RequestBody ReportCat reportCat) {
         return ResponseEntity.ok().body(controllerService.save(reportCat, userCatId));
 
     }
@@ -81,7 +81,7 @@ public class ReportCatController {
                                            @RequestBody ReportCat reportCat) {
         long ids = controllerService.getReferenceById(reportId).getUserCat().getId();
         controllerService.deleteById(reportId);
-        return ResponseEntity.ok().body(controllerService.save(reportCat,ids));
+        return ResponseEntity.ok().body(controllerService.save(reportCat, ids));
     }
 
     @Operation(summary = "Getting all reports")
@@ -107,9 +107,9 @@ public class ReportCatController {
             description = "There is no report in database by this id"
     )
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteReport(@Parameter @PathVariable long id) {
+    public ResponseEntity<Void> deleteReport(@Parameter(description = "id of a report in report.DB", example = "1")
+                                             @PathVariable long id) {
         controllerService.deleteById(id);
-
         return ResponseEntity.ok().build();
     }
 }
