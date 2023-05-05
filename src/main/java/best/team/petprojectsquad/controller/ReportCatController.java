@@ -35,8 +35,7 @@ public class ReportCatController {
             description = "Cat report in database with id",
             content = @Content(
                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ReportCat.class)
-            )
+                    schema = @Schema(implementation = ReportCat.class))
     )
     @ApiResponse(
             responseCode = "500",

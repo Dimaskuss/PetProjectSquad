@@ -112,6 +112,7 @@ public class ReportDogController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteReport(@Parameter(description = "id of a report in a report.DB", example = "1")
                                              @PathVariable long id) {
+
         if (repositoryReportDog.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
