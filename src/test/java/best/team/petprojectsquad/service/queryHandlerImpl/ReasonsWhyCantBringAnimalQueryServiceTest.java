@@ -11,15 +11,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 class ReasonsWhyCantBringAnimalQueryServiceTest {
-    @Autowired
-    ReasonsWhyCantBringAnimalQueryService reasonsWhyCantBringAnimalQueryService;
+
+    private ReasonsWhyCantBringAnimalQueryService reasonsWhyCantBringAnimalQueryService = new ReasonsWhyCantBringAnimalQueryService();
     long id = 123;
+
     @Test
     void getReplyMessage() {
+
         List<BaseRequest> replyMessage = reasonsWhyCantBringAnimalQueryService.getReplyMessage(123);
         List<BaseRequest> requestArrayList = new ArrayList<>();
+
         SendMessage sendMessage0 = new SendMessage(id, "Вам могут отказать по одной из причин:");
         SendMessage sendMessage1 = new SendMessage(id, """
                 1. Несоответствие требованием безопасности. Волонтеры ведут некую статистику причин, по которым
@@ -40,9 +42,7 @@ class ReasonsWhyCantBringAnimalQueryServiceTest {
 
         requestArrayList.add(sendMessage0);
         requestArrayList.add(sendMessage1);
-
         assertEquals(replyMessage.get(0).getParameters(), requestArrayList.get(0).getParameters());
         assertEquals(replyMessage.get(1).getParameters(), requestArrayList.get(1).getParameters());
-
     }
 }
