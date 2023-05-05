@@ -21,7 +21,12 @@ public class VolunteerQueryService implements QueryHandlerService {
 
     private UserServiceImpl userRepositoryService;
     private UserFeedBackService userFeedBackRepositoryService;
-
+    /**
+     * Метод формирует ответное сообщение на запрос пользователя
+     *
+     * @param id id пользователя
+     * @return ответ пользователю
+     */
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
