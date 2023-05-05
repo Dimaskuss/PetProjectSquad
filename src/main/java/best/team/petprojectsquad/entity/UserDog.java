@@ -33,6 +33,7 @@ public class UserDog {
     private int trialPeriod;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
     @Column(name = "user_need_help")
     private boolean userNeedHelp = false;

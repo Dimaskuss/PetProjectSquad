@@ -102,15 +102,3 @@ CREATE SEQUENCE report_dog_seq
     MAXVALUE 50
     INCREMENT BY 1
     CACHE 20;
-
-
-
-
-
-
-
-
-
-
-
-

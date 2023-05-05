@@ -90,4 +90,50 @@ public class VolunteerFunctionalController {
     public ResponseEntity<List<String>> getListOfDogOrCatUsers() {
         return ResponseEntity.ok(volunteerService.getListOfCatAndDogUsers());
     }
+
+    @Operation(
+            summary = "Getting list of all reports",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "List has been returned successfully!"
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Something went wrong!"
+                    )
+            }
+    )
+    @GetMapping("/getListOfReports")
+    public ResponseEntity<List<String>> gelListOfReports() {
+        return ResponseEntity.ok(volunteerService.getListOfReportUsers());
+    }
+
+    @Operation(
+            summary = "Sending a comment about report decision to user",
+            description = "Choose and write in ShelterTypeOfTable one of these: CAT or DOG. And boolean reportAccepted, enter values one of these:  true OR false",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Comment was sent successfully!"
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Check fields, read description! Some fields are written wrong!"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "There is no report by this id!"
+                    )
+            }
+    )
+    @PostMapping("/report/acceptOrReject/id{id}reportAccepted{reportAccepted}type{type}")
+    public ResponseEntity<SendResponse> acceptOrRejectReport(@Parameter(description = "id of a report from report.DB", example = "1")
+                                                     @PathVariable long id,
+                                                     @Parameter(description = "Status of decision about report", example = "true")
+                                                     @PathVariable boolean reportAccepted,
+                                                     @Parameter(description = "Type of shelter", example = "CAT")
+                                                     @PathVariable String type) {
+       return ResponseEntity.ok(volunteerService.acceptOrRejectReportByUserId(id, reportAccepted, volunteerService.getEnumTypeOfShelter(type)));
+    }
 }

@@ -4,8 +4,7 @@ package best.team.petprojectsquad.controller;
 import best.team.petprojectsquad.entity.ReportCat;
 import best.team.petprojectsquad.entity.UserCat;
 
-import best.team.petprojectsquad.service.RepositoryService;
-import best.team.petprojectsquad.service.controllerServiceImpl.UserCatControllerServiceImpl;
+import best.team.petprojectsquad.service.controllerService.ReportCatControllerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -24,10 +23,8 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping(value = "/ReportCat")
 @Tag(name = "Report")
-public class ReportCatController  {
-
-    private final UserCatControllerServiceImpl controllerService;
-    private final RepositoryService<ReportCat> repository;
+public class ReportCatController {
+    private final ReportCatControllerService controllerService;
 
     @Operation(
             summary = "Getting user by it's id",
@@ -47,17 +44,16 @@ public class ReportCatController  {
             }, tags = "User"
     )
     @GetMapping(value = "/{id}")
-
     public ResponseEntity<ReportCat> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
-        return ResponseEntity.ok(repository.get(id).get());
+        return ResponseEntity.ok(controllerService.getReferenceById(id));
     }
 
     @Operation(
-            summary = "Adding dog user, returning id of added user",
+            summary = "Adding reportCat, returning id of added report",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "User has been added to database successfully!"
+                            description = "Report has been added to database successfully!"
                     ),
                     @ApiResponse(
                             responseCode = "400",
@@ -65,17 +61,14 @@ public class ReportCatController  {
                     ),
                     @ApiResponse(
                             responseCode = "500",
-                            description = "Dog by this id has been taken"
+                            description = "UserCat by this id has been taken"
                     )
             }, tags = "User"
     )
-    @PostMapping("/dogId{dogId}")
-    public ResponseEntity<Long> addUser(@Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long dogId,
+    @PostMapping("/userCatId{userCatId}")
+    public ResponseEntity<Long> addUser(@Parameter(description = "id of a userCat in a userCat.DB", example = "1") @PathVariable long userCatId,
                                         @Parameter(description = "An Entity 'user' in database") @RequestBody ReportCat reportCat) {
-        if (controllerService.checkIfEntitiesExist(reportCat.getId(), dogId)) {
-            return ResponseEntity.ok().body(controllerService.save(reportCat.getId(), dogId,reportCat.getUserCat()));
-        }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok().body(controllerService.save(reportCat, userCatId));
     }
 
     @Operation(
@@ -95,16 +88,13 @@ public class ReportCatController  {
                     )
             }, tags = "User"
     )
-    @PutMapping(value = "/catId{dogId}")
-    public ResponseEntity<Long> editUser(@Parameter(description = "id of a dog in a dog.DB", example = "1") @PathVariable long catId,
-                                         @Parameter(description = "an Entity 'user' in database")
-                                         @RequestBody UserCat userCat) {
-        if (repository.get(userCat.getId()).isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        repository.delete(userCat.getId());
-        controllerService.save(userCat.getId(), catId,userCat);
-        return ResponseEntity.ok().body(userCat.getId());
+    @PutMapping(value = "/reportId{reportId}")
+    public ResponseEntity<Long> editReport(@Parameter(description = "id of a report in report.DB", example = "1") @PathVariable long reportId,
+                                           @Parameter(description = "an Entity 'reportCat' in database")
+                                           @RequestBody ReportCat reportCat) {
+        long ids = controllerService.getReferenceById(reportId).getUserCat().getId();
+        controllerService.deleteById(reportId);
+        return ResponseEntity.ok().body(controllerService.save(reportCat,ids));
     }
 
     @Operation(
@@ -123,7 +113,7 @@ public class ReportCatController  {
     )
     @GetMapping("/")
     public ResponseEntity<List<ReportCat>> getAll() {
-        return ResponseEntity.ok().body(repository.findAll());
+        return ResponseEntity.ok().body(controllerService.findAll());
     }
 
 
@@ -142,10 +132,7 @@ public class ReportCatController  {
     )
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteUser(@Parameter @PathVariable long id) {
-        if (repository.get(id).isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        repository.delete(id);
+        controllerService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }
