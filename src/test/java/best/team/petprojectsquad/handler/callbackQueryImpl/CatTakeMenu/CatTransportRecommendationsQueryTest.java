@@ -1,7 +1,7 @@
 package best.team.petprojectsquad.handler.callbackQueryImpl.CatTakeMenu;
 
 import best.team.petprojectsquad.entity.BotState;
-import best.team.petprojectsquad.service.queryHandlerImpl.CatTakeMenuService.CatTakeInfoService;
+import best.team.petprojectsquad.service.queryHandlerImpl.CatTakeMenuService.CatTransportRecommendationsService;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;
@@ -17,16 +17,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CatTakeInfoMenuQueryTest {
+class CatTransportRecommendationsQueryTest {
 
     @Mock
-    CatTakeInfoService service;
+    CatTransportRecommendationsService service;
 
     @InjectMocks
-    private CatTakeInfoMenuQuery catQuery;
+    private CatTransportRecommendationsQuery catQuery;
 
     long id = 1005223990L;
-    private BotState botState = BotState.CAT_TAKE_INFO;
+    private final BotState botState = BotState.CAT_TRANSPORT_RECOMMENDATION;
 
     @Test
     void shouldReturnMessageHandle() {
