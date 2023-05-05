@@ -25,23 +25,18 @@ public class UserDogController {
     private final UserDogControllerService userDogControllerService;
     private final RepositoryService<UserDog> repository;
 
-    @Operation(
-            summary = "Getting user by id",
-            responses = {
+    @Operation(summary = "Getting user by id")
                     @ApiResponse(
                             responseCode = "200",
                             description = "User in database with id",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = UserDog.class)
-                            )
-                    ),
+                                    schema = @Schema(implementation = UserDog.class))
+                    )
                     @ApiResponse(
                             responseCode = "500",
                             description = "There is no user under that id!"
                     )
-            }, tags = "User"
-    )
     @GetMapping(value = "/{id}")
 
     public ResponseEntity<UserDog> getUserById(@Parameter(description = "id of a user in a DB", example = "1")
