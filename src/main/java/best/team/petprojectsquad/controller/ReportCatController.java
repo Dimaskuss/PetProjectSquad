@@ -23,7 +23,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/ReportCat")
-@Tag(name = "Report")
+@Tag(name = "Report", description = "Api for working with report on how dog feels in a new place")
 public class ReportCatController {
 
     private final ReportCatControllerService controllerService;
@@ -41,7 +41,7 @@ public class ReportCatController {
             description = "There is no report under that id!"
     )
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ReportCat> getUserById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
+    public ResponseEntity<ReportCat> getReportById(@Parameter(description = "id of a user in a DB", example = "1") @PathVariable long id) {
         return ResponseEntity.ok(controllerService.getReferenceById(id));
     }
 
@@ -63,7 +63,7 @@ public class ReportCatController {
             }, tags = "User"
     )
     @PostMapping("/userCatId{userCatId}")
-    public ResponseEntity<Long> addUser(@Parameter(description = "id of a userCat in a userCat.DB", example = "1") @PathVariable long userCatId,
+    public ResponseEntity<Long> addReport(@Parameter(description = "id of a userCat in a userCat.DB", example = "1") @PathVariable long userCatId,
                                         @Parameter(description = "An Entity 'user' in database") @RequestBody ReportCat reportCat) {
         return ResponseEntity.ok().body(controllerService.save(reportCat, userCatId));
 
@@ -107,7 +107,7 @@ public class ReportCatController {
             description = "There is no report in database by this id"
     )
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteUser(@Parameter @PathVariable long id) {
+    public ResponseEntity<Void> deleteReport(@Parameter @PathVariable long id) {
         controllerService.deleteById(id);
 
         return ResponseEntity.ok().build();
