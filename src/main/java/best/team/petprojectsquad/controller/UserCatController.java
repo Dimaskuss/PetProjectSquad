@@ -3,6 +3,7 @@ package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.service.RepositoryService;
+import best.team.petprojectsquad.service.controllerService.UserCatControllerService;
 import best.team.petprojectsquad.service.controllerServiceImpl.UserCatControllerServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -23,7 +24,7 @@ import java.util.List;
 @RequestMapping(value = "/UserCat")
 @Tag(name = "UserCat", description = "Api for working with new pet owners")
 public class UserCatController {
-    private final UserCatControllerServiceImpl controllerService;
+    private final UserCatControllerService controllerService;
     private final RepositoryService<UserCat> repository;
 
     @Operation(summary = "Getting user by id")
