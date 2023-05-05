@@ -1,6 +1,5 @@
 package best.team.petprojectsquad.controller;
 
-import best.team.petprojectsquad.entity.User;
 import best.team.petprojectsquad.entity.UserDog;
 import best.team.petprojectsquad.repository.UserDogRepository;
 import best.team.petprojectsquad.service.RepositoryService;
@@ -29,17 +28,13 @@ class UserDogControllerTest {
     private UserDogController userDogController;
     @MockBean
     private UserDogControllerServiceImpl userDogControllerService;
-
     private long id = 1;
-
     UserDog userDog = new UserDog(0, 1, "123");
 
     @Test
     void getUserById() {
         when(repositoryService.get(id)).thenReturn(Optional.ofNullable(userDog));
-
         ResponseEntity<UserDog> status = userDogController.getUserById(id);
-
         assertEquals(status.getBody(), userDog);
     }
 

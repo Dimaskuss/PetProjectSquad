@@ -50,7 +50,5 @@ class ReminderImplTest {
         when(reportDogRepository.findAllByUserDogId(1)).thenReturn(reportDogs);
 
         reminder.idUserToSendReminder();
-
     }
-
 }
