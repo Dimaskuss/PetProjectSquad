@@ -69,7 +69,8 @@ public class DogController {
             description = "Some fields in body may be empty, or may contain irrelevant type! Try to fill fields correctly using example"
     )
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Long> editDog(@Parameter(description = "id of a dog in a DB", example = "1") @PathVariable long id, @Parameter(description = "an Entity 'dog' in database") @RequestBody Dog dog) {
+    public ResponseEntity<Long> editDog(@Parameter(description = "id of a dog in a DB", example = "1") @PathVariable long id,
+                                        @Parameter(description = "an Entity 'dog' in database") @RequestBody Dog dog) {
         if (repository.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -103,7 +104,8 @@ public class DogController {
             description = "There is no dog in database by this id"
     )
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteDog(@Parameter @PathVariable long id) {
+    public ResponseEntity<Void> deleteDog(@Parameter (description = "id of a dog in a DB", example = "1")
+                                              @PathVariable long id) {
         if (repository.get(id).isEmpty()) {
             return ResponseEntity.noContent().build();
         }
