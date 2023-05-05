@@ -39,4 +39,16 @@ public class ReportCat {
         this.dateReport = dateReport;
         this.photoId = photoId;
     }
+
+    @Override
+    public String toString() {
+        return "ReportCat{" +
+               "id=" + id +
+               ", report='" + report + '\'' +
+               ", dateReport=" + dateReport +
+               ", photoId='" + photoId + '\'' +
+               ", reportAccepted=" + reportAccepted +
+               ", userCat=" + userCat +
+               '}';
+    }
 }

@@ -5,6 +5,8 @@ import best.team.petprojectsquad.entity.ReportDog;
 import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.entity.UserDog;
 import best.team.petprojectsquad.service.RepositoryService;
+import best.team.petprojectsquad.service.controllerService.ReportDogControllerService;
+import best.team.petprojectsquad.service.controllerServiceImpl.ReportDogControllerServiceImpl;
 import best.team.petprojectsquad.service.controllerServiceImpl.UserDogControllerServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -23,11 +25,9 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/ReportDog")
-@Tag(name = "Daily dog report", description = "Api for working with report on how the cat feels in a new place")
+@Tag(name = "Report", description = "Api for working with report on how cat feels in a new place")
 public class ReportDogController {
-
-    private final RepositoryService<ReportDog> repositoryReportDog;
-
+    private final ReportDogControllerService service;
     @Operation(summary = "Getting report by id")
     @ApiResponse(
             responseCode = "200",
@@ -43,10 +43,10 @@ public class ReportDogController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<ReportDog> getReportById(@Parameter(description = "id of a report in a database", example = "1")
                                                    @PathVariable long id) {
-        return ResponseEntity.ok(repositoryReportDog.get(id).get());
+        return ResponseEntity.ok(service.getReferenceById(id));
     }
 
-    @Operation(summary = "Adding report, returning id of added user")
+    @Operation(summary = "Adding report, returning id of added report")
     @ApiResponse(
             responseCode = "200",
             description = "Report has been added to database successfully!"
@@ -55,10 +55,10 @@ public class ReportDogController {
             responseCode = "400",
             description = "Some fields may be empty or may contain irrelevant type!"
     )
-
-    @PostMapping("/")
-    public ResponseEntity<Long> addReport(@RequestBody ReportDog reportDog) {
-        return ResponseEntity.ok().body(repositoryReportDog.save(reportDog));
+    @PostMapping("/userDogId{userDogId}")
+    public ResponseEntity<Long> addReport(@Parameter(description = "id of a userCat in a userDog.DB", example = "1") @PathVariable long userDogId,
+                                          @Parameter(description = "An Entity 'reportDog' in database") @RequestBody ReportDog reportDog) {
+        return ResponseEntity.ok().body(service.save(reportDog, userDogId));
     }
 
     @Operation(summary = "Editing report")
@@ -79,11 +79,9 @@ public class ReportDogController {
                                            @PathVariable long id,
                                            @Parameter(description = "an Entity 'report' in database")
                                            @RequestBody ReportDog reportDog) {
-        if (repositoryReportDog.get(id).isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        repositoryReportDog.delete(id);
-        repositoryReportDog.save(reportDog);
+        long id1 = service.getReferenceById(id).getUserDog().getId();
+        service.deleteById(id);
+        service.save(reportDog, id1);
         return ResponseEntity.ok().body(reportDog.getId());
     }
 
@@ -97,7 +95,7 @@ public class ReportDogController {
     )
     @GetMapping("/")
     public ResponseEntity<List<ReportDog>> getAll() {
-        return ResponseEntity.ok().body(repositoryReportDog.findAll());
+        return ResponseEntity.ok().body(service.findAll());
     }
 
     @Operation(summary = "Deleting report by id")
@@ -112,11 +110,7 @@ public class ReportDogController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteReport(@Parameter(description = "id of a report in a report.DB", example = "1")
                                              @PathVariable long id) {
-
-        if (repositoryReportDog.get(id).isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        repositoryReportDog.delete(id);
+        service.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }

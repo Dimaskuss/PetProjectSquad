@@ -15,5 +15,9 @@ public interface VolunteerFunctionalControllerService {
 
     StatusOfDecision getEnumTypeOfDecision(String decision);
 
-    ShelterTypeOfTable getEnumTypeOfShelter(String decision);
+    ShelterTypeOfTable getEnumTypeOfShelter(String shelter);
+
+    List<String> getListOfReportUsers();
+
+    SendResponse acceptOrRejectReportByUserId(long idOfReport, boolean reportAccepted, ShelterTypeOfTable typeOfShelter);
 }
