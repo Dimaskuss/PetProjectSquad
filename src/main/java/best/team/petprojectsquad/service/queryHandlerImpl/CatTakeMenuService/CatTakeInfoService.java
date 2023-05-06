@@ -13,6 +13,12 @@ import java.util.List;
 
 @Service
 public class CatTakeInfoService implements QueryHandlerService {
+    /**
+     * Метод формирует ответное сообщение на запрос пользователя
+     *
+     * @param id id пользователя
+     * @return ответ пользователю
+     */
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
@@ -28,6 +34,10 @@ public class CatTakeInfoService implements QueryHandlerService {
         return requestArrayList;
     }
 
+    /**
+     * Метод формирует электронную клавиатуру на экране пользователя
+     * @return клавиатура на экране пользователя
+     */
     private Keyboard getTakeInfoCatMenuKeyboard() {
 
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(

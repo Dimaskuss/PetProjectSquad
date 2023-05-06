@@ -2,6 +2,7 @@ package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.ReportCat;
 import best.team.petprojectsquad.entity.ReportDog;
+import best.team.petprojectsquad.entity.UserDog;
 import best.team.petprojectsquad.service.RepositoryService;
 import best.team.petprojectsquad.service.controllerService.ReportDogControllerService;
 import org.junit.jupiter.api.Test;
@@ -24,9 +25,9 @@ class ReportDogControllerTest {
     ReportDogControllerService reportDogControllerService;
     @InjectMocks
     private ReportDogController reportDogController;
-    long id = 132L;
+    long id = 0L;
     ReportDog reportDog = new ReportDog("report", null, "1");
-
+    UserDog userDog = new UserDog();
     @Test
     void shouldReturnReportById() {
         when(reportDogControllerService.getReferenceById(id)).thenReturn(reportDog);
@@ -43,7 +44,11 @@ class ReportDogControllerTest {
 
     @Test
     void shouldReturnIdEditedReport() {
-//        todo добить тест
+        userDog.setId(1);
+        reportDog.setUserDog(userDog);
+        when(reportDogControllerService.getReferenceById(id)).thenReturn(reportDog);
+        ResponseEntity<Long> idReportCat = reportDogController.editReport(id , reportDog);
+        assertEquals(idReportCat.getBody(), id);
     }
 
     @Test
