@@ -40,7 +40,6 @@ public class MenuCatQueryService implements QueryHandlerService {
                         {new InlineKeyboardButton("Как взять животное из приюта").callbackData("/catTakeInfo")},
                         {new InlineKeyboardButton("Прислать отчет о питомце").callbackData("/catReportMenu")},
                         {new InlineKeyboardButton("Связаться с волонтером").callbackData("/callVolunteer")},
-                        {new InlineKeyboardButton("Причины, по которым вам могут отказать").callbackData("/reasonsWhy")}
                 });
 
         return inlineKeyboard;
