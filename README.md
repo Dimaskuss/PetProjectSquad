@@ -20,3 +20,20 @@
  ------
 
  ## Стек технологий
+ 
+ Фреймворк
+ springframework.boot
+       
+      Проверка контроллеров
+        Swagger
+    
+      Телеграм библиотека
+        pengrad
+
+      Взаимодействие с БД
+        postgresql
+        liquibase
+        hibernate
+     
+      Кеширование 2 уровня
+        caffeine
