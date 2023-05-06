@@ -60,7 +60,7 @@ class MainHandlerTest {
 
         when(botStateContext.processInputMessage(botState, update.message())).thenReturn(
                 new SendMessage());
-
+// todo Test
         Mockito.verify(botStateContext).processInputMessage(botState, update.message());
         mainHandler.handleInputMessage(update.message());
         Assertions.assertThat(actual.getParameters().get("chat_id")).isEqualTo(update.message().chat().id());
