@@ -1,12 +1,14 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.UserFeedBack;
+import best.team.petprojectsquad.repository.UserFeedBackRepository;
 import best.team.petprojectsquad.service.controllerService.UserFeedBackControllerService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
@@ -14,13 +16,15 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.isNull;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
-    @ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)
     class UserFeedbackControllerTest {
+
+        @Mock
+        UserFeedBackRepository userFeedBackRepository;
         @Mock
         UserFeedBackControllerService userFeedBackControllerService;
 
@@ -71,7 +75,82 @@ import static org.mockito.Mockito.when;
             Optional<UserFeedBack> responseEntity = userFeedBackControllerService.findById(id);
             assertNull(responseEntity);
         }
+        @Test
+        void shouldReturnNoContentWhenUserFeedBackIsNotFound()
+        {
+            // Arrange
+            long id = 1L;
+//            when(userFeedBackRepository.findById(id)).thenReturn(Optional.empty());
 
+            // Act
+            ResponseEntity<Void> responseEntity = userFeedBackController.deleteUser(id);
+
+            // Assert
+            assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+        }
+
+//        @Test
+//        void shouldDeleteUserFeedBackAndReturnOk() {
+//            // Arrange
+//            long id = 1L;
+//            UserFeedBack userFeedBack = new UserFeedBack("+79117076105", 123, "Dog");
+//            userFeedBack.setId(id);
+//            when(userFeedBackRepository.findById(id)).thenReturn(Optional.of(userFeedBack));
+//
+//            // Act
+//            ResponseEntity<Void> responseEntity = userFeedBackController.deleteUser(id);
+//
+//            // Assert
+//            assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+////            verify(userFeedBackRepository, times(1)).deleteById(id);
+
+//        }
+
+        @Test
+        void shouldReturnNoContentWhenUserFeedBackNotFoundOnEdit() {
+            // Arrange
+            long id = 1L;
+            when(userFeedBackRepository.findById(id)).thenReturn(Optional.empty());
+
+            // Act
+            ResponseEntity<Long> responseEntity = userFeedBackController.setFalseConditionFeedBack(id);
+
+            // Assert
+            assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+        }
+
+
+
+    @Test
+    void shouldReturnNoContentWhenUserFeedBackIsNotFoundTwo() {
+        // Arrange
+        long id = 1L;
+        when(userFeedBackRepository.findById(id)).thenReturn(Optional.empty());
+
+        // Act
+        ResponseEntity<Long> responseEntity = userFeedBackController.setFalseConditionFeedBack(id);
+
+        // Assert
+        assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+        assertNull(responseEntity.getBody());
+        verify(userFeedBackRepository, never()).deleteById(id);
+        verify(userFeedBackRepository, never()).save(any(UserFeedBack.class));
+    }
+
+//    @Test
+//    void shouldReturnBadRequestWhenIdIsNull() {
+//        // Arrange
+//        Long id = null;
+//
+//        // Act
+//        ResponseEntity<Long> responseEntity = userFeedBackController.setFalseConditionFeedBack(id);
+//
+//        // Assert
+//        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
+//        assertNull(responseEntity.getBody());
+//        verify(userFeedBackRepository, never()).deleteById(anyLong());
+//        verify(userFeedBackRepository, never()).save(any(UserFeedBack.class));
+//    }
     }
 
 
