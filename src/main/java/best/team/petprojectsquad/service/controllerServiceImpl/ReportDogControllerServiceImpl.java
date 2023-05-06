@@ -14,8 +14,10 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class ReportDogControllerServiceImpl implements ReportDogControllerService {
+
     private final ReportDogRepository repository;
     private final UserDogRepository userDogRepository;
+
     @Override
     public ReportDog getReferenceById(long id) {
         return repository.findById(id).get();

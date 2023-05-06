@@ -8,16 +8,21 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/Volunteer")
 public class VolunteerFunctionalController {
     private final VolunteerFunctionalControllerService volunteerService;
+
+    @Autowired
+    public VolunteerFunctionalController(VolunteerFunctionalControllerService volunteerService) {
+        this.volunteerService = volunteerService;
+    }
 
     @Operation(
             summary = "Sending a comment to the user",
@@ -127,11 +132,11 @@ public class VolunteerFunctionalController {
     )
     @PostMapping("/report/acceptOrReject/id{id}reportAccepted{reportAccepted}type{type}")
     public ResponseEntity<SendResponse> acceptOrRejectReport(@Parameter(description = "id of a report from report.DB", example = "1")
-                                                     @PathVariable long id,
-                                                     @Parameter(description = "Status of decision about report", example = "true")
-                                                     @PathVariable boolean reportAccepted,
-                                                     @Parameter(description = "Type of shelter", example = "CAT")
-                                                     @PathVariable String type) {
-       return ResponseEntity.ok(volunteerService.acceptOrRejectReportByUserId(id, reportAccepted, volunteerService.getEnumTypeOfShelter(type)));
+                                                             @PathVariable long id,
+                                                             @Parameter(description = "Status of decision about report", example = "true")
+                                                             @PathVariable boolean reportAccepted,
+                                                             @Parameter(description = "Type of shelter", example = "CAT")
+                                                             @PathVariable String type) {
+        return ResponseEntity.ok(volunteerService.acceptOrRejectReportByUserId(id, reportAccepted, volunteerService.getEnumTypeOfShelter(type)));
     }
 }

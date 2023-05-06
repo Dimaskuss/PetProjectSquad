@@ -4,8 +4,7 @@ import best.team.petprojectsquad.Cache.UserDataCache;
 import best.team.petprojectsquad.entity.*;
 import best.team.petprojectsquad.service.TextHandlerService;
 import best.team.petprojectsquad.service.ValidatePhone;
-import best.team.petprojectsquad.service.repositoryServiceImpl.UserDogServiceImpl;
-import best.team.petprojectsquad.service.repositoryServiceImpl.UserServiceImpl;
+import best.team.petprojectsquad.service.controllerServiceImpl.UserFeedBackControllerServiceImpl;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
@@ -22,26 +21,20 @@ import java.util.List;
 public class DogValidatePhoneService implements TextHandlerService, ValidatePhone {
 
     private final UserDataCache userDataCache;
-    private final UserServiceImpl userService;
-    private final UserDogServiceImpl userDogService;
+    private final UserFeedBackControllerServiceImpl userFeedBackService;
 
     @Override
     public List<BaseRequest> getReplyMessage(Message message) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         if (checkPhone(message.text())) {
-            try {
-                User user = userService.findByChatId(message.chat().id()).orElseThrow(NullPointerException::new);
-                UserDog userDog = userDogService.getByUser(user).orElse(new UserDog(user));
-                userDog.setUserNeedHelp(true);
-                userDog.setPhoneNumber(message.text());
-                userDog.setChatId(message.chat().id());
-                userDogService.save(userDog);
+                userFeedBackService.save(new UserFeedBack(
+                        message.text(),
+                        message.chat().id(),
+                        message.from().firstName()
+                ));
                 SendMessage sendMessage = new SendMessage(message.chat().id(), "Волонтер в ближайшее время Вам перезвонит.");
                 requestArrayList.add(sendMessage);
                 userDataCache.setUsersCurrentBotState(message.chat().id(), BotState.START);
-            } catch (Exception e) {
-                log.error("Error in class DogValidatePhoneService:" + e.getMessage(), e);
-            }
 
         } else {
             SendMessage sendMessage = new SendMessage(message.chat().id(), "Телефон написан некорректно, пришлите еще раз в формате +79315556677");

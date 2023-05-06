@@ -30,7 +30,6 @@ class InfoMenuHandlerTest {
     private InfoHandlerService service;
     @InjectMocks
     private InfoMenuHandler infoMenuHandler;
-
     long id = 123;
     String text = "/info";
 
@@ -54,11 +53,8 @@ class InfoMenuHandlerTest {
         assertEquals(actualList.get(0).getParameters().get("chat_id"), expectedArrayList.get(0).getParameters().get("chat_id"));
     }
 
-
     @Test
     void shouldReturnHandlerName() {
-
         assertEquals(infoMenuHandler.getHandlerName(), BotState.INFO);
-
     }
 }

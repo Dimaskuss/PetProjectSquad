@@ -1,6 +1,7 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.ReportCat;
+import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.entity.UserDog;
 import best.team.petprojectsquad.entity.UserFeedBack;
 import best.team.petprojectsquad.service.RepositoryService;
@@ -27,8 +28,9 @@ public class ReportCatControllerTest {
     ReportCatControllerService reportCatControllerService;
     @InjectMocks
     private ReportCatController reportCatController;
-    long id = 132L;
+    long id = 0L;
     ReportCat reportCat = new ReportCat("report", null, "1");
+    UserCat userCat = new UserCat();
 
     @Test
     void shouldReturnReportById() {
@@ -46,9 +48,11 @@ public class ReportCatControllerTest {
 
     @Test
     void shouldReturnIdEditedReport() {
-//        when(reportCatControllerService.getReferenceById(id)).thenReturn(reportCat);
-//        ResponseEntity<Long> idReportCat = reportCatController.editReport(id , reportCat);
-//        assertEquals(idReportCat.getBody(), id);
+        userCat.setId(1);
+        reportCat.setUserCat(userCat);
+        when(reportCatControllerService.getReferenceById(id)).thenReturn(reportCat);
+        ResponseEntity<Long> idReportCat = reportCatController.editReport(id , reportCat);
+        assertEquals(idReportCat.getBody(), id);
     }
 
     @Test
@@ -61,9 +65,8 @@ public class ReportCatControllerTest {
     }
 
     @Test
-    void deleteReport() {
-        reportCatControllerService.deleteById(id);
-        ReportCat actual = reportCatControllerService.getReferenceById(id);
-        assertNull(actual);
+    void shouldDeleteReport() {
+        ResponseEntity<Void> actual = reportCatController.deleteReport(id);;
+        assertNull(actual.getBody());
     }
 }

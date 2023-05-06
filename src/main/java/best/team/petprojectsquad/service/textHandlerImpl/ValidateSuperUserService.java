@@ -22,15 +22,15 @@ public class ValidateSuperUserService implements TextHandlerService {
     @Value("${super.user.password}")
     private String password;
 
+    private final UserDataCache userDataCache;
+    private final SuperUserVolunteerRepository superUserVolunteerRepository;
+    private final UserFeedBackRepository userFeedBackRepository;
+
     public ValidateSuperUserService(UserDataCache userDataCache, SuperUserVolunteerRepository superUserVolunteerRepository, UserFeedBackRepository userFeedBackRepository) {
         this.userDataCache = userDataCache;
         this.superUserVolunteerRepository = superUserVolunteerRepository;
         this.userFeedBackRepository = userFeedBackRepository;
     }
-
-    private final UserDataCache userDataCache;
-    private final SuperUserVolunteerRepository superUserVolunteerRepository;
-    private final UserFeedBackRepository userFeedBackRepository;
     @Override
     public List<BaseRequest> getReplyMessage(Message password) {
         List<BaseRequest> requestArrayList = new ArrayList<>();

@@ -1,7 +1,9 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.service.controllerService.VolunteerFunctionalControllerService;
+import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
+import com.pengrad.telegrambot.response.SendResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,9 +25,16 @@ class VolunteerFunctionalControllerTest {
 
     @Test
     void sendUserRemarkMessage() {
-        SendMessage sendMessage = new SendMessage(chatId, "Дорогой усыновитель, мы заметили, что ты заполняешь " +
-                "отчет не так подробно, как необходимо. Пожалуйста, подойди ответственнее к этому занятию. " +
-                "В противном случае волонтеры приюта будут обязаны самолично " +
-                "проверять условия содержания животного");
+//        SendMessage sendMessage = new SendMessage(chatId, "Дорогой усыновитель, мы заметили, что ты заполняешь " +
+//                "отчет не так подробно, как необходимо. Пожалуйста, подойди ответственнее к этому занятию. " +
+//                "В противном случае волонтеры приюта будут обязаны самолично " +
+//                "проверять условия содержания животного");
+//        when(volunteerFunctionalControllerService.sendRemark(chatId)).thenReturn(new SendMessage(chatId, "text"));
+    }
+
+
+    @Test
+    public void testSendUserRemarkMessage() {
+
     }
 }
