@@ -19,7 +19,12 @@ import java.util.List;
 public class ReportDogService implements QueryHandlerService {
 
     private final UserDataCache userDataCache;
-
+    /**
+     * Метод формирует ответное сообщение на запрос пользователя
+     *
+     * @param id id пользователя
+     * @return ответ пользователю
+     */
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();

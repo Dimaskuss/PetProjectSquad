@@ -13,7 +13,12 @@ import java.util.List;
 
 @Service
 public class MenuDogQueryService implements QueryHandlerService {
-
+    /**
+     * Метод формирует ответное сообщение на запрос пользователя
+     *
+     * @param id id пользователя
+     * @return ответ пользователю
+     */
     @Override
     public List<BaseRequest> getReplyMessage(long id) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
@@ -23,7 +28,10 @@ public class MenuDogQueryService implements QueryHandlerService {
         requestArrayList.add(sendMessage);
         return requestArrayList;
     }
-
+    /**
+     * Метод формирует электронную клавиатуру на экране пользователя
+     * @return клавиатура на экране пользователя
+     */
     private Keyboard getMainMenuKeyboard() {
 
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
@@ -32,7 +40,6 @@ public class MenuDogQueryService implements QueryHandlerService {
                         {new InlineKeyboardButton("Как взять животное из приюта").callbackData("/dogTakeInfo")},
                         {new InlineKeyboardButton("Прислать отчет о питомце").callbackData("/dogReportMenu")},
                         {new InlineKeyboardButton("Связаться с волонтером").callbackData("/callVolunteer")},
-                        {new InlineKeyboardButton("Причины, по которым вам могут отказать").callbackData("/reasonsWhy")}
                 });
 
         return inlineKeyboard;

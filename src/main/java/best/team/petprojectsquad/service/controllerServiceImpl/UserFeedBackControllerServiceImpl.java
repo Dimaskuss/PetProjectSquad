@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class UserFeedBackControllerServiceImpl implements UserFeedBackControllerService {
+
     private final UserFeedBackRepository userFeedbackRepository;
 
     @Override
@@ -39,4 +40,5 @@ public class UserFeedBackControllerServiceImpl implements UserFeedBackController
     public Optional<UserFeedBack> findById(long id) {
         return userFeedbackRepository.findById(id);
     }
+
 }
