@@ -1,8 +1,6 @@
 package best.team.petprojectsquad.handler;
 
 import best.team.petprojectsquad.entity.BotState;
-import best.team.petprojectsquad.handler.callbackQuery.InputHandlerQuery;
-import best.team.petprojectsquad.handler.textHandler.InputHandlerMessage;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.request.BaseRequest;
 import org.springframework.stereotype.Component;
@@ -20,11 +18,9 @@ public class BotStateContext {
      * 2) (ключ)BotState.START  (значение) startMenuHandler -> объект класса StartMenuHandler
      */
     private final Map<BotState, InputHandlerMessage> messageHandlers = new HashMap<>();
-
     private final Map<BotState, InputHandlerQuery> queryHandlers = new HashMap<>();
-    
-     public BotStateContext(List<InputHandlerMessage> messageHandlers, List<InputHandlerQuery> queryHandlers) {
 
+    public BotStateContext(List<InputHandlerMessage> messageHandlers, List<InputHandlerQuery> queryHandlers) {
         messageHandlers.forEach(handler -> this.messageHandlers.put(handler.getHandlerName(), handler));
         queryHandlers.forEach(queryHandler -> this.queryHandlers.put(queryHandler.getHandlerName(), queryHandler));
     }

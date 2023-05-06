@@ -1,57 +1,79 @@
 package best.team.petprojectsquad.controller;
 
 import best.team.petprojectsquad.entity.Cat;
-import best.team.petprojectsquad.repository.CatRepository;
-import org.hibernate.LazyInitializationException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.junit.jupiter.api.AfterAll;
+import best.team.petprojectsquad.entity.ReportCat;
+import best.team.petprojectsquad.service.RepositoryService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.stubbing.Answer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.test.web.servlet.MockMvc;
-
-import static org.hamcrest.Matchers.contains;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.containsString;
-
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(CatController.class)
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class CatControllerTest {
-    private Cat cat = new Cat(0, "ВОт", "Test", 2000, "Описание");
+
+    @Mock
+    RepositoryService<Cat> catRepository;
+
+    @InjectMocks
+    private CatController catController;
+
+    private Cat cat = new Cat(0, null, null, 0, null);
     private Long id = 0L;
-    @Autowired
-    private MockMvc mockMvc;
-    @Autowired
-    CatRepository catRepository;
 
     @Test
-    void testingGetter() throws Exception {
-        catRepository.save(cat);
-        this.mockMvc.perform(get("/1")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString(String.valueOf(cat))));
+    void shouldReturnRightObjectPassIdGetter() {
 
+        when(catRepository.get(id)).thenReturn(Optional.of(cat));
+
+        ResponseEntity<Cat> status = catController.getCatById(0);
+
+        assertEquals(status.getBody(), cat);
+    }
+
+    @Test
+    void shouldReturnRightObjectPassAdd() {
+
+        when(catRepository.save(cat)).thenReturn(id);
+        ResponseEntity<Long> idNewCat = catController.addCat(cat);
+        assertEquals(idNewCat.getBody(),id);
+    }
+
+    @Test
+    void shouldReturnIdEditedCat() {
+        when(catRepository.get(id)).thenReturn(Optional.ofNullable(cat));
+//        when(catRepository.get(id).isEmpty()).thenReturn(ResponseEntity.noContent());
+        when(catRepository.save(cat)).thenReturn(cat.getId());
+        ResponseEntity<Long> idEditCat = catController.editCat(id, cat);
+        assertEquals(idEditCat.getBody(),id);
+
+    }
+
+    @Test
+    void shouldReturnListCat() {
+        List<Cat> list = new ArrayList<>();
+        list.add(cat);
+        when(catRepository.findAll()).thenReturn(list);
+        ResponseEntity<List<Cat>> listCat = catController.getAll();
+        assertEquals(Objects.requireNonNull(listCat.getBody()).size(), list.size());
+    }
+
+    @Test
+    void shouldDeleteCat() {
+        when(catRepository.get(id)).thenReturn(Optional.ofNullable(cat));
+        ResponseEntity<Void> actual = catController.deleteCat(id);;
+        assertNull(actual.getBody());
     }
 }

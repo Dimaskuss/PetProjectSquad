@@ -12,15 +12,13 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class BotConfigTest {
-    @Mock
-    BotConfig botConfig;
+    BotConfig botConfig = new BotConfig();
     @Value("${bot.token}")
     String token;
 
     @Test
     public void shouldReturnBotTokenOfYours() {
         TelegramBot telegramBot = new TelegramBot(token);
-        when(botConfig.telegramBot(null)).thenReturn(telegramBot);
-        assertEquals(botConfig.telegramBot(null), telegramBot);
+        assertEquals(botConfig.telegramBot(token).getToken(), telegramBot.getToken());
     }
 }
