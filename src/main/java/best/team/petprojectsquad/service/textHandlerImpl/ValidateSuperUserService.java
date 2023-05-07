@@ -17,8 +17,6 @@ import java.util.List;
 
 @Service
 public class ValidateSuperUserService implements TextHandlerService {
-    //Поле с паролем, возможно нужно вынести в другой класс
-    // TODO:есть идея создать Entity password и к ней БД, чтобы была история паролей
     @Value("${super.user.password}")
     private String password;
 
@@ -32,21 +30,21 @@ public class ValidateSuperUserService implements TextHandlerService {
         this.userFeedBackRepository = userFeedBackRepository;
     }
     @Override
-    public List<BaseRequest> getReplyMessage(Message password) {
+    public List<BaseRequest> getReplyMessage(Message inputMessage) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
-        if (checkPassword(password.text())) {
-            if (!superUserVolunteerRepository.existsByChatId(password.chat().id())) {
-                superUserVolunteerRepository.save(new SuperUserVolunteer(password.chat().id()));
+        if (checkPassword(inputMessage.text())) {
+            if (!superUserVolunteerRepository.existsByChatId(inputMessage.chat().id())) {
+                superUserVolunteerRepository.save(new SuperUserVolunteer(inputMessage.chat().id()));
             }
-            SendMessage sendMessage = new SendMessage(password.chat().id(), "Добро пожаловать!");
-            SendMessage sendMessage1 = new SendMessage(password.chat().id(), "Ниже будет приведен список пользователей, которым нужна помощь");
-            SendMessage sendMessage2 = new SendMessage(password.chat().id(), userFeedBackRepository.findAll().toString());
+            SendMessage sendMessage = new SendMessage(inputMessage.chat().id(), "Добро пожаловать!");
+            SendMessage sendMessage1 = new SendMessage(inputMessage.chat().id(), "Ниже будет приведен список пользователей, которым нужна помощь");
+            SendMessage sendMessage2 = new SendMessage(inputMessage.chat().id(), userFeedBackRepository.findAll().toString());
             requestArrayList.add(sendMessage);
             requestArrayList.add(sendMessage1);
             requestArrayList.add(sendMessage2);
-            userDataCache.setUsersCurrentBotState(password.chat().id(),BotState.START);
+            userDataCache.setUsersCurrentBotState(inputMessage.chat().id(),BotState.START);
         } else {
-            SendMessage sendMessage = new SendMessage(password.chat().id(), "Пароль введен некорректно");
+            SendMessage sendMessage = new SendMessage(inputMessage.chat().id(), "Пароль введен некорректно");
             requestArrayList.add(sendMessage);
 
         }

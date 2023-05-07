@@ -5,7 +5,6 @@ import best.team.petprojectsquad.entity.User;
 import best.team.petprojectsquad.entity.UserCat;
 import best.team.petprojectsquad.service.RepositoryService;
 import best.team.petprojectsquad.service.controllerService.UserCatControllerService;
-import best.team.petprojectsquad.service.controllerServiceImpl.UserCatControllerServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,47 +25,94 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class UserCatControllerTest {
     @Mock
-    RepositoryService<UserCat> repositoryService;
+    RepositoryService<UserCat> userCatRepositoryService;
     @Mock
     private UserCatControllerService userCatControllerService;
     @InjectMocks
     private UserCatController userCatController;
 
-    private long id = 0L;
+    private long id = 1;
     Cat cat = new Cat(1L, null, null, 0, null);
     User user = new User();
-    UserCat userCat = new UserCat(1L,"123");
+    UserCat userCat = new UserCat(1, "123");
 
     @Test
-
     void shouldReturnUserById() {
-        when(repositoryService.get(id)).thenReturn(Optional.ofNullable(userCat));
+        when(userCatRepositoryService.get(id)).thenReturn(Optional.ofNullable(userCat));
         ResponseEntity<UserCat> status = userCatController.getUserById(id);
         assertEquals(HttpStatus.OK, status.getStatusCode());
         assertEquals(status.getBody(), userCat);
     }
 
     @Test
-    void shouldReturnIdEditedUserCat() {
+    void addUserTrue() {
         when(userCatControllerService.checkIfEntitiesExist(Mockito.anyLong(), Mockito.anyLong())).thenReturn(true);
-        when(userCatControllerService.save(cat.getId(), userCat.getId(),userCat)).thenReturn(id);
+        when(userCatControllerService.save(cat.getId(), id, userCat)).thenReturn(id);
         ResponseEntity<Long> status = userCatController.addUserCat(cat.getId(), id, userCat);
         assertEquals(HttpStatus.OK, status.getStatusCode());
         assertEquals(id, status.getBody());
-
     }
 
-//    @Test
-//    void addUserFalse() {
-//        when(userCatControllerService.checkIfEntitiesExist(1L, 1L)).thenReturn(false);
-//
-//        ResponseEntity<Long> response = userCatController.addUserCat(cat.getId(), id, userCat);
-//
-//        verify(userCatControllerService).checkIfEntitiesExist(1L, 1L);
-//        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-//        assertNull(response.getBody());
-//    }
+    @Test
+    void addUserFalse() {
+        when(userCatControllerService.checkIfEntitiesExist(1L, 1L)).thenReturn(false);
+        ResponseEntity<Long> response = userCatController.addUserCat(cat.getId(), id, userCat);
+        verify(userCatControllerService).checkIfEntitiesExist(1L, 1L);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertNull(response.getBody());
+    }
 
+    @Test
+    void editUserTest_whenEntitiesExist() {
+        UserCat newUserCat = new UserCat(1, "456");
+        when(userCatControllerService.checkIfEntitiesExist(id, id)).thenReturn(true);
+        ResponseEntity<Long> response = userCatController.editUser(cat.getId(), id, newUserCat);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(newUserCat.getId(), response.getBody());
+    }
+
+    @Test
+    void editUserTest_whenEntitiesNotExist() {
+        UserCat newUserCat = new UserCat(1, "456");
+        when(userCatControllerService.checkIfEntitiesExist(id, id)).thenReturn(false);
+        ResponseEntity<Long> response = userCatController.editUser(cat.getId(), id, newUserCat);
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        assertNull(response.getBody());
+    }
+
+    @Test
+    void getAll_ReturnsListOfUserCats() {
+        List<UserCat> userCats = new ArrayList<>();
+        userCats.add(userCat);
+        when(userCatRepositoryService.findAll()).thenReturn(userCats);
+        ResponseEntity<List<UserCat>> response = userCatController.getAll();
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(userCats, response.getBody());
+    }
+
+    @Test
+    void getAll_ReturnsEmptyList_WhenRepositoryIsEmpty() {
+        List<UserCat> userCats = new ArrayList<>();
+        when(userCatRepositoryService.findAll()).thenReturn(userCats);
+        ResponseEntity<List<UserCat>> response = userCatController.getAll();
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(userCats, response.getBody());
+    }
+
+    @Test
+    void deleteUserSuccess() {
+        when(userCatRepositoryService.get(id)).thenReturn(Optional.ofNullable(userCat));
+        ResponseEntity<Void> response = userCatController.deleteUser(id);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void deleteUserNotFound() {
+        when(userCatRepositoryService.get(id)).thenReturn(Optional.empty());
+        ResponseEntity<Void> response = userCatController.deleteUser(id);
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+}
 //    @Test
 //    void editUserTest_whenEntitiesExist() {
 //// не срабатывает , но добавляет покрытие
@@ -123,26 +169,3 @@ class UserCatControllerTest {
 //        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
 //    }
 
-    @Test
-    void editUser() {
-        when(userCatControllerService.checkIfEntitiesExist(id, cat.getId())).thenReturn(true);
-        when(userCatControllerService.save(cat.getId(), id, userCat)).thenReturn(userCat.getId());
-        ResponseEntity<Void> actual = repositoryService.delete(cat.getId());
-        ResponseEntity<Long> idEditCat = catController.editCat(id, cat);
-        assertEquals(idEditCat.getBody(),id);
-    }
-
-    @Test
-    void getAll() {
-        List<UserCat> userDogs = new ArrayList<>();
-        userDogs.add(userCat);
-        when(repositoryService.findAll()).thenReturn(userDogs);
-        ResponseEntity<List<UserCat>> response = userCatController.getAll();
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(userDogs, response.getBody());
-    }
-
-    @Test
-    void deleteUser() {
-    }
-}

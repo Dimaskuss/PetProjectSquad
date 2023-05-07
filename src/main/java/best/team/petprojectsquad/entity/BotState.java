@@ -1,10 +1,12 @@
 package best.team.petprojectsquad.entity;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public enum BotState {
     START("/start"),
     INFO("/info"),
     CALL_VOLUNTEER("/callVolunteer"),
-    GET_VOLUNTEER_REPLY("/getVolunteerReply"),
     VALIDATE_PHONE("/validatePhone"),
     CAT_SHELTER_MENU("/catShelterMenu"),
     DOG_SHELTER_MENU("/dogShelterMenu"),
@@ -45,7 +47,6 @@ public enum BotState {
     HOME_RECOMMENDATION_DIS_DOG("/homeRecommendationsDogWithDisabilities"),
     DOG_TIPS_TRAINER("/tipsDogTrainer"),
     VERIFIED_TRAINERS("/listVerifiedDogTrainers"),
-    DOG_TAKE_NEGATIVE("/dogListReasonsNegative"),
     CONTACTS_CAT("/catSendContact"),
     CONTACTS_DOG("/dogSendContact"),
     SHELTER_CALLBACK("/callback"),
@@ -53,14 +54,22 @@ public enum BotState {
     VALIDATE_VOLUNTEER("/volunteerValidate"),
     REASONS_WHY_CANT_BRING_AN_ANIMAL("/reasonsWhy");
 
-    private final String state;
+    private static final Map<String, BotState> STATE_MAP;
+
+    static {
+        STATE_MAP = new LinkedHashMap<>();
+        for (BotState botState : values()) {
+            STATE_MAP.put(botState.state, botState);
+        }
+    }
+
+    private String state;
 
     BotState(String state) {
         this.state = state;
     }
 
-    public String showState() {
-        return state;
+    public static Map<String, BotState> getBotStateMap() {
+        return STATE_MAP;
     }
-
 }
