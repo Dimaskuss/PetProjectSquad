@@ -31,7 +31,7 @@ public class CatValidatePhoneService implements TextHandlerService, ValidatePhon
                 userFeedBackService.save(new UserFeedBack(
                         message.text(),
                         message.chat().id(),
-                        message.from().firstName()
+                        message.chat().firstName()
                 ));
                 SendMessage sendMessage = new SendMessage(message.chat().id(), "Волонтер в ближайшее время Вам перезвонит.");
                 requestArrayList.add(sendMessage);

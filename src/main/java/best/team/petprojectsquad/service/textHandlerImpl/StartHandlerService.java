@@ -10,6 +10,7 @@ import com.pengrad.telegrambot.model.request.Keyboard;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SendPhoto;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -17,20 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class StartHandlerService implements TextHandlerService {
-    UserRepository userRepository;
 
-    public StartHandlerService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserRepository userRepository;
 
     @Override
     public List<BaseRequest> getReplyMessage(Message message) {
         List<BaseRequest> requestArrayList = new ArrayList<>();
         Keyboard keyboard = getMainMenuKeyboard();
         if (!userRepository.existsByChatId(message.chat().id())) {
-            User user = new User(message.chat().id(),message.from().username());
-            userRepository.save(user);
+            userRepository.save(new User(message.chat().id(),message.chat().username()));
             SendPhoto sendPhoto = new SendPhoto(message.chat().id(), new File("src/main/resources/mainMenu.png"));
             sendPhoto.caption("""
                     Вас приветствует приют для домашних животных.
